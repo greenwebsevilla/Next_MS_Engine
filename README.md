@@ -1,25 +1,25 @@
 # Next MS Engine
 
-**Next MS Engine** es un motor para hacer juegos para ***ZX Spectrum Next***. Está programado en Boriel's ZX Basic (de Jose Rodriguez) más las librerías Nextlib de em00k (David Saphier). Además, se incluyen las herramientas necesarias para crear los ficheros gráficos y mapas y exportarlos al formato que maneja el propio motor. 
+**Next MS Engine** es un motor para hacer juegos para ***ZX Spectrum Next***. Está programado en ZX Basic de Boriel (Jose Rodriguez - https://boriel.com/pages/the-zx-basic-compiler.html) más las librerías Nextlib de em00k (David Saphier). Además, se incluyen las herramientas necesarias para crear los ficheros gráficos y mapas y exportarlos al formato que maneja el propio motor. 
 
 El origen de este motor es una versión reducida y reprogramada del motor MK1 de los Mojon Twins (https://github.com/mojontwins/MK1) que sirvió para portar el juego Shovel Adventure al Spectrum Next. Partiendo de él, se fueron añadiendo funcionalidades extra, algunas también existentes en el MK1 pero hechas desde cero en el lenguaje ZX Basic y aprovechando las características del Next.
 
 # Características del motor:
 
- - Configuración del player: velocidades, salto, gravedad, disparo, energía, vidas, inercia, caja de colisión, etc
- - Manejo de mapas de hasta 256 tiles de ancho (4096 píxeles) y de altura hasta 12 tiles (192 píxeles)
- - Scroll horizontal (proximamente también vertical).
- - Configuración de la cámara.
- - Conexión entre mapas personalizables. 
- - Hasta 128 imágenes de 16x16 para el player.
- - Hasta 128 imágenes de 16x16 para enemigos y objetos por mapa.
- - Posibilidad de usar sprites de 16x32.
- - Configuración de enemigos.
- - 4 tipos de enemigos preprogramados.
- - Plataformas móviles y objetos recolectables preprogramados.
- - Personalización del hud.
- - Tile animados para tener fondos más atractivos.
- - Temporizador.
+ - **Configuración del player**: velocidades, salto, gravedad, disparo, energía, vidas, inercia, caja de colisión, etc
+ - **Mapas** de hasta 256 tiles de ancho (4096 píxeles) y de altura hasta 12 tiles (192 píxeles)
+ - **Scroll horizontal** (proximamente también vertical).
+ - Configuración de la **cámara**.
+ - **Conexiones entre mapas** personalizables. 
+ - **Hasta 128 imágenes de 16x16 para el player**.
+ - **Hasta 128 imágenes de 16x16 para enemigos y objetos por mapa**.
+ - Posibilidad de usar **sprites de 16x32**.
+ - **Configuración de enemigos**.
+ - 4 tipos de **enemigos preprogramados**.
+ - **Plataformas móviles** y **objetos recolectables** preprogramados.
+ - **Personalización del hud**.
+ - **Tile animados** para tener fondos más atractivos.
+ - **Temporizador**.
 
 
 # Como empezar
