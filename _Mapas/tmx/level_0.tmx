@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="100" height="11" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="246">
+ <editorsettings>
+  <export format="csv"/>
+ </editorsettings>
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16" tilecount="128" columns="16">
+  <image source="../../_Graficos/tiles.png" trans="ff00ff" width="256" height="128"/>
+ </tileset>
+ <tileset firstgid="129" name="sprites" tilewidth="16" tileheight="16" tilecount="64" columns="16">
+  <image source="../../_Graficos/sprites_enems1.png" trans="ff00ff" width="256" height="64"/>
+ </tileset>
+ <layer id="1" name="tiles" width="100" height="11">
+  <data encoding="csv">
+11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,2,2,2,12,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,2,2,2,2,2,2,2,2,2,16,15,16,15,16,15,16,16,15,15,16,2,2,2,16,15,16,15,15,16,16,15,16,16,15,16,16,15,16,15,16,16,15,16,16,15,16,16,16,15,16,16,16,15,
+12,11,11,11,11,11,11,11,11,12,11,11,11,11,11,12,13,13,12,11,11,11,11,11,12,13,2,2,2,2,2,12,11,11,11,11,11,11,11,11,11,11,11,11,12,13,2,2,2,2,2,2,2,2,2,2,16,15,15,16,15,15,16,15,15,16,2,2,2,2,2,2,2,15,15,15,16,16,15,16,16,15,16,16,16,15,16,16,16,15,16,16,15,16,15,16,15,16,16,15,
+2,13,12,13,30,13,12,13,13,2,13,12,30,12,13,2,2,2,2,12,13,30,13,12,2,2,2,2,2,2,2,2,13,12,30,12,13,13,12,13,12,30,12,13,2,2,2,2,2,2,2,2,2,2,2,2,2,2,15,15,16,15,15,2,2,2,2,2,2,2,2,2,2,16,15,16,16,16,24,10,10,24,10,16,16,16,16,16,24,10,16,16,15,16,16,15,16,15,15,16,
+5,5,5,5,8,5,5,5,5,5,5,5,8,5,5,5,5,5,5,5,5,8,5,5,5,5,5,5,5,5,5,5,5,5,8,5,5,5,5,5,5,8,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,24,10,10,24,10,9,31,31,9,31,24,10,24,24,24,9,31,24,10,24,24,16,16,16,16,15,15,
+3,3,3,3,8,3,3,3,3,3,3,3,29,43,3,3,3,3,3,3,3,8,43,3,3,3,3,3,3,3,3,3,3,3,8,3,3,3,3,3,3,8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,39,31,31,9,31,9,9,9,9,9,9,31,9,9,9,9,9,9,31,9,9,24,16,15,16,16,15,
+7,7,4,4,8,42,4,4,17,18,4,41,8,4,4,4,4,17,18,4,41,29,4,4,4,4,4,4,4,17,18,4,4,4,8,4,4,17,18,4,4,8,4,4,17,18,4,4,4,4,4,4,4,4,4,4,4,17,18,4,4,4,4,4,4,4,4,4,4,4,4,4,4,39,9,9,9,9,9,9,9,9,9,9,9,9,38,9,9,9,9,9,9,9,9,16,16,15,16,16,
+10,16,4,41,29,4,4,4,4,4,4,4,8,42,4,4,4,4,4,4,4,8,4,17,18,4,4,4,4,4,4,4,4,4,8,4,4,4,4,4,4,8,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,17,18,4,4,7,7,7,7,9,9,9,9,9,9,9,9,9,9,9,125,9,9,9,9,9,9,9,9,24,16,15,16,15,
+1,33,20,37,8,37,7,7,7,7,14,37,8,37,14,37,14,37,7,7,7,7,7,14,37,19,20,14,7,7,7,7,14,37,8,37,14,19,20,37,14,8,14,7,7,7,7,7,4,4,17,18,4,4,7,45,45,45,45,45,45,45,7,4,4,4,4,4,4,4,4,16,16,16,15,9,9,9,9,9,9,9,38,9,9,9,125,9,9,9,9,9,9,9,9,9,16,16,15,16,
+1,34,6,6,8,6,15,15,16,15,6,6,8,6,6,6,6,6,15,16,15,15,16,6,6,6,6,6,15,16,15,16,6,6,6,6,6,6,6,6,6,6,6,15,16,15,16,15,18,4,4,4,4,4,16,4,4,4,4,4,4,4,15,4,4,4,4,4,4,7,7,15,15,15,15,7,7,7,9,9,9,9,125,9,9,9,125,9,9,9,9,9,9,9,9,9,16,16,16,15,
+7,7,7,7,7,7,15,16,15,15,7,7,7,7,7,7,7,7,16,15,15,16,15,7,7,7,7,7,15,15,16,15,7,7,7,7,7,7,7,7,7,7,7,15,15,16,15,15,4,4,4,4,4,17,15,21,21,21,21,21,21,21,15,21,21,4,4,4,4,16,16,15,16,15,16,16,16,16,7,7,9,9,125,9,9,32,125,9,9,9,9,28,9,32,32,32,16,15,16,15,
+15,16,15,15,15,16,15,15,15,16,15,15,15,15,16,15,15,15,15,16,15,15,16,15,15,15,16,15,15,15,15,16,15,15,15,16,15,15,15,16,15,15,16,15,15,15,16,15,21,21,21,21,21,21,15,7,7,7,7,7,7,7,7,7,7,7,7,7,7,15,16,16,15,15,16,16,16,16,16,16,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,16,16,16,16
+</data>
+ </layer>
+ <objectgroup color="#00ff00" id="11" name="_temp_markers">
+  <object id="171" name="Limit A" x="96" y="96" width="16" height="16"/>
+  <object id="172" name="Limit B" x="144" y="96" width="16" height="16"/>
+  <object id="174" name="Limit A" x="160" y="128" width="16" height="16"/>
+  <object id="175" name="Limit B" x="272" y="128" width="16" height="16"/>
+  <object id="177" name="Limit A" x="160" y="96" width="16" height="16"/>
+  <object id="178" name="Limit B" x="272" y="96" width="16" height="16"/>
+  <object id="180" name="Limit A" x="368" y="128" width="16" height="16"/>
+  <object id="181" name="Limit B" x="432" y="128" width="16" height="16"/>
+  <object id="183" name="Limit A" x="448" y="96" width="16" height="16"/>
+  <object id="184" name="Limit B" x="496" y="96" width="16" height="16"/>
+  <object id="186" name="Limit A" x="512" y="128" width="16" height="16"/>
+  <object id="187" name="Limit B" x="672" y="128" width="16" height="16"/>
+  <object id="189" name="Limit A" x="512" y="96" width="16" height="16"/>
+  <object id="190" name="Limit B" x="672" y="96" width="16" height="16"/>
+  <object id="192" name="Limit A" x="768" y="112" width="16" height="16"/>
+  <object id="193" name="Limit B" x="848" y="112" width="16" height="16"/>
+  <object id="195" name="Limit A" x="1088" y="16" width="16" height="16"/>
+  <object id="196" name="Limit B" x="1088" y="80" width="16" height="16"/>
+  <object id="198" name="Limit A" x="1040" y="144" width="16" height="16"/>
+  <object id="199" name="Limit B" x="1088" y="144" width="16" height="16"/>
+  <object id="201" name="Limit A" x="1008" y="112" width="16" height="16"/>
+  <object id="202" name="Limit B" x="1120" y="112" width="16" height="16"/>
+  <object id="204" name="Limit A" x="1280" y="144" width="16" height="16"/>
+  <object id="205" name="Limit B" x="1344" y="144" width="16" height="16"/>
+  <object id="209" name="Limit A" x="352" y="80" width="16" height="16"/>
+  <object id="210" name="Limit B" x="352" y="80" width="16" height="16"/>
+  <object id="212" name="Limit A" x="784" y="96" width="16" height="16"/>
+  <object id="213" name="Limit B" x="784" y="96" width="16" height="16"/>
+  <object id="215" name="Limit A" x="800" y="96" width="16" height="16"/>
+  <object id="216" name="Limit B" x="800" y="96" width="16" height="16"/>
+  <object id="218" name="Limit A" x="816" y="96" width="16" height="16"/>
+  <object id="219" name="Limit B" x="816" y="96" width="16" height="16"/>
+  <object id="221" name="Limit A" x="832" y="96" width="16" height="16"/>
+  <object id="222" name="Limit B" x="832" y="96" width="16" height="16"/>
+  <object id="233" name="Limit A" x="736" y="96" width="16" height="16"/>
+  <object id="234" name="Limit B" x="736" y="96" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup color="#ff3366" id="12" name="enemies">
+  <object id="173" name="Type 1" type="Enemy" gid="129" x="128" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="171"/>
+    <property name="limitB" type="object" value="172"/>
+    <property name="num_pantalla" type="int" value="0"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="176" name="Type 1" type="Enemy" gid="129" x="224" y="144" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="174"/>
+    <property name="limitB" type="object" value="175"/>
+    <property name="num_pantalla" type="int" value="0"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="179" name="Type 3" type="Enemy" gid="137" x="256" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="177"/>
+    <property name="limitB" type="object" value="178"/>
+    <property name="num_pantalla" type="int" value="0"/>
+    <property name="sprite" type="int" value="8"/>
+    <property name="tipo" type="int" value="3"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="182" name="Type 1" type="Enemy" gid="129" x="432" y="144" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="180"/>
+    <property name="limitB" type="object" value="181"/>
+    <property name="num_pantalla" type="int" value="1"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="185" name="Type 1" type="Enemy" gid="129" x="464" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="183"/>
+    <property name="limitB" type="object" value="184"/>
+    <property name="num_pantalla" type="int" value="1"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="188" name="Type 1" type="Enemy" gid="129" x="592" y="144" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="186"/>
+    <property name="limitB" type="object" value="187"/>
+    <property name="num_pantalla" type="int" value="1"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="191" name="Type 3" type="Enemy" gid="137" x="656" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="189"/>
+    <property name="limitB" type="object" value="190"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="8"/>
+    <property name="tipo" type="int" value="3"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="194" name="Type 49" type="Enemy" gid="176" x="784" y="128" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="192"/>
+    <property name="limitB" type="object" value="193"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="47"/>
+    <property name="tipo" type="int" value="49"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="197" name="Type 49" type="Enemy" gid="176" x="1088" y="64" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="195"/>
+    <property name="limitB" type="object" value="196"/>
+    <property name="num_pantalla" type="int" value="3"/>
+    <property name="sprite" type="int" value="47"/>
+    <property name="tipo" type="int" value="49"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="200" name="Type 1" type="Enemy" gid="129" x="1072" y="160" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="198"/>
+    <property name="limitB" type="object" value="199"/>
+    <property name="num_pantalla" type="int" value="3"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="203" name="Type 3" type="Enemy" gid="137" x="1104" y="96" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="201"/>
+    <property name="limitB" type="object" value="202"/>
+    <property name="num_pantalla" type="int" value="3"/>
+    <property name="sprite" type="int" value="8"/>
+    <property name="tipo" type="int" value="3"/>
+    <property name="velocidad_x" type="int" value="-1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="206" name="Type 1" type="Enemy" gid="129" x="1280" y="160" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="204"/>
+    <property name="limitB" type="object" value="205"/>
+    <property name="num_pantalla" type="int" value="4"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="1"/>
+    <property name="velocidad_x" type="int" value="1"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="208" name="Type 50" type="Enemy" gid="190" x="352" y="96" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="209"/>
+    <property name="limitB" type="object" value="210"/>
+    <property name="num_pantalla" type="int" value="1"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="211" name="Type 50" type="Enemy" gid="190" x="784" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="212"/>
+    <property name="limitB" type="object" value="213"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="214" name="Type 50" type="Enemy" gid="190" x="800" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="215"/>
+    <property name="limitB" type="object" value="216"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="217" name="Type 50" type="Enemy" gid="190" x="816" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="218"/>
+    <property name="limitB" type="object" value="219"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="220" name="Type 50" type="Enemy" gid="190" x="832" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="limitA" type="object" value="221"/>
+    <property name="limitB" type="object" value="222"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="232" name="Type 5" type="Enemy" gid="175" x="736" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="3"/>
+    <property name="limitA" type="object" value="233"/>
+    <property name="limitB" type="object" value="234"/>
+    <property name="num_pantalla" type="int" value="2"/>
+    <property name="sprite" type="int" value="46"/>
+    <property name="tipo" type="int" value="5"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="239" name="Player" type="Player" x="304" y="96" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="sprite" type="int" value="0"/>
+    <property name="tipo" type="int" value="255"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="242" name="Collect Obj" type="Enemy" gid="190" x="64" y="144" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="243" name="Collect Obj" type="Enemy" gid="190" x="64" y="96" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="244" name="Collect Obj" type="Enemy" gid="190" x="48" y="112" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="245" name="Collect Obj" type="Enemy" gid="190" x="48" y="96" width="16" height="16">
+   <properties>
+    <property name="enem_life" type="int" value="1"/>
+    <property name="sprite" type="int" value="61"/>
+    <property name="tipo" type="int" value="50"/>
+    <property name="velocidad_x" type="int" value="0"/>
+    <property name="velocidad_y" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

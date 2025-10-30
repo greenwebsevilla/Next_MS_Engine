@@ -1,0 +1,56 @@
+[
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 2,
+        "members": [
+            {
+                "name": "enem_life",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "limitA",
+                "type": "object",
+                "value": 0
+            },
+            {
+                "name": "limitB",
+                "type": "object",
+                "value": 0
+            },
+            {
+                "name": "num_pantalla",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "sprite",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "tipo",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "velocidad_x",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "velocidad_y",
+                "type": "int",
+                "value": 0
+            }
+        ],
+        "name": "Enemy",
+        "type": "class",
+        "useAs": [
+            "property",
+            "object",
+            "project"
+        ]
+    }
+]

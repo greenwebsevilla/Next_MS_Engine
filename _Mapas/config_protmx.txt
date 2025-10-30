@@ -1,0 +1,5 @@
+source_path=C:/NextBuild-master_New/Sources/NextMultiScroll_Engine/_Mapas/tmx
+bin_path=C:/NextBuild-master_New/Sources/NextMultiScroll_Engine/data/bin/maps
+csv_path=C:/NextBuild-master_New/Sources/NextMultiScroll_Engine/Mapas/tiled/csv
+generate_csv=False
+lang=es

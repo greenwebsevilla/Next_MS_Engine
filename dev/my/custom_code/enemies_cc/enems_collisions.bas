@@ -1,0 +1,12 @@
+'ENTER YOUR CUSTOM COLLISION CODE FOR ENEMIES OR OTHER OBJECTS 
+
+'Ejemplo de un sprite llave (por ejemplo la ponemos como tipo 10), que puede ser recogida por el jugador
+' La VARIABLE "HAS_KEY" DEBERÍA SER CREADA ANTES EN "EXTRA_VARIABLES.BAS"
+/'
+IF ENEMY_TYPE = 10
+        SOUND(8)                  'ACTIVAMOS UN EFECTO DE SONIDO
+        NO_KILL                   'LA COLISION CON ESTE SPRITE NO MATA
+        HAS_KEY = TRUE            'PONEMOS LA VARIABLE HAS KEY (TIENE LLAVE) COMO VERDADERA. 
+        KILL_SPRITE_NO_RESPAWN    'BORRA EL SPRITE Y DESACTIVA EL RESPAWN
+END IF
+'/

@@ -1,0 +1,1 @@
+..\utils\ts2bin.exe font.png notiles ..\data\bin\font.bin nomask 7

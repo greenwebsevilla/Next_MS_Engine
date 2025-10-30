@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.defaultLanguage": ".bas",
+		"telemetry.enableCrashReporter": false,
+		"editor.tokenColorCustomizations": {
+			"comments": "#2ccf2c",
+			"numbers": "#e06565",
+			"keywords": "#f1db14",
+			"functions": "#13ad34"
+		}
+	}
+}
