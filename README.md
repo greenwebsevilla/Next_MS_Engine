@@ -7,7 +7,7 @@ El origen de este motor es una versión reducida y reprogramada del motor MK1 de
 # Características del motor:
 
  - **Configuración del player**: velocidades, salto, gravedad, disparo, energía, vidas, inercia, caja de colisión, etc
- - **Mapas** de hasta 256 tiles de ancho (4096 píxeles) y de altura hasta 12 tiles (192 píxeles)
+ - **Acepta mapas Tiled (tmx)** de hasta 256 tiles de ancho (4096 píxeles) y de altura hasta 12 tiles (192 píxeles)
  - **Scroll horizontal** (proximamente también vertical).
  - Configuración de la **cámara**.
  - **Conexiones entre mapas** personalizables. 
@@ -20,6 +20,7 @@ El origen de este motor es una versión reducida y reprogramada del motor MK1 de
  - **Personalización del hud**.
  - **Tile animados** para tener fondos más atractivos.
  - **Temporizador**.
+ - Uso de **2xAY** (música y sonidos FX por separado).
 
 
 # Como empezar
