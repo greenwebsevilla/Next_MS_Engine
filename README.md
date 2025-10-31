@@ -11,8 +11,9 @@ El origen de este motor es una versión reducida y reprogramada del motor MK1 de
  - **Scroll horizontal** (proximamente también vertical).
  - Configuración de la **cámara**.
  - **Conexiones entre mapas** personalizables. 
- - **Hasta 128 imágenes de 16x16 para el player**.
- - **Hasta 128 imágenes de 16x16 para enemigos y objetos por mapa**.
+ - **Hasta 128 tiles de 16x16 por mapa**.
+ - **Hasta 64 imágenes de 16x16 para el sprite del player**.
+ - **Hasta 64 imágenes de 16x16 para sprites de enemigos y objetos por mapa**.
  - Posibilidad de usar **sprites de 16x32**.
  - **Configuración de enemigos**.
  - 4 tipos de **enemigos preprogramados**.
@@ -41,3 +42,6 @@ Si no quieres usar Aseprite y prefieres tu editor de confianza, deberás tratar 
 **- Plugins para Aseprite** by Pandapus (Paul "Spectre" Harten). Descárgalos de https://github.com/spectrepaul/blog/tree/main/ZX%20Spectrum%20Next%20-%20Using%20Aseprite
 Y visita la web del autor para saber que nos ofrecen esos plugins: https://www.pandapus.com/2025/09/zx-spectrum-next-using-aseprite.html
 
+# Siguientes pasos
+
+Sigue el manual en la sección Wikis.

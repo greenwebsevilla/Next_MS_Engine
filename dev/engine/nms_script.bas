@@ -8,9 +8,9 @@
 #define FULL_ULA ClipULA(0,255,0,191)
 #define HIDE_SPRITES ClipSprite(0,0,0,0)
 #define SHOW_SPRITES ClipSprite(16,143,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
-#define ENDING endif
 #define HALF_LIFE half_life
 #define QUARTER_LIFE half_life2
+
 
 'Niveles'
 #define LEVEL_NUM level_number
@@ -20,15 +20,15 @@
 #define RESTART_LEVEL current_level=255:track=255
 
 'Player'
-#define PLAYER_X gpx
+#define PLAYER_X cast(uinteger,gpx)+x_scroll
 #define PLAYER_Y gpy
 #define PLAYER_VX p_vx
 #define PLAYER_VY p_vy
-#define PLAYER_X_IN_TILES gpx>>4
-#define PLAYER_Y_IN_TILES gpy>>4
+#define PLAYER_X_IN_TILES cast(ubyte,(cast(uinteger,gpx)+x_scroll)>>4)
+#define PLAYER_Y_IN_TILES cast(ubyte,(gpy>>4))
 #define PLAYER_ENERGY player_energy
 #define PLAYER_LIVES lives
-#define PLAYER_IN_ZONE(x,y,x2,y2) if((cast(integer, gpx) + x_scroll) >= (x<<4) AND (gpx + x_scroll) < ((x2+1)<<4) AND (gpy) >= (y<<4) AND (gpy) < ((y2+1)<<4))
+#define PLAYER_IN_ZONE(x,y,x2,y2) ((cast(integer, gpx) + x_scroll) >= (x<<4) AND (gpx + x_scroll) < ((x2+1)<<4) AND (gpy) >= (y<<4) AND (gpy) < ((y2+1)<<4))
 #define PLAYER_TOUCH_TILE player_touch_tile()
 #define PLAYER_TOUCH_TILE_TYPE player_touch_tile_type()
 #define SCORE_ADD add_points
@@ -63,7 +63,8 @@
 #define UPDATE_TILE actualizar_tile     '(x_tile as ubyte, y_tile as ubyte, num_tile as ubyte)'
 #define DELETE_HUD delete_hud()
 #define PRINT_HUD print_hud()
-#define FIRST_TILANIM tilanims_first
+#define NEW_SPRITE new_sprite
+
 
 'Enemigos'
 #define ENEMY_TYPE _en_t
@@ -93,6 +94,8 @@
 #define RESTART_TIME timer_t=TIMER_INITIAL
 #define OBJECTS_NUMBER num_objects
 #define SCORE score
+#define FIRST_TILANIM tilanims_first
+
 
 
 
