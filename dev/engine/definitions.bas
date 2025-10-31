@@ -252,5 +252,3 @@ dim v, VarFrec, contador_frecuencia60 as ubyte
 ' 8 = Full obstacle (blocks player from all directions)
 
 dim behs(128) as ubyte
-
-dim variable1 as ubyte
