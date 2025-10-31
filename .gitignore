@@ -1,2 +1,8 @@
-
+game.bin
+game.cfg
+game.nex
+Memory.txt
 NMS_Engine.code-workspace
+*tiled-project
+*.tiled-session
+*.world
