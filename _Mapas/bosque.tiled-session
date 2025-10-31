@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tmx/level_2.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "Todos los archivos (*)",
@@ -13,11 +13,11 @@
                 12,
                 11
             ],
-            "scale": 1,
-            "selectedLayer": 2,
+            "scale": 4,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 276,
-                "y": 191
+                "x": 355.125,
+                "y": 77.25
             }
         },
         "tmx/level_0.tmx#sprites": {
@@ -34,7 +34,7 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 869.3333333333333,
+                "x": 1036.6666666666665,
                 "y": -14.666666666666686
             }
         },
@@ -48,8 +48,8 @@
             "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 848.3333333333333,
-                "y": 110
+                "x": 890.1666666666665,
+                "y": 90.33333333333334
             }
         },
         "tmx/level_2.tmx#sprites": {
@@ -83,17 +83,14 @@
     "map.tileWidth": 16,
     "map.width": 16,
     "openFiles": [
-        "tmx/level_0.tmx",
-        "tmx/level_1.tmx",
-        "tmx/level_2.tmx"
     ],
     "project": "bosque.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "tmx/level_3.tmx",
-        "tmx/level_0.tmx",
+        "tmx/level_2.tmx",
         "tmx/level_1.tmx",
-        "tmx/level_2.tmx"
+        "tmx/level_0.tmx",
+        "tmx/level_3.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
