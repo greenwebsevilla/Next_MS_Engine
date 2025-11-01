@@ -41,7 +41,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define LEVELS_TILESETS         0,0,0,0	        ' Tilesets (spr) used in each level, separated by commas //Eg. Value 0 will use files: "tiles_1.spr +  beh1.bin"
 #define LEVELS_ENEMIES          0,0,0,1	        ' Enemies spriteset (spr) used in each level, separated by commas //Eg. Value 0 will use files: "enemies_1.spr"
 #define LEVELS_MUSICS           1,1,2,4	        ' # music used in each level, separated by commas //Eg. Value 2 will use the file "2.pt3"
-#define MAX_ENEMS               60              ' Max enemies+objects+platforms per level (one level is a map)'
+#define MAX_ENEMS               40              ' Max enemies+objects+platforms per level (one level is a map)'
 
 ' ============================================================================
 ' TILES ANIMADOS (ANIMATED TILES)'
