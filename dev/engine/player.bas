@@ -50,11 +50,13 @@ sub game_init()
 
 end sub
 
-sub go_to_another_map(level_num as ubyte, x_inicial as ubyte, y_inicial as ubyte)
+sub go_to_another_map(level_num as ubyte, x_inicial as ubyte == 255, y_inicial as ubyte = 255)
     level_number = level_num
-    player_x_ini = x_inicial
-    player_y_ini = y_inicial
-    teleport = 1 'ignorará la posición del player definida en el mapa'
+    if y_inicial < 255 'Si no indicamos coordenadas x e y, solo vamos al mapa nuevo y apareceremos donde esté definido en el mapa
+        player_x_ini = x_inicial
+        player_y_ini = y_inicial
+        teleport = 1 'ignorará la posición del player definida en el mapa'
+    end if
 end sub
 
 sub PlayerMove()
@@ -502,7 +504,7 @@ sub set_player_animation (fpi as ubyte, f0 as ubyte , f1 as ubyte = 0, f2 as uby
 
 end sub
 
-function player_touch_tile() as ubyte
+function player_touch_tile_num() as ubyte
     qtile(gpx>>4, gpy>>4)
     return aux2
 end function
