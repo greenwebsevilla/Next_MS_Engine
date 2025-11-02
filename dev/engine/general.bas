@@ -245,7 +245,7 @@ sub game_over ()
     ShowLayer2(1)
     EnableMusic
     EnableSFX
-    track = 12 : play_music()
+    track = MUSIC_GAMEOVER : play_music()
     pausa (200)
     
 end sub
@@ -405,7 +405,7 @@ sub redefine_keys()
             if tecla = 4 then key_down = GetKeyScanCode
             if tecla = 5 then key_pause = GetKeyScanCode
             keys_to_play(tecla) = GetKeyScanCode
-            PlaySFX(13)
+            PlaySFX(SOUND_KEY_DEFINED)
             tecla = tecla + 1
           end if
         end if
@@ -629,7 +629,7 @@ sub shoot()
                 estado_bala(i) = 1
                 v_bala(i) = 4 - p_facing
                 facing_bala(i) = p_facing
-                PlaySFX(11)
+                PlaySFX(SOUND_PLAYER_SHOOT)
                 EXIT FOR
             end if
         next i
@@ -690,6 +690,7 @@ sub EnemyBulletsMove()
 
     for i = 0 to 2
         if estado_enemyBullet(i) = 1 
+
             spnum = sprite_enemyBullet(frame_enemyBullet)
             
             asm : nextreg $50,55 : nextreg $51,56 : end asm 
@@ -723,7 +724,7 @@ sub EnemyBulletsMove()
                     estado_enemyBullet(i) = 0
                     player_damaged = 1
                     ' // METER FX
-                    PlaySFX(4)
+                    PlaySFX(SOUND_PLAYER_DAMAGED)
 
                 end if
             end if

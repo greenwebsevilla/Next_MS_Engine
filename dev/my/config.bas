@@ -102,7 +102,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 ' Collision with enemies and shots'
 #define SMALL_COLLISION_ENEM 				' reduced bounding box for collision with enemies
 ' #define SMALL_COLLISION_SHOTS				' reduced bounding box for collision with enemy bullets
-
+#define STOMP_ENEMIES                       ' Kill enemies by stomping on them'
 
 ' ============================================================================
 ' ENEMIES, PLATFORMS & OBJECTS CONFIGURATION
@@ -114,7 +114,6 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define DEFAULT_ENEM_FPS    4   ' Numero de frames que pasan para cambiar el sprite de animacion de los enemigos'
 
 #define RESPAWN_ENEMIES         ' If defined, enemies will respawn in the the place they died, when it is out of the visible area.'
-#define STOMP_ENEMIES           ' Kill enemies by stomping on them'
 #define ENEMY_DEATH_BOUNCE  24  ' If defined, when enemies die, they bounce, and the number is the vertical speed (VY) of the bounce (default is 24)'
 #define WALLS_STOP_ENEMIES      ' If defined, enemies change direction when colliding with a solid tile.
 
@@ -126,7 +125,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define FANTYS                  ' Activate the pursuer enemy type (type 2)'
 #define FANTYS_MAX_VEL 32 
 #define FANTYS_ACELERACION 1
-#define FANTY_DISTANCIA 100
+
 
 ' Jumpers
 #define JUMPERS                 ' Activate the jumping enemy type (type 3)'
@@ -135,7 +134,8 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 ' Oscillators
 #define OSCILLATORS              ' Oscillating enemy (type 4)'
 
-#define GRAVEDAD_ENEMS 2        ' For jumpers, oscillators, or enemies that can fall
+#define ENEMY_GRAVITY       2    ' For jumpers, oscillators, or enemies that can fall
+#define ENEMY_MAX_VY        96   ' For jumpers, oscillators, or enemies that can fall  
 
 ' Enemy fire'
 #define ENEMY_BULLETS           ' If defined, enemies can fire
@@ -162,5 +162,28 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define SHOW_OBJECTS                    ' If defined, print # of captured objects on hud
 #define OBJECTS_X               6       ' Timer coord X on hud
 #define OBJECTS_Y               1       ' Timer coord Y on hud
+
+
+' ============================================================================
+' MUSIC & SOUND CONFIGURATION
+' ============================================================================
+
+'Default songs'
+#define MUSIC_TITLE 0       'Title/menu screen'
+#define MUSIC_GAMEOVER 12
+#define MUSIC_ENDING 9
+#define MUSIC_STAGE_CLEAR 11
+
+'Default fx sounds'
+#define SOUND_JUMP 5
+#define SOUND_PLAYER_DAMAGED 4
+#define SOUND_PLAYER_SHOOT 3
+#define SOUND_START_GAME 6
+#define SOUND_LANGUAGE_SELECTED 11
+#define SOUND_EXTRA_LIFE 6
+#define SOUND_KEY_DEFINED 13
+#define SOUND_ENEMY_DAMAGED 7
+#define SOUND_ENEMY_DIE 9
+#define SOUND_ENEMY_STOMPED 12
 
 

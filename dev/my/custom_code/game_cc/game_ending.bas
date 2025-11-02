@@ -15,7 +15,7 @@ ClipLayer2(0,255,0,191)
 ShowLayer2(1)
 EnableMusic
 EnableSFX
-track = 9 : play_music()
+track = MUSIC_ENDING : play_music()
  
 if idioma = 0
 cadena1 = "YOU HAVE COMPLETED THE GAME... %CHANGE THIS SCREEN AND ADD%YOUR OWN CODE AT %GAME_ENDING.BAS*"

@@ -85,7 +85,7 @@ sub PlayerMove()
             salto_pulsado = 1
 
             possee = 0
-            PlaySFX(5)
+            PlaySFX(SOUND_JUMP)
         end if
 #endif
 
@@ -163,7 +163,7 @@ sub PlayerMove()
             if ct1 = 1 OR ct2 = 1
                 if p_estado < EST_PARP 
                 player_damaged = 1
-                PlaySFX(4)
+                PlaySFX(SOUND_PLAYER_DAMAGED)
                 end if
                 if p_estado < EST_MURIENDO
                     brinco = 1
@@ -344,7 +344,6 @@ sub PlayerMove()
             disparado = 1
         
             shoot()
-            PlaySFX(3)
 
         end if
     else

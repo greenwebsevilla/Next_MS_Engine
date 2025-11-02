@@ -65,7 +65,8 @@
 #define PRINT_HUD print_hud()
 #define NEW_SPRITE new_sprite
 '  NEW_SPRITE (61, 50, PLAYER_X_IN_TILES, PLAYER_Y_IN_TILES-1, 1) 'Creamos un objeto a la izquierda del jugador: sprite 61, tipo 50
-
+#define TIMER_ON timer_on = 1
+#define TIMER_OFF timer_on = 0
 
 
 'Enemigos'

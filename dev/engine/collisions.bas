@@ -38,7 +38,7 @@ if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
             cy1 = gpy + 15
     
             if cx1 >= cx2 AND cx1 <= (cx2+15) AND cy1 >= cy2 - ENEMY_EXTRA_TOP_BB AND cy1 <= (cy2+8)
-                PlaySFX(12)
+                PlaySFX(SOUND_ENEMY_STOMP)
                 enem_recibe_golpe(1)
                 brinco = 1
             end if
@@ -68,7 +68,7 @@ if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
                     if no_kill = 0
                         player_damaged = 1
                         ' // METER FX
-                        PlaySFX(4)
+                        PlaySFX(SOUND_PLAYER_DAMAGED)
                     end if
 
                 end if

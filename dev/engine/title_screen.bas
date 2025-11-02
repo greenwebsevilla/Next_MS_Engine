@@ -11,7 +11,7 @@ ClipULA(0,255,0,191)
 ShowLayer2(1)
 EnableSFX
 contador = 0
-track = 0 : play_music()
+track = MUSIC_TITLE : play_music()
 
 menu:
 control = 1

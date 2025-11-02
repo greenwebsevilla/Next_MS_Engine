@@ -81,8 +81,8 @@ end sub
 sub aplicar_gravedad_enem()
 
     ' fuerza gravedad'
-    _en_vy = _en_vy + GRAVEDAD_ENEMS
-    if  _en_vy > 96 then _en_vy = 96
+    _en_vy = _en_vy + ENEMY_GRAVITY
+    if  _en_vy > ENEMY_MAX_VY then _en_vy = ENEMY_MAX_VY
     _en_my = cast(byte, (_en_vy >> 4))
 
 end sub
@@ -90,8 +90,8 @@ end sub
 sub aplicar_gravedad_invertida_enem()
 
     ' fuerza gravedad invertida'
-    _en_vy = _en_vy - GRAVEDAD_ENEMS
-    if  _en_vy < -96 then _en_vy = -96
+    _en_vy = _en_vy - ENEMY_GRAVITY
+    if  _en_vy < -ENEMY_MAX_VY then _en_vy = -ENEMY_MAX_VY
     _en_my = cast(byte, (_en_vy >> 4))
 
 end sub
@@ -298,7 +298,7 @@ sub animate_enemy()
                     #include "../my/custom_code/enemies_cc/enems_die.bas"
                     en_an_subframe(enit) = 0
                     en_an_frame(enit) = 0
-                    PlaySFX(9)
+                    PlaySFX(SOUND_ENEMY_DIE)
     
                 end if
             end if
@@ -506,7 +506,7 @@ sub enem_recibe_golpe(fuerza as ubyte)
     enem_counter (enit) = 4
     enem_status = ENEM_DAMAGED 'estado tocado 
     enemies_mx_fanty(enit) = 0
-    PlaySFX(7)
+    PlaySFX(SOUND_ENEMY_DAMAGED)
     #include "../my/custom_code/enemies_cc/enems_before_hit.bas"
 end sub
 
