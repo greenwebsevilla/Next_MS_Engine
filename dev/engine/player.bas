@@ -50,7 +50,7 @@ sub game_init()
 
 end sub
 
-sub go_to_another_map(level_num as ubyte, x_inicial as ubyte == 255, y_inicial as ubyte = 255)
+sub go_to_another_map(level_num as ubyte, x_inicial as ubyte = 255, y_inicial as ubyte = 255)
     level_number = level_num
     if y_inicial < 255 'Si no indicamos coordenadas x e y, solo vamos al mapa nuevo y apareceremos donde esté definido en el mapa
         player_x_ini = x_inicial

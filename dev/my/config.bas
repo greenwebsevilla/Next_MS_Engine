@@ -21,13 +21,10 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define REDEFINE_TEXT_X 2   'Coords where to print Redefine keys dialog'
 #define REDEFINE_TEXT_Y 12
 
-
-' ============================================================================
 ' CAMERA SETTINGS: define los límites a partir de los cuales la cámara sigue al jugador haciendo un scroll
-' ============================================================================
 ' Valores en píxeles: de 8 a 296 para horizontal y de 8 a 168 para vertical)'
-#define CAM_RIGHT_LIMIT     168
-#define CAM_LEFT_LIMIT      168
+#define CAM_RIGHT_LIMIT     152
+#define CAM_LEFT_LIMIT      152
 #define CAM_DOWN_LIMIT      100
 #define CAM_UP_LIMIT        80
 
@@ -75,7 +72,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define INIT_LIVES				    3		' Max and starting lives gauge. (put 1 for just one life and use energy instead)
 
 ' Fire
-#define PLAYER_CAN_FIRE			    16		' If defined, player can shoot
+#define PLAYER_CAN_FIRE			     		' If defined, player can shoot
 #define BULLET_SPRITE				63		' # of sprite for the bullets in spriteset
 #define MAX_BULLETS				    3		' # of sprite for the bullets in spriteset
 

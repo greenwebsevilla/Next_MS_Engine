@@ -29,7 +29,7 @@
 #define PLAYER_ENERGY player_energy
 #define PLAYER_LIVES lives
 #define PLAYER_IN_ZONE(x,y,x2,y2) ((cast(integer, gpx) + x_scroll) >= (x<<4) AND (gpx + x_scroll) < ((x2+1)<<4) AND (gpy) >= (y<<4) AND (gpy) < ((y2+1)<<4))
-#define PLAYER_TOUCH_TILE player_touch_tile()
+#define PLAYER_TOUCH_TILE_NUM player_touch_tile_num()
 #define PLAYER_TOUCH_TILE_TYPE player_touch_tile_type()
 #define SCORE_ADD add_points
 #define REFILL_ENERGY player_energy=INIT_ENERGY
