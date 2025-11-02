@@ -6,7 +6,6 @@ NMS_Engine.code-workspace
 *tiled-project
 *.tiled-session
 *.world
-cspect.log
 config_protmx.txt
 config_tb.txt
 cspect.log
