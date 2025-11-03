@@ -503,13 +503,20 @@ sub set_player_animation (fpi as ubyte, f0 as ubyte , f1 as ubyte = 0, f2 as uby
 
 end sub
 
+dim val_a, val_b as ubyte
 function player_touch_tile_num() as ubyte
-    qtile(gpx>>4, gpy>>4)
-    return aux2
+    qtile(gpx+7>>4, gpy+3>>4)
+    val_a = aux2
+    qtile(gpx+7>>4, gpy+15>>4)
+    val_b = aux2
+    if val_a = val_b then return aux2
 end function
 
 function player_touch_tile_type() as ubyte
-    qtile(gpx>>4, gpy>>4)
-    return aux1
+    qtile(gpx+7>>4, gpy+3>>4)
+    val_a = aux1
+    qtile(gpx+7>>4, gpy+15>>4)
+    val_b = aux1
+    if val_a = val_b then return aux1
 end function
 

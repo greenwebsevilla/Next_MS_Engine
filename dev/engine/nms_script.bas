@@ -10,6 +10,8 @@
 #define SHOW_SPRITES ClipSprite(16,143,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
 #define HALF_LIFE half_life
 #define QUARTER_LIFE half_life2
+#define TRUE 1
+#define FALSE 0
 
 
 'Niveles'
