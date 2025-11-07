@@ -40,4 +40,3 @@ gpy = cast(uinteger, player_y_ini) << 4
 tilanims_first = LEVELS_FIRST_TILANIM
 #endif
 
-EnableMusic

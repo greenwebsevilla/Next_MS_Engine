@@ -251,7 +251,6 @@ sub game_over ()
     LoadSDBank("gfx/gameover.bin",0,0,0,18)
     ClipLayer2(0,255,0,191)
     ShowLayer2(1)
-    EnableMusic
     EnableSFX
     track = MUSIC_GAMEOVER : play_music()
     pausa (200)

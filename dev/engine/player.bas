@@ -102,7 +102,7 @@ sub PlayerMove()
 #ifndef ENABLE_UPDOWN_MOVE
 
 #ifdef ENABLE_LADDERS
-
+dim ladder_middle as ubyte
     player_calc_bounding_box()
 
     cx1 = ptx1 : cy1 = pty2   'abajo-izq
@@ -114,6 +114,11 @@ sub PlayerMove()
     cx2 = ptx2 : cy2 = cy1     'abajo-der
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_down = 1 else ladder_down = 0
+
+    cx1 = ptx1 : cy1 = pty2+1   'abajo-izq
+    cx2 = ptx2 : cy2 = cy1     'abajo-der
+    check_n_points(2)
+    if ct1 = 2 AND ct2 = 2 then ladder_middle = 1 else ladder_middle = 0
 
     if ladder_up AND KEY_TO_UP then PLAYER_ON_LADDER = TRUE : p_vx = 0 : anular_salto()
     if ladder_down AND KEY_TO_DOWN then PLAYER_ON_LADDER = TRUE : p_vx = 0 : anular_salto()
@@ -131,7 +136,7 @@ sub PlayerMove()
 
     end if
 
-    if not ladder_up AND not ladder_down 
+    if not ladder_up AND not ladder_down AND not ladder_middle
         PLAYER_ON_LADDER = 0
     end if
 
