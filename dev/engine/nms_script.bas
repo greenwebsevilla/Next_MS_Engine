@@ -48,7 +48,6 @@
 #define PLAYER_ON_LADDER ladder_on
 
 
-
 'Utilidades / Loop'
 #define TEXT(x,y,color,text) print at y,x;ink color;text
 #define MUSIC(pt3_number) if track <> pt3_number : track = pt3_number : play_music() : endif
