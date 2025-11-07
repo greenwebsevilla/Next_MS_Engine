@@ -1,6 +1,5 @@
 sub player_locate()
     p_subframe = 0
-    tocado = 0
     
     p_frame = 0 : p_subframe = 0
 
@@ -26,9 +25,9 @@ sub game_init()
     lives = INIT_LIVES
     playing = 1
     p_vx = 0: p_vy = 0
-    p_facing = 0
+    player_facing = 0
     PLAYER_EXTRA_TOP_BB = 0 'por defecto por se amplía la caja de colisión por arriba'
-    p_estado = 0 : p_ct_estado = 0
+    player_status = 0 : p_ct_estado = 0
     num_objects = 0 : player_damaged = 0
 
 
@@ -59,49 +58,120 @@ sub go_to_another_map(level_num as ubyte, x_inicial as ubyte = 255, y_inicial as
     end if
 end sub
 
+function player_touch_tile_num() as ubyte
+    qtile(gpx+7>>4, gpy+3>>4)
+    val_a = aux2
+    qtile(gpx+7>>4, gpy+15>>4)
+    val_b = aux2
+    if val_a = val_b then return aux2
+    return 0
+end function
+
+function player_touch_tile_type() as ubyte
+    qtile(gpx+7>>4, gpy+3>>4)
+    val_a = aux1
+    qtile(gpx+7>>4, gpy+15>>4)
+    val_b = aux1
+    if val_a = val_b then return aux1
+    return 0
+end function
+
+sub anular_salto()
+    player_jumping = 0 : jump_pressed = 0
+end sub
+
 sub PlayerMove()
 
-    if p_estado < EST_MURIENDO 
+    if player_status < EST_MURIENDO 
         control_vars () 'Read the control'
     end if
 
     'Gravedad'
 #ifdef PLAYER_GRAVITY
-    p_vy = p_vy + PLAYER_GRAVITY
-    if p_vy > PLAYER_MAX_VY_FALLING then p_vy = PLAYER_MAX_VY_FALLING
+    #ifdef ENABLE_LADDERS
+    if PLAYER_ON_LADDER = 0
+    #endif
+        p_vy = p_vy + PLAYER_GRAVITY
+        if p_vy > PLAYER_MAX_VY_FALLING then p_vy = PLAYER_MAX_VY_FALLING
+    #ifdef ENABLE_LADDERS
+    end if
+    #endif
 #endif
 
     ' Control Vertical
+#ifndef ENABLE_UPDOWN_MOVE
+
+#ifdef ENABLE_LADDERS
+
+    player_calc_bounding_box()
+
+    cx1 = ptx1 : cy1 = pty2   'abajo-izq
+    cx2 = ptx2 : cy2 = pty2      'abajo-der
+    check_n_points(2)
+    if ct1 = 2 AND ct2 = 2 then ladder_up = 1 else ladder_up = 0
+
+    cx1 = ptx1 : cy1 = pty2+17   'abajo-izq
+    cx2 = ptx2 : cy2 = cy1     'abajo-der
+    check_n_points(2)
+    if ct1 = 2 AND ct2 = 2 then ladder_down = 1 else ladder_down = 0
+
+    if ladder_up AND KEY_TO_UP then PLAYER_ON_LADDER = TRUE : p_vx = 0 : anular_salto()
+    if ladder_down AND KEY_TO_DOWN then PLAYER_ON_LADDER = TRUE : p_vx = 0 : anular_salto()
+
+    if PLAYER_ON_LADDER
+        IF KEY_TO_UP  
+            p_vy = -LADDER_VY
+            ' p_vx = 0
+        ELSEIF KEY_TO_DOWN  then
+            p_vy = LADDER_VY
+            ' p_vx = 0
+        else
+            p_vy = 0
+        END IF
+
+    end if
+
+    if not ladder_up AND not ladder_down 
+        PLAYER_ON_LADDER = 0
+    end if
+
+
+#endif
+
 
 #ifdef PLAYER_JUMPS
 #ifdef DAMAGE_BOUNCE_POWER
-        if (press_up OR brinco) AND p_saltando = 0 AND salto_pulsado = 0
+        if (KEY_TO_JUMP OR brinco) AND player_jumping = 0 AND jump_pressed = 0
 #else
-        if press_up AND p_saltando = 0 AND salto_pulsado = 0
+        if KEY_TO_JUMP AND player_jumping = 0 AND jump_pressed = 0
 #endif
     
             p_vy = - JUMP_POWER
-            p_saltando = 1
-            salto_pulsado = 1
-
-            possee = 0
+            player_jumping = 1
+            jump_pressed = 1
+            on_ground = 0
             PlaySFX(SOUND_JUMP)
+#ifdef ENABLE_LADDERS
+            PLAYER_ON_LADDER = 0
+#endif
         end if
 #endif
 
-#ifndef ENABLE_UPDOWN_MOVE
-    #ifdef DAMAGE_BOUNCE_POWER
-        if brinco then 
-            p_vy = - DAMAGE_BOUNCE_POWER
-            brinco = 0
-        end if
-    #endif
 
-#else
+#ifdef DAMAGE_BOUNCE_POWER
+    if brinco then 
+        p_vy = - DAMAGE_BOUNCE_POWER
+        brinco = 0
+    end if
+#endif
+
+#else 'defined ENABLE_UPDOWN'
+
+
     'UP & DOWN MOVEMENT
-    if press_up
+    if KEY_TO_UP
 
-        '    p_facing = FACING_LEFT
+        '    player_facing = FACING_LEFT
 #ifdef INERTIA
             p_vy = p_vy - PLAYER_AX
             if p_vy < -PLAYER_MAX_VX then p_vy = -PLAYER_MAX_VX
@@ -110,8 +180,8 @@ sub PlayerMove()
 #endif
         else
 
-            if press_down
-                ' p_facing = FACING_RIGHT
+            if KEY_TO_DOWN
+                ' player_facing = FACING_RIGHT
 #ifdef INERTIA
                 p_vy = p_vy + PLAYER_AX
                 if p_vy > PLAYER_MAX_VX then p_vy = PLAYER_MAX_VX
@@ -133,45 +203,69 @@ sub PlayerMove()
 
     'Colisiones verticales
     player_calc_bounding_box()
-    
+
     if p_vy > 0
         cx1 = ptx1+1 : cy1 = pty2+1
         cx2 = ptx2-1 : cy2 = cy1 
-        cm_two_points()
-        if ct1 bAND 12 OR ct2 bAND 12 OR possee
-            cx1 = ptx1 : cy1 = pty2-4
-            cx2 = ptx2 : cy2 = cy1
-            cm_two_points()
-            if ct1 <> 4 AND ct2 <> 4 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
-                p_vy = 0
-#ifdef PLAYER_JUMPS
-                p_saltando = 0: brinco = 0
-                if press_up = 0 then salto_pulsado = 0
+
+        check_n_points(2)
+        
+        if ct1 bAND 12 OR ct2 bAND 12 OR on_ground 'on_ground IMPORTANTE para plataformas móviles
+#ifdef ENABLE_LADDERS
+            if not (PLAYER_ON_LADDER AND ct1 = 4) 
 #endif
-                if possee = 0
-                    gpy = gpy bAND 0xfff0
-                    p_y = gpy << 6 
+                cx1 = ptx1 : cy1 = pty2-4
+                cx2 = ptx2 : cy2 = cy1
+                check_n_points(2)
+                if ct1 <> 4 AND ct2 <> 4 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
+                    p_vy = 0
+#ifdef ENABLE_LADDERS
+                    PLAYER_ON_LADDER = 0
+#endif
+#ifdef PLAYER_JUMPS
+                    player_jumping = 0: brinco = 0
+                    if KEY_TO_JUMP = 0 then jump_pressed = 0
+#endif
+                    if on_ground = 0
+                        gpy = gpy bAND 0xfff0
+                        p_y = gpy << 6 
+                    end if
                 end if
+#ifdef ENABLE_LADDERS
             end if
-        else 
-#ifdef PLAYER_JUMPS
-            p_saltando = 1: salto_pulsado = 1
 #endif
-            cx1 = ptx1+4 
-            cx2 = ptx2-4  
-            cm_two_points()
+        else 
+#ifdef ENABLE_LADDERS
+            if PLAYER_ON_LADDER = 0
+#endif
+#ifdef PLAYER_JUMPS
+            player_jumping = 1: jump_pressed = 1
+#endif
+#ifdef ENABLE_LADDERS
+            end if
+#endif
+            ' cx1 = ptx1+4 
+            ' cx2 = ptx2-4  
+            ' check_n_points(2)
             if ct1 = 1 OR ct2 = 1
-                if p_estado < EST_PARP 
-                player_damaged = 1
-                PlaySFX(SOUND_PLAYER_DAMAGED)
+                if player_status < EST_PARP 
+
+                spike_touched = 1
                 end if
-                if p_estado < EST_MURIENDO
+#ifdef ENABLE_LADDERS
+                if PLAYER_ON_LADDER = 0
+#endif
+                if player_status < EST_MURIENDO
                     brinco = 1
                 end if
+#ifdef ENABLE_LADDERS
+                end if
+#endif
             end if
        
         end if
     end if
+
 
     if p_vy < 0
 
@@ -181,10 +275,16 @@ sub PlayerMove()
         cy1 = cy1 - PLAYER_EXTRA_TOP_BB
         cy2 = cy1
 #endif
-        cm_two_points()
+        check_n_points(2)
         if ct1 = 8 OR ct2 = 8
             p_vy = 0
         end if
+
+        if ct1 = 1 OR ct2 = 1
+            if player_status < EST_PARP 
+            spike_touched = 1
+            end if
+        endif
     end if 
 
    
@@ -202,9 +302,12 @@ sub PlayerMove()
 
     ' CONTROL HORIZONTAL
 
-        if press_left 
+#ifdef ENABLE_LADDERS
+    if PLAYER_ON_LADDER = 0
+#endif    
+        if KEY_TO_LEFT 
 
-            p_facing = FACING_LEFT
+            player_facing = FACING_LEFT
 #ifdef INERTIA
             p_vx = p_vx - PLAYER_AX
             if p_vx < -PLAYER_MAX_VX then p_vx = -PLAYER_MAX_VX
@@ -213,8 +316,8 @@ sub PlayerMove()
 #endif
         else
 
-            if press_right 
-                p_facing = FACING_RIGHT
+            if KEY_TO_RIGHT 
+                player_facing = FACING_RIGHT
 #ifdef INERTIA
                 p_vx = p_vx + PLAYER_AX
                 if p_vx > PLAYER_MAX_VX then p_vx = PLAYER_MAX_VX
@@ -232,13 +335,14 @@ sub PlayerMove()
 
         end if
 
+   
 
-    ' if disparando AND p_saltando = 0 then p_vx = 0
+    ' if disparando AND player_jumping = 0 then p_vx = 0
 
     total_vx = p_vx + plataforma_vx
   
     ' Colisiones horizontales'
-    if p_estado < EST_MURIENDO
+    if player_status < EST_MURIENDO
 
         player_calc_bounding_box()
 
@@ -246,26 +350,40 @@ sub PlayerMove()
        
                 cx1 = ptx2+1 : cy1 = pty1 
                 cx2 = ptx2+1 : cy2 = pty2 
-                cm_two_points()
+                check_n_points(2)
+#ifdef SPIKES_KILL_VERTICAL_ONLY
                 if ct1 bAND 9 OR ct2 bAND 9
+#else
+                if ct1 = 8 OR ct2 = 8
+#endif
                     ' if p_x < 17216 'Este IF es para que no detecte colisiones al salir del mapa por la derecha'
                         total_vx = 0 
                     ' endif
                 end if
+#ifndef SPIKES_KILL_VERTICAL_ONLY
+                if ct1 = 1 OR ct2 = 1
+                    if player_status < EST_PARP 
+                    spike_touched = 1
+                    end if
+                endif
+#endif
+
 #ifdef PLAYER_SPRITE_16X32 
                 cx1 = ptx2+1
                 cy1 = pty1 - PLAYER_EXTRA_TOP_BB
-                cm_two_points()
+                check_n_points(2)
                 if ct1 bAND 9
                         total_vx = 0 
                 end if
 #endif
                 p_x = p_x + total_vx
-            if p_x > CAM_RIGHT_LIMIT*64 
-                if ScrollToRight()
-                p_x = CAM_RIGHT_LIMIT*64 
-                end if
-            endif
+
+                if p_x > CAM_RIGHT_LIMIT*64 
+                    if ScrollToRight()
+                    p_x = CAM_RIGHT_LIMIT*64 
+                    end if
+                endif
+                
         end if
 
 
@@ -273,34 +391,60 @@ sub PlayerMove()
         
                 cx1 = ptx1-1 : cy1 = pty1 
                 cx2 = ptx1-1 : cy2 = pty2 
-                cm_two_points()
+
+                check_n_points(2)
+#ifdef SPIKES_KILL_VERTICAL_ONLY
                 if ct1 bAND 9 OR ct2 bAND 9
-                    total_vx = 0
+#else
+                if ct1 = 8 OR ct2 = 8
+#endif
+                total_vx = 0
                 end if
+
+#ifndef SPIKES_KILL_VERTICAL_ONLY
+                if ct1 = 1 OR ct2 = 1
+                    if player_status < EST_PARP 
+                    spike_touched = 1
+                    end if
+                endif
+#endif
+
 #ifdef PLAYER_SPRITE_16X32 
                 cx1 = ptx1-1
                 cy1 = pty1 - PLAYER_EXTRA_TOP_BB
-                cm_two_points()
+                check_n_points(2)
                 if ct1 bAND 9
                         total_vx = 0 
                 end if
 #endif
+
+
                 p_x = p_x + total_vx
         
-            if p_x < CAM_LEFT_LIMIT*64 
-                if ScrollToLeft()
-                    p_x = CAM_LEFT_LIMIT*64
+                if p_x < CAM_LEFT_LIMIT*64 
+                    if ScrollToLeft()
+                        p_x = CAM_LEFT_LIMIT*64
+                    end if
                 end if
-            end if
 
         end if 
 
+#ifdef ENABLE_LADDERS
+    end if ' END IF 'NOT ESCALERAS' PARA TODO LO HORIZONTAL
+#endif
+
+        if spike_touched
+            player_damaged = 1
+            PlaySFX(SOUND_PLAYER_DAMAGED)
+            spike_touched = 0
+        end if
+
         #ifdef PLAYER_FLICKERS
             ' // Flickering
-            if p_estado = EST_PARP
+            if player_status = EST_PARP
                     p_ct_estado = p_ct_estado - 1
                     if p_ct_estado = 0
-                        p_estado = EST_NORMAL
+                        player_status = EST_NORMAL
                     end if
             end if
         #endif
@@ -316,8 +460,8 @@ sub PlayerMove()
             else
                 #include "../my/custom_code/player_cc/player_dies.bas"
                 player_damaged = 0
-                p_estado = EST_MURIENDO
-                p_counter = 100
+                player_status = EST_MURIENDO
+                player_counter = 100
                 lives = lives - 1
                 print_number_of_lives()
             end if
@@ -326,7 +470,7 @@ sub PlayerMove()
 
 
     
-    end if ' if p_estado < EST_MURIENDO
+    end if ' if player_status < EST_MURIENDO
 
     if p_x < 2048 then p_x = 2048 'límite izquierdo pantalla'
 
@@ -337,7 +481,7 @@ sub PlayerMove()
     gpx = p_x >> 6  
 
 #ifdef PLAYER_CAN_FIRE
-    if press_fire
+    if KEY_TO_FIRE
         if disparando = 0 AND disparado = 0
 
             disparando = 4 
@@ -400,7 +544,7 @@ sub UpdatePlayer()
     _x1 = gpx
     _y = gpy + (SCREEN_Y_OFFSET<<4)
 
-    if p_estado = EST_PARP AND half_life = 0
+    if player_status = EST_PARP AND half_life = 0
 
         RemoveSprite(PLAYER_FIRST_SP_VRAM,0)
 #ifdef PLAYER_SPRITE_16X32
@@ -410,9 +554,9 @@ sub UpdatePlayer()
     else
 
 #ifdef PLAYER_SPRITE_16X32
-        UpdateSprite(_x1, _y-16, PLAYER_FIRST_SP_VRAM+1, PLAYER_FIRST_SP_VRAM+1, p_facing, 0) 'Extra Sprite Player for 32 pixels height
+        UpdateSprite(_x1, _y-16, PLAYER_FIRST_SP_VRAM+1, PLAYER_FIRST_SP_VRAM+1, player_facing, 0) 'Extra Sprite Player for 32 pixels height
 #endif
-        UpdateSprite(_x1, _y, PLAYER_FIRST_SP_VRAM, PLAYER_FIRST_SP_VRAM, p_facing, 0) 'Sprite Player
+        UpdateSprite(_x1, _y, PLAYER_FIRST_SP_VRAM, PLAYER_FIRST_SP_VRAM, player_facing, 0) 'Sprite Player
 
     end if
 
@@ -440,7 +584,7 @@ sub player_kill()
     brinco = 1
 
 #ifdef PLAYER_FLICKERS
-    p_estado = EST_PARP
+    player_status = EST_PARP
     p_ct_estado = FLICKERING_TIME
 #endif   
 
@@ -448,12 +592,12 @@ end sub
 
 
 sub check_death()
-    p_counter = p_counter - 1
+    player_counter = player_counter - 1
     'Ultimo frame de muerte'
-    if p_estado = EST_MURIENDO AND p_counter = 0
+    if player_status = EST_MURIENDO AND player_counter = 0
 
         pausa(50)
-        p_estado = EST_NORMAL
+        player_status = EST_NORMAL
 
         'Si no hay mas vidas, Game Over'
         if lives > 0
@@ -503,20 +647,4 @@ sub set_player_animation (fpi as ubyte, f0 as ubyte , f1 as ubyte = 0, f2 as uby
 
 end sub
 
-dim val_a, val_b as ubyte
-function player_touch_tile_num() as ubyte
-    qtile(gpx+7>>4, gpy+3>>4)
-    val_a = aux2
-    qtile(gpx+7>>4, gpy+15>>4)
-    val_b = aux2
-    if val_a = val_b then return aux2
-end function
-
-function player_touch_tile_type() as ubyte
-    qtile(gpx+7>>4, gpy+3>>4)
-    val_a = aux1
-    qtile(gpx+7>>4, gpy+15>>4)
-    val_b = aux1
-    if val_a = val_b then return aux1
-end function
 

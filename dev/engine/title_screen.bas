@@ -41,7 +41,7 @@ loop
 
 RANDOMIZE
 DisableMusic
-PlaySFX(6)
+PlaySFX(SOUND_START_GAME)
 pausa (50)
 CLS
 ShowLayer2(0)

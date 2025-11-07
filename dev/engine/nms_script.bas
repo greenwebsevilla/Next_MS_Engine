@@ -37,22 +37,17 @@
 #define REFILL_ENERGY player_energy=INIT_ENERGY
 #define PLAYER_DIE player_energy=1:player_damaged = 1
 #define SET_PLAYER_ANIMATION set_player_animation
-#define PLAYER_STATUS p_estado
+#define PLAYER_STATUS player_status
 #define PLAYER_EXTRA_TOP_BB ajuste_ccol_y
 'Estados del player para diferentes animaciones'
-#define PLAYER_JUMPING p_saltando
+#define PLAYER_JUMPING player_jumping
 #define PLAYER_WALKING p_vx
-#define PLAYER_DYING p_estado = EST_MURIENDO
+#define PLAYER_DYING player_status = EST_MURIENDO
 #define PLAYER_GOING_UP p_vy<0
 #define PLAYER_GOING_DOWN p_vy>0
+#define PLAYER_ON_LADDER ladder_on
 
-'Control'
-#define PRESS_UP press_up
-#define PRESS_DOWN press_down
-#define PRESS_LEFT press_left
-#define PRESS_RIGHT press_right
-#define PRESS_FIRE press_fire
-#define PRESS_PAUSE press_pause
+
 
 'Utilidades / Loop'
 #define TEXT(x,y,color,text) print at y,x;ink color;text

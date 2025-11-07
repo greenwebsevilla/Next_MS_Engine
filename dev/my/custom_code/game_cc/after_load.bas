@@ -10,7 +10,7 @@ do
     end if
 loop
 EnableSFX
-PlaySFX(11)
+PlaySFX(SOUND_LANGUAGE_SELECTED)
 WaitForNoKey()
 pausa(30)
 DisableSFX

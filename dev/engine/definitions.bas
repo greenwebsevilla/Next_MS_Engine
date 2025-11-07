@@ -7,24 +7,7 @@ dim half_life, half_life2, success as ubyte
 dim i, j, k as ubyte
 dim dif_x, dif_y as integer
 
-'Variables control'
-dim press_up, press_down, press_left, press_right, press_fire, press_pause as uinteger
-dim key_up, key_down, key_left, key_right, key_fire, key_pause as uinteger
-dim control as ubyte
-dim tecla as ubyte
-dim teclas_redef (0 to 5) as string
-dim keys_to_play(6) as uinteger
 
-'LOAD REDEFINED KEYS'
-LoadSD("bin/keys.bin",@keys_to_play(0), 12, 0)
-
-'Copy keys from array'
-key_left = keys_to_play(0)
-key_right = keys_to_play(1)
-key_up = keys_to_play(2)
-key_fire = keys_to_play(3)
-key_down = keys_to_play(4)
-key_pause = keys_to_play(5)
 
 
 ' Variables & Defines Player
@@ -34,25 +17,27 @@ dim p_vx, p_vy, total_vx, total_vy as integer
 dim player_x_ini, player_y_ini as ubyte 
 dim p_x, p_y as integer 
 dim gpx, gpy as uinteger
-dim p_frame, p_subframe, p_facing, spnum, p_frame_base as ubyte 
-dim p_estado, p_ct_estado, p_saltando, salto_pulsado, brinco as ubyte 
-dim possee as ubyte 
+dim p_frame, p_subframe, player_facing, spnum, p_frame_base as ubyte 
+dim player_status, p_ct_estado, player_jumping, jump_pressed, brinco as ubyte 
+dim on_ground as ubyte 
 dim plataforma_vx, plataforma_vy as integer
 dim ptx1, pty1, ptx2, pty2, _x1 as uinteger 'Puntos caja de colision player
 dim _x as integer
 dim _y, _n, _t as ubyte
 
-dim tocado as ubyte
-dim ct1, ct2, aux1, aux2, aux3, aux4 as ubyte 'Puntos auxiliares
-dim cx1, cy1, cx2, cy2 as integer 'Puntos auxiliares
+dim spike_touched as ubyte
+dim ct1, ct2, ct3, aux1, aux2, aux3, aux4 as ubyte 'Puntos auxiliares
+dim cx1, cy1, cx2, cy2, cx3, cy3 as integer 'Puntos auxiliares
 dim contador as ubyte
 
-dim p_counter, fps_animacion as ubyte
+dim player_counter, fps_animacion as ubyte
 dim diferencia, distancia as integer
 dim auxi1 as integer
 dim auxi2, auxi3, auxi4, uit as ubyte
 dim ajuste_ccol_y as ubyte
 dim score, next_extra_life as uinteger
+dim ladder_on, ladder_up, ladder_down as ubyte
+dim val_a, val_b as ubyte
 
 #define FACING_RIGHT    0
 #define FACING_LEFT     8
@@ -68,8 +53,7 @@ dim score, next_extra_life as uinteger
 dim player_frames(MAX_FRAMES_PLAYER-1) as ubyte
                                  
 
-'Variables disparos player y enemigos'
-'Player'
+'Variables disparos player'
 dim disparando, disparado as ubyte 
 dim x_bala (3)  as uinteger
 dim y_bala (3)  as ubyte

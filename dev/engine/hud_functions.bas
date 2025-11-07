@@ -38,7 +38,7 @@ function print_score() as ubyte
 	if score > next_extra_life
 			next_extra_life = next_extra_life + EXTRA_LIFE_SCORE
             PLAYER_LIVES = PLAYER_LIVES + 1
-			PlaySFX (6)
+			PlaySFX (SOUND_EXTRA_LIFE)
 	end if
     
 end function

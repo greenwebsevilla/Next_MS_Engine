@@ -28,7 +28,6 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define CAM_DOWN_LIMIT      100
 #define CAM_UP_LIMIT        80
 
-#define EXTRA_LIFE_SCORE    3000    'Win extra life each N points'
 
 ' ============================================================================
 ' LEVELS CONFIGURATION (here, we consider each maps as a levels)
@@ -58,6 +57,11 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define TIMER_START						' If defined, start timer from the beginning
 #define TIMER_AUTO_RESET				' If defined, timer resets after "time up"
 
+' ============================================================================
+' MISCELANIA
+' ============================================================================
+#define EXTRA_LIFE_SCORE    3000    'Win extra life each N points'
+#define SPIKES_KILL_VERTICAL_ONLY   ' If defined, tile type 1 only damages if touched on top or bottom, horizontally is a solid block
 
 ' ============================================================================
 ' PLAYER CONFIGURATION
@@ -86,6 +90,10 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 
 ' #define ENABLE_UPDOWN_MOVE                ' If defined, player can move up and down (for top view games, remember to disable gravity and jump)
 
+#define ENABLE_LADDERS                      ' If defined, tile type 2 are ladders.
+#define LADDER_VY                   64      ' Y speed when moving up/down on ladders.
+
+
 ' Horizontal (side view) or general (top view) movement.
 #define PLAYER_MAX_VX				96  	' Max X speed  (96/64 = 1.5 pixels/frame)
 #define INERTIA                             ' Comment this out to disable inertia'
@@ -97,7 +105,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define BOUNDING_BOX_LEFT_OFFSET	   -1	' in pixels: negative to reduce the box, positive to increase
 #define BOUNDING_BOX_RIGHT_OFFSET	   -1	' in pixels: negative to reduce the box, positive to increase
 #define BOUNDING_BOX_UP_OFFSET	       -3	' in pixels: negative to reduce the box, positive to increase
-#define BOUNDING_BOX_DOWN_OFFSET	   0	' in pixels: negative to reduce the box, positive to increase
+#define BOUNDING_BOX_DOWN_OFFSET	   0	' in pixels: negative to reduce the box, positive to increase (If use gravity, let it 0)
 
 ' Collision with enemies and shots'
 #define SMALL_COLLISION_ENEM 				' reduced bounding box for collision with enemies
@@ -186,4 +194,17 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define SOUND_ENEMY_DIE 9
 #define SOUND_ENEMY_STOMPED 12
 
+
+' ============================================================================
+' CONTROL CONFIGURATION
+' ============================================================================
+
+#define KEY_TO_LEFT     PRESS_LEFT
+#define KEY_TO_RIGHT    PRESS_RIGHT
+#define KEY_TO_UP       PRESS_UP
+#define KEY_TO_DOWN     PRESS_DOWN
+
+#define KEY_TO_FIRE     PRESS_FIRE
+#define KEY_TO_JUMP     PRESS_FIRE2
+#define KEY_TO_PAUSE    PRESS_PAUSE
 

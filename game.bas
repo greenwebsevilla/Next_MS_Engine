@@ -12,6 +12,7 @@
 #include <string.bas>
 #include <asc.bas>
 
+#include "dev/engine/control_keys_def.bas"
 #include "dev/my/config.bas"
 #include "dev/engine/definitions.bas"
 #include "dev/engine/nms_script.bas"
@@ -21,10 +22,9 @@
 #include "dev/engine/player.bas"
 #include "dev/engine/enengine.bas"
 #include "dev/my/custom_code/extra_functions.bas"
-
 #include "dev/engine/hud_functions.bas"
 
-ShowLayer2(0)
+ShowLayer2(0) 
 get_frecuency()
 set_joystick()
 set_registers()

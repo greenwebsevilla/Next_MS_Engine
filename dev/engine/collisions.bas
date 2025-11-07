@@ -12,7 +12,7 @@ no_kill = 0 'Default, all enemies kill'
 if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
 #endif
 
-    if enem_status < ENEM_DAMAGED 'afecta solo a estados diferentes a tocado o muriendo
+    if enem_status < ENEM_DAMAGED 'afecta solo a estados diferentes a dañado o muriendo
 
     'DISPAROS'
 #ifdef OBJECT_TYPE
@@ -38,7 +38,7 @@ if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
             cy1 = gpy + 15
     
             if cx1 >= cx2 AND cx1 <= (cx2+15) AND cy1 >= cy2 - ENEMY_EXTRA_TOP_BB AND cy1 <= (cy2+8)
-                PlaySFX(SOUND_ENEMY_STOMP)
+                PlaySFX(SOUND_ENEMY_STOMPED)
                 enem_recibe_golpe(1)
                 brinco = 1
             end if
@@ -48,7 +48,7 @@ if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
 #ifdef OBJECT_TYPE    
     end if
 #endif
-        if p_estado < EST_PARP
+        if player_status < EST_PARP
             if enem_status < ENEM_DYING
                 if collide() = 1
 #ifdef OBJECT_TYPE
@@ -90,7 +90,7 @@ else
     if gpy >= cy2 - 17
     if gpy < cy2 - 9
 
-        possee = 1
+        on_ground = 1
         plataforma_vx = 0: plataforma_vy = 0
         if half_life = 0
             plataforma_vx = _en_mx << 6 

@@ -37,15 +37,23 @@ sub qtile(byval x_punto as uinteger, byval y_punto as uinteger)
 end sub
 
 
-' CM_TWO_POINTS: Devuelve el comportamiento (beh) del tile que hay en dos puntos (ct1 y ct2) definidos por sus coordenadas x,y en pixeles: cx1,cy1 para ct1 y cx2,cy2 para ct2
-sub cm_two_points ()
+' CHECK_N_POINTS: Devuelve el comportamiento (beh) del tile que hay en dos puntos (ct1 y ct2) definidos por sus coordenadas x,y en pixeles: cx1,cy1 para ct1 y cx2,cy2 para ct2
+sub check_n_points (num_points as ubyte)
     ' Punto ct1
     qtile(cx1 >> 4, cy1 >> 4)
     ct1 = aux1
 
-    ' Punto ct2
-    qtile(cx2 >> 4, cy2 >> 4)
-    ct2 = aux1
+    if num_points > 1
+      ' Punto ct2
+      qtile(cx2 >> 4, cy2 >> 4)
+      ct2 = aux1
+    end if
+
+    if num_points > 2
+      ' Punto ct3
+      qtile(cx3 >> 4, cy3 >> 4)
+      ct3 = aux1
+    end if
 end sub
 
 sub pausa(tiempo as uinteger) 'Thanks to Duefectu'
@@ -367,23 +375,25 @@ sub redefine_keys()
     if idioma = 0
       let teclas_redef(0) = "LEFT"
       let teclas_redef(1) = "RIGHT"
-      let teclas_redef(2) = "JUMP"
-      let teclas_redef(3) = "FIRE"
-      let teclas_redef(4) = "BUTTON 2"
-      let teclas_redef(5) = "PAUSE"
+      let teclas_redef(2) = "UP"
+      let teclas_redef(3) = "DOWN"
+      let teclas_redef(4) = "FIRE"
+      let teclas_redef(5) = "BUTTON 2"
+      let teclas_redef(6) = "PAUSE"
       cadena1 = "PRESS"
     else
       let teclas_redef(0) = "IZQUIERDA"
       let teclas_redef(1) = "DERECHA"
-      let teclas_redef(2) = "SALTO"
-      let teclas_redef(3) = "DISPARO"
-      let teclas_redef(4) = "BOTON 2"
-      let teclas_redef(5) = "PAUSA"
+      let teclas_redef(2) = "ARRIBA"
+      let teclas_redef(3) = "ABAJO"
+      let teclas_redef(4) = "DISPARO"
+      let teclas_redef(5) = "BOTON 2"
+      let teclas_redef(6) = "PAUSA"
       cadena1 = "PULSA"
     end if
 
     'Reset keys'
-    for i = 0 to 5
+    for i = 0 to 6
       keys_to_play(i) = 0
     next i
 
@@ -392,7 +402,7 @@ sub redefine_keys()
     Print ink 6;at REDEFINE_TEXT_Y,REDEFINE_TEXT_X;cadena1$
 
     tecla = 0
-    while tecla < 6
+    while tecla < 7
         Print ink 5;at REDEFINE_TEXT_Y,REDEFINE_TEXT_X+6;teclas_redef(tecla)+"   "
         WaitForNoKey()
         WaitKey()
@@ -401,9 +411,10 @@ sub redefine_keys()
             if tecla = 0 then key_left = GetKeyScanCode
             if tecla = 1 then key_right = GetKeyScanCode
             if tecla = 2 then key_up = GetKeyScanCode
-            if tecla = 3 then key_fire = GetKeyScanCode
-            if tecla = 4 then key_down = GetKeyScanCode
-            if tecla = 5 then key_pause = GetKeyScanCode
+            if tecla = 3 then key_down = GetKeyScanCode
+            if tecla = 4 then key_fire = GetKeyScanCode
+            if tecla = 5 then key_fire2 = GetKeyScanCode
+            if tecla = 6 then key_pause = GetKeyScanCode
             keys_to_play(tecla) = GetKeyScanCode
             PlaySFX(SOUND_KEY_DEFINED)
             tecla = tecla + 1
@@ -417,7 +428,7 @@ sub redefine_keys()
     WaitRetrace(60)
     DisableMusic
     DisableSFX
-    SaveSD("bin/keys.bin",@keys_to_play(0), 12)
+    SaveSD("bin/keys.bin",@keys_to_play(0), 14)
     EnableMusic
     EnableSFX
 
@@ -471,11 +482,12 @@ function control_vars() as ubyte
     if control = 1 'Control por kempston 3 botones'
 
         v=in(31) 'leer el puerto kempston 1'
-        press_up = v bAND %100000 'salto con boton 2'
-        press_down = v bAND %1000000 'magia con boton 3'
+        press_up = v bAND %1000 
+        press_down = v bAND %1000000 
         press_left = v bAND %10
         press_right = v bAND %1
         press_fire = v bAND %10000
+        press_fire2 = v bAND %100000
         press_pause = v bAND %10000000
 
     else 'Control por teclado'
@@ -485,6 +497,7 @@ function control_vars() as ubyte
         press_left = MultiKeys(key_left) 
         press_right = MultiKeys(key_right)
         press_fire = MultiKeys(key_fire)
+        press_fire2 = MultiKeys(key_fire2)
         press_pause = MultiKeys(key_pause)
 
     end if
@@ -627,8 +640,8 @@ sub shoot()
                 x_bala(i) = gpx + 4
                 y_bala(i) = gpy + 0
                 estado_bala(i) = 1
-                v_bala(i) = 4 - p_facing
-                facing_bala(i) = p_facing
+                v_bala(i) = 4 - player_facing
+                facing_bala(i) = player_facing
                 PlaySFX(SOUND_PLAYER_SHOOT)
                 EXIT FOR
             end if
@@ -717,7 +730,7 @@ sub EnemyBulletsMove()
 
             UpdateSprite(x_enemyBullet(i)- x_scroll, y_enemyBullet(i) + (SCREEN_Y_OFFSET<<4),ENEMBULLET_FIRST_SP_VRAM+i,ENEMBULLET_FIRST_SP_VRAM,0,0)
 
-            if p_estado < EST_PARP
+            if player_status < EST_PARP
                 cx2 = x_enemyBullet(i) + 8 - x_scroll
                 cy2 = y_enemyBullet(i) + 8
                 if point_collide() = 1

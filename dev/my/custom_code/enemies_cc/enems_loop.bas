@@ -9,7 +9,7 @@
 
 'ENEMIGO TIPO 1 y 49: Patrollers y plataformas'
 IF ENEMY_TYPE = 1 OR ENEMY_TYPE = PLATFORM_TYPE   
-        ENEMY_EXTRA_TOP_BB = 8
+
         IF ENEMY_STATUS = 0         ' Si está en estado 0 (moviéndose)
 
             IF HALF_LIFE            'Solo se ejecuta cada 2 frames (se usa para enlentecer los enemigos, tambien existe QUARTER_LIFE, cada 4 frames)

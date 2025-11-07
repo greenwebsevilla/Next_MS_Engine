@@ -99,7 +99,7 @@ end sub
 function pisa_suelo_enem() as ubyte
     cx1 = _en_x : cx2 = cx1+15
     cy1 = _en_y + 16 : cy2 = cy1
-    cm_two_points()
+    check_n_points(2)
     if ct1 = 8 OR ct2 = 8 then return 1
     return 0
 end function
@@ -109,7 +109,7 @@ end function
 
 sub EnemiesMove()
     enviit = 0
-    possee = 0
+    on_ground = 0
 
 #ifdef ENABLE_PLATFORMS    'reset platform things'
     plataforma_vx = 0: plataforma_vy = 0
@@ -283,7 +283,7 @@ sub animate_enemy()
 
        
 
-    else    'ESTADO  enem_status = ENEM_DAMAGED , enemigo tocado'
+    else    'ESTADO  enem_status = ENEM_DAMAGED , enemigo dañado'
             enem_counter (enit) =  enem_counter (enit) -1
            
             if enem_counter (enit) = 0 
@@ -354,7 +354,7 @@ sub mons_col_sc_x()
     cx2 = cx1
     cy1 = _en_y
     cy2 = _en_y + 15
-    cm_two_points ()
+    check_n_points(2)
     if _en_t <>  5
         if ct1 = 8 OR ct2 = 8
             colision_ok = 1
@@ -376,7 +376,7 @@ sub mons_col_sc_y()
     cy2 = cy1
     cx1 = _en_x
     cx2 = _en_x + 15
-    cm_two_points ()
+    check_n_points(2)
     if ct1 = 8 OR ct2 = 8
         colision_ok = 1
     end if
@@ -386,7 +386,7 @@ end sub
 '////// FUNCIONES ENEMIGOS //////'
 sub mover_enemigo()
 
-    'Estado 0: normal / 1: tocado /  10:muriendo / 12: muerto
+    'Estado 0: normal / 1: dañado /  10:muriendo / 12: muerto
     if enem_status < ENEM_DEAD
         _en_x = _en_x + _en_mx
         _en_y = _en_y + _en_my
@@ -504,7 +504,7 @@ sub enem_recibe_golpe(fuerza as ubyte)
 
     _en_life = _en_life - fuerza
     enem_counter (enit) = 4
-    enem_status = ENEM_DAMAGED 'estado tocado 
+    enem_status = ENEM_DAMAGED 'estado dañado 
     enemies_mx_fanty(enit) = 0
     PlaySFX(SOUND_ENEMY_DAMAGED)
     #include "../my/custom_code/enemies_cc/enems_before_hit.bas"
