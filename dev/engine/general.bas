@@ -86,8 +86,8 @@ MUSIC AND SOUND
 sub play_music ()
 #ifdef ENABLE_SOUND
   DisableMusic
-  LoadSDBank("music/"+ str(track) +".pt3",0,0,0,51) 
-  InitMusic(50,51,0000)
+  LoadSDBank("music/"+ str(track) +".pt3",0,0,0,31) 
+  InitMusic(30,31,0000)
   EnableMusic
 #endif
 end sub
@@ -145,12 +145,12 @@ end sub
 'Iniciar players de sonido y musica'
 sub init_sound()
   ' MUSIC
-  LoadSDBank("music/0.pt3",0,0,0,51) 				' load music.pt3 into bank 51
-  LoadSDBank("music/vt24000.bin",0,0,0,50) 		' load the music replayer into bank 50
-  LoadSDBank("music/fx.afb",0,0,0,44) 		' load SFX afb file into bank  44
+  LoadSDBank("music/0.pt3",0,0,0,31) 				' load music.pt3 into bank 31
+  LoadSDBank("music/vt24000.bin",0,0,0,30) 		' load the music replayer into bank 30
+  LoadSDBank("music/fx.afb",0,0,0,29) 		' load SFX afb file into bank  29
   ' SFX
-  InitSFX(44)							          ' init the SFX engine, sfx are in bank 44
-  InitMusic(50,51,0000)				      ' init the music engine 50 has the player, 51 the pt3, 0000 the offset in bank 51
+  InitSFX(29)							          ' init the SFX engine, sfx are in bank 29
+  InitMusic(30,31,0000)				      ' init the music engine 30 has the player, 31 the pt3, 0000 the offset in bank 31
   SetUpIM()							            ' init the IM2 code 
   EnableSFX							            ' Enables the AYFX, use DisableSFX to top
   DisableMusic

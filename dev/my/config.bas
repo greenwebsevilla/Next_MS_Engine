@@ -58,7 +58,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define TIMER_AUTO_RESET				' If defined, timer resets after "time up"
 
 ' ============================================================================
-' MISCELANIA
+' MISCELANEA
 ' ============================================================================
 #define EXTRA_LIFE_SCORE    3000    'Win extra life each N points'
 #define SPIKES_KILL_VERTICAL_ONLY   ' If defined, tile type 1 only damages if touched on top or bottom, horizontally is a solid block

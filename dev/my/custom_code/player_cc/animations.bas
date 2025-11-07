@@ -24,9 +24,6 @@ ELSE IF PLAYER_WALKING
         
         SET_PLAYER_ANIMATION(8, 0,1,2,1)        ' ANIMATION WALKING
 
-
-
-
 ELSE
         
         SET_PLAYER_ANIMATION(8, 0,0,0,0)        ' ANIMATION IDLE

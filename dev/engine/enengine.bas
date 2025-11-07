@@ -312,7 +312,7 @@ end sub
 
 sub draw_current_enemy()
 
-    asm : nextreg $50,55 : nextreg $51,56 : end asm  'paginamos a los bancos 55 y 56'
+    asm : nextreg $50,34 : nextreg $51,35 : end asm  'paginamos a los bancos 34 y 35'
 
     direccion = $0000+(256*spnum)
     Test_SetSprites(1,direccion,ENEMIES_FIRST_SP_VRAM+enviit) ' cargamos el frame que hay en direccion en el sprite 10+enviit'

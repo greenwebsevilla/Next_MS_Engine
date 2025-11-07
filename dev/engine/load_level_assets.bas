@@ -16,7 +16,7 @@ LoadSD(fichero, ENEMIES_BUFFER, size, 0)
 
 'Load the sprites for enemies of the current sublevel'
 fichero = "spr/enemies_"+str(level_enemsprite(level_number))+".spr"
-LoadSDBank (fichero,0,0,0,55)
+LoadSDBank (fichero,0,0,0,34)
 
 'load the tilesets'
 LoadSDBank ("spr/tiles_"+str(level_tileset(level_number))+".spr",0,0,0,36)
