@@ -55,22 +55,21 @@ do 'Game loop'
         CLS320()
         ClipLayer2(0,0,0,0)
         ShowLayer2(0)
+
+        current_level = level_number
+        
+        if level_music(level_number) <> track
+            track = level_music(level_number) : play_music()
+        end if
+        EnableMusic
+        EnableSFX
+
         draw_scr() 'Draws the screen'
         coloca_scroll()
         player_locate()
 
         ClipLayer2(17,144,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
         ShowLayer2(1)
-        
-        current_level = level_number
-        
-        if level_music(level_number) <> track
-            track = level_music(level_number) : play_music()
-        else 
-            EnableMusic
-        end if
-
-        EnableSFX
 
     end if
 
