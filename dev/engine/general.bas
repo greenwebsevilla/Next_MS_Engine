@@ -590,7 +590,7 @@ end function
 sub coloca_scroll()
   colocando_scroll = 1
   posicion_x_inicial = (cast(uinteger, player_x_ini) << 4) - CAM_RIGHT_LIMIT
-  total_vx = 512 'Avanza 8 px (asegura el dibujado de las columnas)'
+  total_vx = 255 'Avanza 4 px (asegura el dibujado de las columnas)'
   while x_scroll < posicion_x_inicial AND x_scroll < x_fin_mapa 
     calculos_vx_scroll()
     ScrollToRight()
