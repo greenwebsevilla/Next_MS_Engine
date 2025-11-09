@@ -1,18 +1,98 @@
+"""
+🧱 Tile Behaviour Assignment Tool - Pat Morita Team
+Versión: 1.1.5
+---------------------------------------------
+✅ Selector de idioma estable en Windows (reconstrucción de menús)
+🌐 Traducción completa de menús, botones y diálogos
+💾 Configuración persistente
+"""
+
 import os
 import struct
 import tkinter as tk
 from tkinter import filedialog, simpledialog, messagebox
 from PIL import Image, ImageTk
 
-CONFIG_FILE = "config.txt"
-VERSION = "1.0.0"
+CONFIG_FILE = "config_tb.txt"
+VERSION = "1.1.5"
+
+# ---------------- TEXTOS MULTILINGÜES ----------------
+TEXTS = {
+    "es": {
+        "title": f"🧱 Asignación de Comportamientos - Ver.{VERSION} (Pat Morita Team)",
+        "zoom_in": "🔍 +",
+        "zoom_out": "🔍 –",
+        "reset": "🔄 Poner todo a 0",
+        "menu_file": "Archivo",
+        "open_png": "Abrir PNG...",
+        "import_bin": "Importar BIN...",
+        "save_bin": "Guardar BIN...",
+        "exit": "Salir",
+        "menu_lang": "Idioma",
+        "lang_es": "Español",
+        "lang_en": "English",
+        "choose_png": "Selecciona la hoja de tiles PNG",
+        "tile_size_title": "Tamaño de tile",
+        "tile_size_prompt": "Introduce el tamaño de tile (8 u 16):",
+        "tile_size_error": "El tamaño debe ser 8 o 16.",
+        "assign_number_title": "Asignar número",
+        "assign_number_prompt": "Número actual: {current}\nIntroduce un nuevo valor (0–255):",
+        "reset_confirm": "¿Poner todos los tiles a 0?",
+        "error": "Error",
+        "success": "Éxito",
+        "bin_saved": "Archivo binario guardado en:\n{path}",
+        "load_png_error": "No se pudo abrir la imagen:\n{error}",
+        "import_before_png": "Carga un PNG antes de importar un BIN.",
+        "bin_tile_mismatch": "El BIN tiene {bin_count} valores pero el PNG tiene {png_count} tiles.",
+        "import_error": "No se pudo importar:\n{error}",
+        "bin_associated_found": "Se ha encontrado un BIN asociado.\n¿Cargarlo automáticamente?",
+        "save_error": "No se pudo guardar el archivo:\n{error}",
+        "no_tiles": "No hay tiles cargados.",
+        "filter_png": "Imagen PNG",
+        "filter_bin": "Binario 8-bit"
+    },
+    "en": {
+        "title": f"🧱 Tile Behaviour Assignment Tool - Ver.{VERSION} (Pat Morita Team)",
+        "zoom_in": "🔍 +",
+        "zoom_out": "🔍 –",
+        "reset": "🔄 Reset all to 0",
+        "menu_file": "File",
+        "open_png": "Open PNG...",
+        "import_bin": "Import BIN...",
+        "save_bin": "Save BIN...",
+        "exit": "Exit",
+        "menu_lang": "Language",
+        "lang_es": "Spanish",
+        "lang_en": "English",
+        "choose_png": "Select the PNG tile sheet",
+        "tile_size_title": "Tile size",
+        "tile_size_prompt": "Enter tile size (8 or 16):",
+        "tile_size_error": "Tile size must be 8 or 16.",
+        "assign_number_title": "Assign number",
+        "assign_number_prompt": "Current number: {current}\nEnter a new value (0–255):",
+        "reset_confirm": "Reset all tiles to 0?",
+        "error": "Error",
+        "success": "Success",
+        "bin_saved": "Binary file saved at:\n{path}",
+        "load_png_error": "Could not open image:\n{error}",
+        "import_before_png": "Load a PNG before importing a BIN.",
+        "bin_tile_mismatch": "BIN has {bin_count} values but PNG has {png_count} tiles.",
+        "import_error": "Import failed:\n{error}",
+        "bin_associated_found": "An associated BIN was found.\nLoad it automatically?",
+        "save_error": "Could not save file:\n{error}",
+        "no_tiles": "No tiles loaded.",
+        "filter_png": "PNG Image",
+        "filter_bin": "8-bit Binary"
+    }
+}
+
 
 class TileNumberingApp:
     def __init__(self, root):
         self.root = root
-        self.root.title(f"🧱 Tile Behaviour Assigment Tool - Ver.{VERSION} (Pat Morita Team)")
+        self.lang = "es"
 
-        # Imagen y datos
+        # Datos de imagen
         self.image = None
         self.image_path = None
         self.tiles = []
@@ -20,23 +100,25 @@ class TileNumberingApp:
         self.tile_size = None
         self.cols = 0
         self.rows = 0
-        self.scale = 2  # Escala inicial x2
+        self.scale = 2
         self.tk_images = []
 
-        # Rutas recordadas
+        # Configuración persistente
         self.paths = {
             "last_png_path": "",
             "last_bin_save_path": "",
-            "last_bin_import_path": ""
+            "last_bin_import_path": "",
+            "lang": "es"
         }
         self.load_config()
+        self.lang = self.paths.get("lang", "es")
 
         # UI
         self.create_ui()
+        self.update_texts()
 
     # ---------- CONFIG ----------
     def load_config(self):
-        """Lee las rutas guardadas desde config.txt."""
         if not os.path.exists(CONFIG_FILE):
             return
         try:
@@ -50,7 +132,6 @@ class TileNumberingApp:
             pass
 
     def save_config(self):
-        """Guarda las rutas actuales en config.txt."""
         try:
             with open(CONFIG_FILE, "w", encoding="utf-8") as f:
                 for key, value in self.paths.items():
@@ -60,37 +141,69 @@ class TileNumberingApp:
 
     # ---------- UI ----------
     def create_ui(self):
-        # Frame superior (zoom + reset)
         top_frame = tk.Frame(self.root)
         top_frame.pack(fill=tk.X, pady=2)
 
-        tk.Button(top_frame, text="🔍 +", command=self.zoom_in).pack(side=tk.LEFT, padx=2)
-        tk.Button(top_frame, text="🔍 –", command=self.zoom_out).pack(side=tk.LEFT, padx=2)
-        tk.Button(top_frame, text="🔄 Poner todo a 0", command=self.reset_all).pack(side=tk.LEFT, padx=10)
+        self.zoom_in_btn = tk.Button(top_frame, command=self.zoom_in)
+        self.zoom_in_btn.pack(side=tk.LEFT, padx=2)
 
-        # Canvas
+        self.zoom_out_btn = tk.Button(top_frame, command=self.zoom_out)
+        self.zoom_out_btn.pack(side=tk.LEFT, padx=2)
+
+        self.reset_btn = tk.Button(top_frame, command=self.reset_all)
+        self.reset_btn.pack(side=tk.LEFT, padx=10)
+
         self.canvas = tk.Canvas(self.root, bg="gray")
         self.canvas.pack(fill=tk.BOTH, expand=True)
         self.canvas.bind("<Button-1>", self.on_click)
         self.root.bind("<Control-MouseWheel>", self.on_ctrl_mousewheel)
 
-        # Menú
+        self.build_menus()
+
+    def build_menus(self):
+        """Reconstruye el menú superior según el idioma."""
+        t = TEXTS[self.lang]
         menubar = tk.Menu(self.root)
+
         filemenu = tk.Menu(menubar, tearoff=0)
-        filemenu.add_command(label="Abrir PNG...", command=self.load_png)
-        filemenu.add_command(label="Importar BIN...", command=self.import_bin)
-        filemenu.add_command(label="Guardar BIN...", command=self.save_bin)
+        filemenu.add_command(label=t["open_png"], command=self.load_png)
+        filemenu.add_command(label=t["import_bin"], command=self.import_bin)
+        filemenu.add_command(label=t["save_bin"], command=self.save_bin)
         filemenu.add_separator()
-        filemenu.add_command(label="Salir", command=self.root.quit)
-        menubar.add_cascade(label="Archivo", menu=filemenu)
+        filemenu.add_command(label=t["exit"], command=self.root.quit)
+        menubar.add_cascade(label=t["menu_file"], menu=filemenu)
+
+        lang_menu = tk.Menu(menubar, tearoff=0)
+        lang_menu.add_command(label=t["lang_es"], command=lambda: self.set_lang("es"))
+        lang_menu.add_command(label=t["lang_en"], command=lambda: self.set_lang("en"))
+        menubar.add_cascade(label=t["menu_lang"], menu=lang_menu)
+
         self.root.config(menu=menubar)
+        self.menubar = menubar
+
+    def t(self, key):
+        return TEXTS[self.lang].get(key, key)
+
+    def update_texts(self):
+        t = TEXTS[self.lang]
+        self.root.title(t["title"])
+        self.zoom_in_btn.config(text=t["zoom_in"])
+        self.zoom_out_btn.config(text=t["zoom_out"])
+        self.reset_btn.config(text=t["reset"])
+        self.build_menus()
+
+    def set_lang(self, lang):
+        self.lang = lang
+        self.paths["lang"] = lang
+        self.save_config()
+        self.update_texts()
 
     # ---------- LÓGICA PRINCIPAL ----------
     def load_png(self):
         initial_dir = self.paths["last_png_path"] or os.getcwd()
         file_path = filedialog.askopenfilename(
-            title="Selecciona la hoja de tiles PNG",
-            filetypes=[("Imagen PNG", "*.png")],
+            title=self.t("choose_png"),
+            filetypes=[(self.t("filter_png"), "*.png")],
             initialdir=initial_dir
         )
         if not file_path:
@@ -100,20 +213,19 @@ class TileNumberingApp:
             self.image = Image.open(file_path)
             self.image_path = file_path
         except Exception as e:
-            messagebox.showerror("Error", f"No se pudo abrir la imagen:\n{e}")
+            messagebox.showerror(self.t("error"), self.t("load_png_error").format(error=e))
             return
 
         self.paths["last_png_path"] = os.path.dirname(file_path)
         self.save_config()
 
-        # Tamaño del tile
         tile_size = simpledialog.askinteger(
-            "Tamaño de tile",
-            "Introduce el tamaño de tile (8 u 16):",
+            self.t("tile_size_title"),
+            self.t("tile_size_prompt"),
             minvalue=8, maxvalue=16, initialvalue=16
         )
         if tile_size not in [8, 16]:
-            messagebox.showerror("Error", "El tamaño debe ser 8 o 16.")
+            messagebox.showerror(self.t("error"), self.t("tile_size_error"))
             return
 
         self.tile_size = tile_size
@@ -140,7 +252,7 @@ class TileNumberingApp:
                     (y + 1) * self.tile_size
                 ))
                 self.tiles.append(tile)
-                self.tile_numbers.append(0)  # por defecto
+                self.tile_numbers.append(0)
 
     def draw_canvas(self):
         self.canvas.delete("all")
@@ -162,27 +274,21 @@ class TileNumberingApp:
             self.tk_images.append(tile_img)
             self.canvas.create_image(x, y, image=tile_img, anchor="nw")
 
-            self.canvas.create_rectangle(
-                x, y, x + display_size, y + display_size,
-                outline="#808080"
-            )
+            self.canvas.create_rectangle(x, y, x+display_size, y+display_size, outline="#808080")
 
             num = str(self.tile_numbers[index])
             font_size = max(10, display_size // 2)
-            offsets = [(-1,0),(1,0),(0,-1),(0,1)]
-            for ox, oy in offsets:
+            for ox, oy in [(-1,0),(1,0),(0,-1),(0,1)]:
                 self.canvas.create_text(
-                    x + display_size // 2 + ox,
-                    y + display_size // 2 + oy,
-                    text=num,
-                    fill="black",
+                    x + display_size//2 + ox,
+                    y + display_size//2 + oy,
+                    text=num, fill="black",
                     font=("Arial", font_size, "bold")
                 )
             self.canvas.create_text(
-                x + display_size // 2,
-                y + display_size // 2,
-                text=num,
-                fill="white",
+                x + display_size//2,
+                y + display_size//2,
+                text=num, fill="white",
                 font=("Arial", font_size, "bold")
             )
 
@@ -198,9 +304,10 @@ class TileNumberingApp:
 
         current = self.tile_numbers[index]
         new_val = simpledialog.askinteger(
-            "Asignar número",
-            f"Número actual: {current}\nIntroduce un nuevo valor (0–255):",
-            minvalue=0, maxvalue=255, initialvalue=current
+            self.t("assign_number_title"),
+            self.t("assign_number_prompt").format(current=current),
+            minvalue=0, maxvalue=255,
+            initialvalue=current
         )
         if new_val is not None:
             self.tile_numbers[index] = new_val
@@ -209,7 +316,7 @@ class TileNumberingApp:
     def reset_all(self):
         if not self.tiles:
             return
-        if messagebox.askyesno("Confirmar", "¿Poner todos los tiles a 0?"):
+        if messagebox.askyesno(self.t("reset"), self.t("reset_confirm")):
             self.tile_numbers = [0] * len(self.tile_numbers)
             self.draw_canvas()
 
@@ -243,12 +350,12 @@ class TileNumberingApp:
     # ---------- BIN ----------
     def import_bin(self):
         if not self.tiles:
-            messagebox.showerror("Error", "Carga un PNG antes de importar un BIN.")
+            messagebox.showerror(self.t("error"), self.t("import_before_png"))
             return
         initial_dir = self.paths["last_bin_import_path"] or os.getcwd()
         file_path = filedialog.askopenfilename(
-            title="Selecciona archivo BIN",
-            filetypes=[("Binario 8bit", "*.bin")],
+            title=self.t("import_bin"),
+            filetypes=[(self.t("filter_bin"), "*.bin")],
             initialdir=initial_dir
         )
         if not file_path:
@@ -261,8 +368,8 @@ class TileNumberingApp:
                 data = f.read()
             if len(data) != len(self.tiles):
                 messagebox.showerror(
-                    "Error",
-                    f"El BIN tiene {len(data)} valores pero el PNG tiene {len(self.tiles)} tiles."
+                    self.t("error"),
+                    self.t("bin_tile_mismatch").format(bin_count=len(data), png_count=len(self.tiles))
                 )
                 return
             self.tile_numbers = [int(b) for b in data]
@@ -271,7 +378,7 @@ class TileNumberingApp:
                 with open(self.image_path + ".lastbin", "w", encoding="utf-8") as assoc:
                     assoc.write(file_path)
         except Exception as e:
-            messagebox.showerror("Error", f"No se pudo importar:\n{e}")
+            messagebox.showerror(self.t("error"), self.t("import_error").format(error=e))
 
     def load_associated_bin(self):
         if not self.image_path:
@@ -282,7 +389,7 @@ class TileNumberingApp:
                 with open(assoc_file, "r", encoding="utf-8") as f:
                     bin_path = f.read().strip()
                 if os.path.isfile(bin_path):
-                    if messagebox.askyesno("BIN asociado", "Se ha encontrado un BIN asociado.\n¿Cargarlo automáticamente?"):
+                    if messagebox.askyesno("BIN", self.t("bin_associated_found")):
                         with open(bin_path, "rb") as f:
                             data = f.read()
                         if len(data) == len(self.tiles):
@@ -293,15 +400,15 @@ class TileNumberingApp:
 
     def save_bin(self):
         if not self.tiles:
-            messagebox.showerror("Error", "No hay tiles cargados.")
+            messagebox.showerror(self.t("error"), self.t("no_tiles"))
             return
 
         initial_dir = self.paths["last_bin_save_path"] or os.getcwd()
         file_path = filedialog.asksaveasfilename(
-            title="Guardar como binario",
+            title=self.t("save_bin"),
             defaultextension=".bin",
             initialdir=initial_dir,
-            filetypes=[("Binario 8bit", "*.bin")]
+            filetypes=[(self.t("filter_bin"), "*.bin")]
         )
         if not file_path:
             return
@@ -312,12 +419,13 @@ class TileNumberingApp:
             with open(file_path, "wb") as f:
                 for val in self.tile_numbers:
                     f.write(struct.pack("B", int(val)))
-            messagebox.showinfo("Éxito", f"Archivo binario guardado en:\n{file_path}")
+            messagebox.showinfo(self.t("success"), self.t("bin_saved").format(path=file_path))
             if self.image_path:
                 with open(self.image_path + ".lastbin", "w", encoding="utf-8") as assoc:
                     assoc.write(file_path)
         except Exception as e:
-            messagebox.showerror("Error", f"No se pudo guardar el archivo:\n{e}")
+            messagebox.showerror(self.t("error"), self.t("save_error").format(error=e))
+
 
 # ---------- Lanzador ----------
 if __name__ == "__main__":
