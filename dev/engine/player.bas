@@ -105,18 +105,18 @@ sub PlayerMove()
 dim ladder_middle as ubyte
     player_calc_bounding_box()
 
-    cx1 = ptx1 : cy1 = pty2   'abajo-izq
-    cx2 = ptx2 : cy2 = pty2      'abajo-der
+    cx1 = ptx1+1 : cy1 = pty2   'abajo-izq
+    cx2 = ptx2-1 : cy2 = pty2      'abajo-der
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_up = 1 else ladder_up = 0
 
-    cx1 = ptx1 : cy1 = pty2+17   'abajo-izq
-    cx2 = ptx2 : cy2 = cy1     'abajo-der
+    cx1 = ptx1+1 : cy1 = pty2+17   'abajo-izq
+    cx2 = ptx2-1 : cy2 = cy1     'abajo-der
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_down = 1 else ladder_down = 0
 
-    cx1 = ptx1 : cy1 = pty2+1   'abajo-izq
-    cx2 = ptx2 : cy2 = cy1     'abajo-der
+    cx1 = ptx1+1 : cy1 = pty2+1   'abajo-izq
+    cx2 = ptx2-1 : cy2 = cy1     'abajo-der
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_middle = 1 else ladder_middle = 0
 
@@ -249,9 +249,6 @@ dim ladder_middle as ubyte
 #ifdef ENABLE_LADDERS
             end if
 #endif
-            ' cx1 = ptx1+4 
-            ' cx2 = ptx2-4  
-            ' check_n_points(2)
             if ct1 = 1 OR ct2 = 1
                 if player_status < EST_PARP 
 

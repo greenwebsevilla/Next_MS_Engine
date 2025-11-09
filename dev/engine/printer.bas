@@ -4,8 +4,8 @@ sub draw_scr()
     detect_tilanims() ' detectamos tiles animados de todo el mapa'
     mapbuffer = MAP_BUFFER	' point to the map 	
     columna_inicial = cast(byte, x_scroll>>4)
-     ink 6
-    ' print at 0,0;"COL ACT:";columna_inicial;"  "
+    ink 6
+
     for y = 0 to (SCREENS_H-1)
         
         tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
@@ -26,10 +26,7 @@ sub draw_column_right()
     mapbuffer = MAP_BUFFER			' point to the map 	
     tt=0
     addx = (x_scroll>>4) + 19 'es el offset para leer el mapa, a partir de la columna que toque'
-    if NOT colocando_scroll OR (cast(ubyte, player_x_ini) - cast(ubyte, x_scroll>>4))<22 'pintamos solo las ultimas 21 si estamos colocando scroll'
-        ' print at 0,0;ink 6;str(ancho_mapa);" "
-        ' print at 0,4;ink 6;str(x_scroll>>4);" "
-        ' print at 1,0;ink 6;str(cast(ubyte, ancho_mapa) - cast(ubyte, x_scroll>>4));" "
+    if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4))< 22 'pintamos solo las ultimas 21 si estamos colocando scroll'
         for y = 0 to (SCREENS_H-1)
             tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
             tt = tt + cast(uinteger,addx)
@@ -100,7 +97,7 @@ sub detect_tilanims()
     
     tilanim_num = 0
     mapbuffer = MAP_BUFFER	' point to the map 	
-' ClipULA(0,255,0,191)  
+
     for y = 0 to 9
         
         tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
@@ -111,8 +108,6 @@ sub detect_tilanims()
                 tiles_animados_x (tilanim_num) = x  'guardamos la x global en tiles'
                 tiles_animados_y (tilanim_num) = y  'guardamos la y global en tiles'
                 tiles_animados_t (tilanim_num) = p
-                
-' print at x,0;ink 7;str(x);" ";str(y);" ";str(p)
                 tilanim_num = tilanim_num + 1
             end if
             tt=tt+1 						' increase tile number

@@ -506,14 +506,12 @@ end function
 'RUTINAS DE SCROLL'
 function process_right_scroll() as ubyte
       columna_actual = x_scroll_temp>>4
-' print ink 6;at 2,10;columna_actual;" - ";columna_anterior;" "
+
       if x_scroll_temp_6 >= 20480 'es lo mismo que 320<<6'
           x_scroll_temp_6 = x_scroll_temp_6 - 20480
           x_scroll_temp = cast(integer, (x_scroll_temp_6 >> 6))
           columna_actual = 0
       end if
-' print ink 6;at 0,0;x_scroll;" "
-' print ink 6;at 1,0;x_scroll_temp;" "
 
       if columna_actual <> columna_anterior
           draw_column_right()
@@ -524,15 +522,12 @@ end function
 
 function process_left_scroll() as ubyte
     columna_actual = x_scroll_temp>>4
-' print ink 6;at 2,10;columna_actual;" - ";columna_anterior;" "
+
     if x_scroll_temp_6 < 0
         x_scroll_temp_6 = 20480 + x_scroll_temp_6
         x_scroll_temp = cast(integer, (x_scroll_temp_6 >> 6))
         columna_actual = 0
     end if
-      
-' print ink 6;at 0,0;x_scroll;" "
-' print ink 6;at 1,0;x_scroll_temp;" "
 
     if columna_actual <> columna_anterior
         draw_column_left()
@@ -599,7 +594,6 @@ sub coloca_scroll()
   while x_scroll < posicion_x_inicial AND x_scroll < x_fin_mapa 
     calculos_vx_scroll()
     ScrollToRight()
-    ' pausa(25)
   wend
   total_vx = 0
   colocando_scroll = 0
@@ -705,7 +699,7 @@ sub EnemyBulletsMove()
 
             spnum = sprite_enemyBullet(frame_enemyBullet)
             
-            asm : nextreg $50,55 : nextreg $51,56 : end asm 
+            asm : nextreg $50,34 : nextreg $51,35 : end asm 
                 direccion = $0000+(256*spnum)
                 Test_SetSprites(1,direccion,ENEMBULLET_FIRST_SP_VRAM)
             asm : nextreg $50,$ff : nextreg $51,$ff : end asm  
@@ -733,9 +727,9 @@ sub EnemyBulletsMove()
                 cx2 = x_enemyBullet(i) + 8 - x_scroll
                 cy2 = y_enemyBullet(i) + 8
                 if point_collide() = 1
+
                     estado_enemyBullet(i) = 0
                     player_damaged = 1
-                    ' // METER FX
                     PlaySFX(SOUND_PLAYER_DAMAGED)
 
                 end if

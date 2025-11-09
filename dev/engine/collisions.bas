@@ -67,7 +67,6 @@ if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
 
                     if no_kill = 0
                         player_damaged = 1
-                        ' // METER FX
                         PlaySFX(SOUND_PLAYER_DAMAGED)
                     end if
 

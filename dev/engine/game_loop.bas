@@ -58,7 +58,6 @@ do 'Game loop'
         draw_scr() 'Draws the screen'
         coloca_scroll()
         player_locate()
-        
 
         ClipLayer2(17,144,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
         ShowLayer2(1)
@@ -67,6 +66,8 @@ do 'Game loop'
         
         if level_music(level_number) <> track
             track = level_music(level_number) : play_music()
+        else 
+            EnableMusic
         end if
 
         EnableSFX
