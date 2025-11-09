@@ -26,7 +26,7 @@ sub draw_column_right()
     mapbuffer = MAP_BUFFER			' point to the map 	
     tt=0
     addx = (x_scroll>>4) + 19 'es el offset para leer el mapa, a partir de la columna que toque'
-    if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4))< 22 'pintamos solo las ultimas 21 si estamos colocando scroll'
+    if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4)) < 30 'pintamos solo las ultimas 30 si estamos colocando scroll'
         for y = 0 to (SCREENS_H-1)
             tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
             tt = tt + cast(uinteger,addx)
