@@ -18,8 +18,6 @@ columna_anterior = 0
 NextReg($70,$10) ' usar MODO 320x256'
 ShowLayer2(0) 'Turn off Layer 2'
 CLS320()
-' CLS
-
 
 ' Load the level assets'
 '----------------------'
