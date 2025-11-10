@@ -49,8 +49,6 @@
   <object id="202" name="Limit B" x="1120" y="112" width="16" height="16"/>
   <object id="204" name="Limit A" x="1280" y="144" width="16" height="16"/>
   <object id="205" name="Limit B" x="1344" y="144" width="16" height="16"/>
-  <object id="209" name="Limit A" x="352" y="80" width="16" height="16"/>
-  <object id="210" name="Limit B" x="352" y="80" width="16" height="16"/>
   <object id="212" name="Limit A" x="784" y="96" width="16" height="16"/>
   <object id="213" name="Limit B" x="784" y="96" width="16" height="16"/>
   <object id="215" name="Limit A" x="800" y="96" width="16" height="16"/>
@@ -204,18 +202,6 @@
     <property name="sprite" type="int" value="0"/>
     <property name="tipo" type="int" value="1"/>
     <property name="velocidad_x" type="int" value="1"/>
-    <property name="velocidad_y" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="208" name="Type 50" type="Enemy" gid="190" x="352" y="96" width="16" height="16">
-   <properties>
-    <property name="enem_life" type="int" value="1"/>
-    <property name="limitA" type="object" value="209"/>
-    <property name="limitB" type="object" value="210"/>
-    <property name="num_pantalla" type="int" value="1"/>
-    <property name="sprite" type="int" value="61"/>
-    <property name="tipo" type="int" value="50"/>
-    <property name="velocidad_x" type="int" value="0"/>
     <property name="velocidad_y" type="int" value="0"/>
    </properties>
   </object>
