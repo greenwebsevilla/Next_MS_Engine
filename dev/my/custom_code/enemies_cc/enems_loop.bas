@@ -58,7 +58,7 @@ ELSE IF ENEMY_TYPE = 4
 
         IF ENEMY_COUNTER = 100
             ENEMY_COUNTER = 0   'Reseteamos el contador'
-            ENEMY_SHOOT (0,2)   'Dispara proyectil hacia abajo, el primer parametro es velocidad en X (VX) y el segundo VY.'
+            ENEMY_SHOOT (0,2)   'Dispara proyectil hacia abajo, el primer parametro es velocidad en X (VX) y el segundo VY (en píxeles/frame)'
         END IF
 
 
