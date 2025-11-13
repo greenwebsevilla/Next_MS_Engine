@@ -1,6 +1,8 @@
 ' Dibujar pantalla inicial
 sub draw_scr()
 
+    first_row = level_floor*SCREENS_H
+
     detect_tilanims() ' detectamos tiles animados de todo el mapa'
     mapbuffer = MAP_BUFFER	' point to the map 	
     columna_inicial = cast(byte, x_scroll>>4)
@@ -8,7 +10,7 @@ sub draw_scr()
 
     for y = 0 to (SCREENS_H-1)
         
-        tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
+        tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
         tt = tt + columna_inicial + 2
 
         for x = 2  to 21 'Sumo 2 para empezar desde el tile 0, que se oculta con el clip de layer 2'
@@ -26,9 +28,9 @@ sub draw_column_right()
     mapbuffer = MAP_BUFFER			' point to the map 	
     tt=0
     addx = (x_scroll>>4) + 19 'es el offset para leer el mapa, a partir de la columna que toque'
-    if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4)) < 30 'pintamos solo las ultimas 30 si estamos colocando scroll'
+    ' if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4)) < 30 'pintamos solo las ultimas 30 si estamos colocando scroll'
         for y = 0 to (SCREENS_H-1)
-            tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
+            tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
             tt = tt + cast(uinteger,addx)
             p = peek(tt+mapbuffer)
 
@@ -36,18 +38,18 @@ sub draw_column_right()
             tt=tt+1 						' increase tile number
             
         next y
-    end if
+    ' end if
 
 end sub
 
 'Dibujar nueva columna de tiles a la izquierda'
 sub draw_column_left()
-    
+
     mapbuffer = MAP_BUFFER			' point to the map 	
     tt=0
     addx = (x_scroll>>4) 'es el offset para leer el mapa, a partir de la columna que toque'
     for y = 0 to (SCREENS_H-1)
-        tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
+        tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
         tt = tt + cast(uinteger,addx)
         p = peek(tt+mapbuffer)
 
@@ -67,6 +69,7 @@ sub update_tile(modify_map as ubyte)
         tt = _x + (ancho_mapa * cast(uinteger,_y) )
         poke(mapbuffer + tt, _t) '  modificamos el mapa'
     end if
+
     'calcular la variación de la posición con el scroll'
     resto_scrollx = (_x MOD 20) + 2
     if resto_scrollx > 19 
@@ -75,6 +78,7 @@ sub update_tile(modify_map as ubyte)
 
     _x = _x - (x_scroll>>4)
     if _x > 0 AND _x < 20 
+    first_row = level_floor*SCREENS_H
     FDoTile16(_t,resto_scrollx, _y+SCREEN_Y_OFFSET, 36)	' draw tiles from bank 36
     end if
     
@@ -100,7 +104,7 @@ sub detect_tilanims()
 
     for y = 0 to 9
         
-        tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
+        tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
 
         for x = 0  to ancho_mapa-1 
             p = peek(tt+mapbuffer)

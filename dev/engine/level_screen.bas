@@ -1,9 +1,8 @@
-DisableMusic
-DisableSFX
+
 ShowLayer2(0) 'Turn off Layer 2'
 
 clear_sprites()
-CLS320()
+' CLS320()
 
 'Reset scroll stuff'
 ResetScroll320()
@@ -17,11 +16,14 @@ columna_anterior = 0
 
 NextReg($70,$10) ' usar MODO 320x256'
 ShowLayer2(0) 'Turn off Layer 2'
-CLS320()
+' CLS320()
 
 ' Load the level assets'
 '----------------------'
+if NOT changing_floor  
 #include "load_level_assets.bas"
+end if
+
 
 'Precalculos del mapa'
 ancho_mapa = cast(uinteger, PEEK(DIMENSIONES_MAPA))

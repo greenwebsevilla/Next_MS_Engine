@@ -19,27 +19,26 @@ sub enems_load ()
 
 		en_an_frame (enit) = 0
 		en_an_state (enit) = ENEM_NORMAL
-		enoffset = cast (uinteger, (enit*12))
-         
-        ' enemies_npant (enit) = peek(ENEMIES_DATA + enoffset + 9) ' numero de pantalla donde está'
 
+        enoffset = cast (uinteger, enit) * 12
+         
         enemies_x (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset))<<4
-        enemies_y (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 1))<<4
+        enemies_y (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 1) MOD SCREENS_H)<<4
         enemies_x1 (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 2))<<4
-        enemies_y1 (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 3))<<4
+        enemies_y1 (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 3) MOD SCREENS_H)<<4
         enemies_x2 (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 4))<<4
-        enemies_y2 (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 5))<<4
+        enemies_y2 (enit) =cast (uinteger, peek(ENEMIES_DATA + enoffset + 5) MOD SCREENS_H)<<4
      
         'ordenar limites en x e y'
         if enemies_x1 (enit) > enemies_x2 (enit) then
            enemies_x2 (enit) = enemies_x1 (enit)
            enemies_y2 (enit) = enemies_y1 (enit)
            enemies_x1 (enit) = cast (uinteger, peek(ENEMIES_DATA + enoffset + 4))<<4
-           enemies_y1 (enit) = cast (uinteger, peek(ENEMIES_DATA + enoffset + 5))<<4
+           enemies_y1 (enit) = cast (uinteger, peek(ENEMIES_DATA + enoffset + 5) MOD SCREENS_H)<<4
         elseif enemies_y1 (enit) > enemies_y2 (enit) 
            enemies_y2 (enit) = enemies_y1 (enit)
            enemies_x1 (enit) = cast (uinteger, peek(ENEMIES_DATA + enoffset + 4))<<4
-           enemies_y1 (enit) = cast (uinteger, peek(ENEMIES_DATA + enoffset + 5))<<4
+           enemies_y1 (enit) = cast (uinteger, peek(ENEMIES_DATA + enoffset + 5) MOD SCREENS_H)<<4
         end if
 
         enemies_mx (enit) = peek(ENEMIES_DATA + enoffset + 6)'Initial X speed'
@@ -56,17 +55,21 @@ sub enems_load ()
 
         en_an_fps (enit) = DEFAULT_ENEM_FPS
  		en_an_num_frames (enit) = 1
+
+        enemies_npant (enit) = peek(ENEMIES_DATA + enoffset + 1)/SCREENS_H ' numero de planta (level_floor) donde está'
+
         _en_t = enemies_t (enit)
 
         if _en_t = 255 'Type 255 is the player default location when a map is loaded'
             
             if teleport = 0 
-                player_x_ini = cast (uinteger, peek(ENEMIES_DATA + enoffset))
-                player_y_ini = cast (uinteger, peek(ENEMIES_DATA + enoffset + 1))
+                player_x_ini = peek(ENEMIES_DATA + enoffset)
+                player_y_ini = peek(ENEMIES_DATA + enoffset + 1) MOD SCREENS_H
+                level_floor = peek(ENEMIES_DATA + enoffset + 1)/SCREENS_H
             end if
 
             enemies_t (enit) = 0 'anulamos el tipo porque no es un enemigo'
-            
+            _en_t = 0
         end if
         
 
@@ -124,7 +127,7 @@ sub EnemiesMove()
         enem_status = en_an_state (enit)
 
         'Descartamos los que estén fuera de pantalla o sean tipo 0'
-        if _en_x > x_scroll+320 OR _en_x < x_scroll 
+        if _en_x > x_scroll+320 OR _en_x < x_scroll OR enemies_npant (enit) <> level_floor
 #ifdef RESPAWN_ENEMIES
             if enem_status = ENEM_DEAD
                 en_an_state (enit) = ENEM_NORMAL : enemies_life(enit) = enemies_maxlife(enit)

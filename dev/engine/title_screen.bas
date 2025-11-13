@@ -46,4 +46,4 @@ pausa (50)
 CLS
 ShowLayer2(0)
 CLS256(0)
-CLS320()
+' CLS320()

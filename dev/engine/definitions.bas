@@ -1,13 +1,10 @@
 'Variables generales
-dim level, level_completed as ubyte
-dim track as ubyte
+dim track, new_track as ubyte
 dim fichero as string
 dim direccion, size as uinteger
 dim half_life, half_life2, success as ubyte
 dim i, j, k as ubyte
 dim dif_x, dif_y as integer
-
-
 
 
 ' Variables & Defines Player
@@ -21,7 +18,8 @@ dim p_frame, p_subframe, player_facing, spnum, p_frame_base as ubyte
 dim player_status, p_ct_estado, player_jumping, jump_pressed, brinco as ubyte 
 dim on_ground as ubyte 
 dim plataforma_vx, plataforma_vy as integer
-dim ptx1, pty1, ptx2, pty2, _x1 as uinteger 'Puntos caja de colision player
+dim ptx1, pty1, ptx2, pty2 as uinteger 'Puntos caja de colision player
+dim _x1, _y1 as uinteger 
 dim _x as integer
 dim _y, _n, _t as ubyte
 
@@ -36,7 +34,7 @@ dim auxi1 as integer
 dim auxi2, auxi3, auxi4, uit as ubyte
 dim ajuste_ccol_y as ubyte
 dim score, next_extra_life as uinteger
-dim ladder_on, ladder_up, ladder_down as ubyte
+dim ladder_on, ladder_up, ladder_down, ladder_middle as ubyte
 dim val_a, val_b as ubyte
 
 #define FACING_RIGHT    0
@@ -129,14 +127,6 @@ dim estado_enemyBullet (3)  as ubyte
 dim sprite_enemyBullet(1) as ubyte => {ENEM_BULLET_ANIM} '2 frames'
 dim frame_enemyBullet as ubyte
 
-'Items'
-' dim x_item (3)  as integer
-' dim y_item (3)  as integer
-' dim vy_item (3)  as integer
-' dim estado_item (3)  as ubyte
-' dim item_num(3) as ubyte
-' dim contador_items, tipo_item, recarga as ubyte
-
 'Arrays animaciones enemigos'
 dim enem_animation (MAX_ENEMS, MAX_FRAMES_ENEMIES) as ubyte 'array para guardar la animacion de cada enemigo
 
@@ -149,12 +139,14 @@ dim enem_animation (MAX_ENEMS, MAX_FRAMES_ENEMIES) as ubyte 'array para guardar 
 
 '************************************************'
 'Variables MAPAS
+dim level_completed as ubyte
 dim mapbuffer as uinteger
 dim p, tilenum  as uinteger 
 dim x, y  as ubyte
 dim tt as uinteger
 dim current_level, level_number, teleport  as ubyte
 dim ancho_mapa, alto_mapa as uinteger
+dim level_floor, first_row, changing_floor as ubyte 
 
 '************************************************'
 'Variables Tiles animados'
@@ -236,3 +228,4 @@ dim v, VarFrec, contador_frecuencia60 as ubyte
 ' 8 = Full obstacle (blocks player from all directions)
 
 dim behs(128) as ubyte
+

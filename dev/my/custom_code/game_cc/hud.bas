@@ -8,3 +8,5 @@ print at 0,10;"LIVES"
 print at 1,11;"X"
 print at 0,19;"TIME"
 print at 0,27;"SCORE"
+
+

@@ -90,11 +90,11 @@ sub add_points (points as ubyte)
     print_score()
 end sub
 
-sub delete_hud()
+sub delete_hud(start_y as ubyte)
 
     PAPER 3: BRIGHT 1
 
-    for i=0 to 7
+    for i=start_y to 7
         for j=0 to 31
             PRINT AT i,j;" "
         next j

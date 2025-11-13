@@ -26,11 +26,11 @@
 #define PLAYER_Y gpy
 #define PLAYER_VX p_vx
 #define PLAYER_VY p_vy
-#define PLAYER_X_IN_TILES cast(ubyte,(cast(uinteger,gpx)+x_scroll)>>4)
-#define PLAYER_Y_IN_TILES cast(ubyte,(gpy>>4))
+#define PLAYER_X_IN_TILES get_player_xtiles()
+#define PLAYER_Y_IN_TILES get_player_ytiles()
 #define PLAYER_ENERGY player_energy
 #define PLAYER_LIVES lives
-#define PLAYER_IN_ZONE(x,y,x2,y2) ((cast(integer, gpx) + x_scroll) >= (x<<4) AND (gpx + x_scroll) < ((x2+1)<<4) AND (gpy) >= (y<<4) AND (gpy) < ((y2+1)<<4))
+#define PLAYER_IN_ZONE player_in_zone
 #define PLAYER_TOUCH_TILE_NUM player_touch_tile_num()
 #define PLAYER_TOUCH_TILE_TYPE player_touch_tile_type()
 #define SCORE_ADD add_points
@@ -49,15 +49,16 @@
 
 
 'Utilidades / Loop'
-#define TEXT(x,y,color,text) print at y,x;ink color;text
-#define MUSIC(pt3_number) if track <> pt3_number : track = pt3_number : play_music() : endif
+#define TEXT(x,y,color,text) PRINT AT y,x;INK color;PAPER 0;text
+#define MUSIC new_track
 #define SOUND PlaySFX
 #define STOP_MUSIC DisableMusic
 #define RESET_MUSIC play_music()
 #define PAUSA pausa
 #define PRINT_TILE pintar_tile          '(x_tile as ubyte, y_tile as ubyte, num_tile as ubyte)'
 #define UPDATE_TILE actualizar_tile     '(x_tile as ubyte, y_tile as ubyte, num_tile as ubyte)'
-#define DELETE_HUD delete_hud()
+#define DELETE_HUD delete_hud(0)
+#define DELETE_TEXT_AREA delete_hud(HUD_HEIGHT*2)
 #define PRINT_HUD print_hud()
 #define NEW_SPRITE new_sprite
 '  NEW_SPRITE (61, 50, PLAYER_X_IN_TILES, PLAYER_Y_IN_TILES-1, 1) 'Creamos un objeto a la izquierda del jugador: sprite 61, tipo 50

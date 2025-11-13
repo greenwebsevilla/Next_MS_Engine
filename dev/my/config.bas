@@ -23,11 +23,10 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 
 ' CAMERA SETTINGS: define los límites a partir de los cuales la cámara sigue al jugador haciendo un scroll
 ' Valores en píxeles: de 8 a 296 para horizontal y de 8 a 168 para vertical)'
-#define CAM_RIGHT_LIMIT     152
 #define CAM_LEFT_LIMIT      152
-#define CAM_DOWN_LIMIT      100
-#define CAM_UP_LIMIT        80
-
+#define CAM_RIGHT_LIMIT     152
+' #define CAM_DOWN_LIMIT      100
+' #define CAM_UP_LIMIT        80
 
 ' ============================================================================
 ' LEVELS CONFIGURATION (here, we consider each maps as a levels)
@@ -92,6 +91,8 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 
 #define ENABLE_LADDERS                      ' If defined, tile type 2 are ladders.
 #define LADDER_VY                   64      ' Y speed when moving up/down on ladders.
+#define JUMP_POWER_ON_LADDER        128     ' Jump initial Y speed when player is on ladders.
+' #define FALL_OFF_LADDER                     ' If defined: if the player is damaged while on the ladder, he will fall off it.
 
 
 ' Horizontal (side view) or general (top view) movement.

@@ -1,4 +1,5 @@
 sub player_locate()
+
     p_subframe = 0
     
     p_frame = 0 : p_subframe = 0
@@ -13,11 +14,13 @@ sub player_locate()
     p_x = gpx << 6
     p_y = gpy << 6
    
+    changing_floor = 0
+
 end sub
 
 sub game_init()
+
     success = 0: half_life = 0
-	level = 0
     level_completed = 0
     level_number = FIRST_LEVEL 
     current_level = 255
@@ -29,7 +32,7 @@ sub game_init()
     PLAYER_EXTRA_TOP_BB = 0 'por defecto por se amplía la caja de colisión por arriba'
     player_status = 0 : p_ct_estado = 0
     num_objects = 0 : player_damaged = 0
-
+    level_floor = 0 : changing_floor = 0
 
 #ifdef TIMER_ENABLE
     timer_t = TIMER_INITIAL
@@ -50,35 +53,40 @@ sub game_init()
 end sub
 
 sub go_to_another_map(level_num as ubyte, x_inicial as ubyte = 255, y_inicial as ubyte = 255)
+
     level_number = level_num
     if y_inicial < 255 'Si no indicamos coordenadas x e y, solo vamos al mapa nuevo y apareceremos donde esté definido en el mapa
         player_x_ini = x_inicial
-        player_y_ini = y_inicial
+        player_y_ini = y_inicial MOD SCREENS_H
+        level_floor = y_inicial/SCREENS_H
+   
         teleport = 1 'ignorará la posición del player definida en el mapa'
     end if
+
 end sub
 
 function player_touch_tile_num() as ubyte
+
     qtile(gpx+7>>4, gpy+3>>4)
     val_a = aux2
     qtile(gpx+7>>4, gpy+15>>4)
     val_b = aux2
     if val_a = val_b then return aux2
     return 0
+
 end function
 
 function player_touch_tile_type() as ubyte
+
     qtile(gpx+7>>4, gpy+3>>4)
     val_a = aux1
     qtile(gpx+7>>4, gpy+15>>4)
     val_b = aux1
     if val_a = val_b then return aux1
     return 0
+    
 end function
 
-sub anular_salto()
-    player_jumping = 0 : jump_pressed = 0
-end sub
 
 sub PlayerMove()
 
@@ -102,7 +110,7 @@ sub PlayerMove()
 #ifndef ENABLE_UPDOWN_MOVE
 
 #ifdef ENABLE_LADDERS
-dim ladder_middle as ubyte
+
     player_calc_bounding_box()
 
     cx1 = ptx1+1 : cy1 = pty2   'abajo-izq
@@ -110,26 +118,25 @@ dim ladder_middle as ubyte
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_up = 1 else ladder_up = 0
 
-    cx1 = ptx1+1 : cy1 = pty2+17   'abajo-izq
-    cx2 = ptx2-1 : cy2 = cy1     'abajo-der
+    cx1 = ptx1+1 : cy1 = pty2+17   '2 tiles más abajo, abajo-izq
+    cx2 = ptx2-1 : cy2 = cy1     '2 tiles más abajo, abajo-der
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_down = 1 else ladder_down = 0
 
-    cx1 = ptx1+1 : cy1 = pty2+1   'abajo-izq
-    cx2 = ptx2-1 : cy2 = cy1     'abajo-der
+    cx1 = ptx1+1 : cy1 = pty2+1   '1 tiles más abajo, abajo-izq
+    cx2 = ptx2-1 : cy2 = cy1     '1 tiles más abajo, abajo-der
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_middle = 1 else ladder_middle = 0
 
-    if ladder_up AND KEY_TO_UP then PLAYER_ON_LADDER = TRUE : p_vx = 0 : anular_salto()
-    if ladder_down AND KEY_TO_DOWN then PLAYER_ON_LADDER = TRUE : p_vx = 0 : anular_salto()
+    if ladder_up AND KEY_TO_UP then PLAYER_ON_LADDER = TRUE : p_vx = 0 : player_jumping = 0 
+    if ladder_down AND KEY_TO_DOWN then PLAYER_ON_LADDER = TRUE : p_vx = 0 : player_jumping = 0 
 
     if PLAYER_ON_LADDER
+
         IF KEY_TO_UP  
             p_vy = -LADDER_VY
-            ' p_vx = 0
         ELSEIF KEY_TO_DOWN  then
             p_vy = LADDER_VY
-            ' p_vx = 0
         else
             p_vy = 0
         END IF
@@ -157,11 +164,15 @@ dim ladder_middle as ubyte
             on_ground = 0
             PlaySFX(SOUND_JUMP)
 #ifdef ENABLE_LADDERS
-            PLAYER_ON_LADDER = 0
+            if PLAYER_ON_LADDER 
+                p_vy = - JUMP_POWER_ON_LADDER
+                PLAYER_ON_LADDER = 0
+            end if
 #endif
         end if
 #endif
 
+        if NOT KEY_TO_JUMP then jump_pressed = 0
 
 #ifdef DAMAGE_BOUNCE_POWER
     if brinco then 
@@ -229,7 +240,7 @@ dim ladder_middle as ubyte
 #endif
 #ifdef PLAYER_JUMPS
                     player_jumping = 0: brinco = 0
-                    if KEY_TO_JUMP = 0 then jump_pressed = 0
+                    
 #endif
                     if on_ground = 0
                         gpy = gpy bAND 0xfff0
@@ -293,9 +304,30 @@ dim ladder_middle as ubyte
 
 	p_y = p_y + p_vy
 
-    if p_y < -1024 then p_y = -1024
+    if p_y < -1024 
+        if first_row        'CAMBIANDO DE PLANO DE ALTURA HACIA ARRIBA'
+            changing_floor = 1
+            level_floor = level_floor - 1
+            current_level = 255
+            player_x_ini = cast (ubyte, (gpx+x_scroll+7 >> 4))
+            player_y_ini = SCREENS_H-1
+
+        else
+            p_y = -1024
+        end if
+    end if
+    
     if p_y > 10240 
-         p_y = 10240
+        if (first_row + SCREENS_H) < alto_mapa 'CAMBIANDO DE PLANO DE ALTURA HACIA ABAJO'
+            changing_floor = 1
+            level_floor = level_floor + 1
+            current_level = 255
+            player_x_ini = cast (ubyte, (gpx+x_scroll+7 >> 4))
+            player_y_ini = 0
+
+        else    
+            p_y = 10240
+        end if
     end if
 	gpy = p_y >> 6
 
@@ -342,9 +374,17 @@ dim ladder_middle as ubyte
     ' if disparando AND player_jumping = 0 then p_vx = 0
 
     total_vx = p_vx + plataforma_vx
-  
+
+#ifdef ENABLE_LADDERS
+    end if ' END IF 'NOT PLAYER_ON_LADDER' PARA MOV HORIZONTAL
+#endif
+
     ' Colisiones horizontales'
     if player_status < EST_MURIENDO
+
+#ifdef ENABLE_LADDERS
+    if NOT PLAYER_ON_LADDER
+#endif 
 
         player_calc_bounding_box()
 
@@ -431,8 +471,9 @@ dim ladder_middle as ubyte
 
         end if 
 
+
 #ifdef ENABLE_LADDERS
-    end if ' END IF 'NOT ESCALERAS' PARA TODO LO HORIZONTAL
+    end if ' END IF 'NOT PLAYER_ON_LADDER' PARA MOV HORIZONTAL
 #endif
 
         if spike_touched
@@ -544,9 +585,9 @@ sub UpdatePlayer()
 
     'Pintamos los sprites nuevos'
     _x1 = gpx
-    _y = gpy + (SCREEN_Y_OFFSET<<4)
+    _y1 = gpy + (SCREEN_Y_OFFSET<<4)
 
-    if player_status = EST_PARP AND half_life = 0
+    if player_status = EST_PARP AND half_life2 = 0
 
         RemoveSprite(PLAYER_FIRST_SP_VRAM,0)
 #ifdef PLAYER_SPRITE_16X32
@@ -556,9 +597,9 @@ sub UpdatePlayer()
     else
 
 #ifdef PLAYER_SPRITE_16X32
-        UpdateSprite(_x1, _y-16, PLAYER_FIRST_SP_VRAM+1, PLAYER_FIRST_SP_VRAM+1, player_facing, 0) 'Extra Sprite Player for 32 pixels height
+        UpdateSprite(_x1, _y1-16, PLAYER_FIRST_SP_VRAM+1, PLAYER_FIRST_SP_VRAM+1, player_facing, 0) 'Extra Sprite Player for 32 pixels height
 #endif
-        UpdateSprite(_x1, _y, PLAYER_FIRST_SP_VRAM, PLAYER_FIRST_SP_VRAM, player_facing, 0) 'Sprite Player
+        UpdateSprite(_x1, _y1, PLAYER_FIRST_SP_VRAM, PLAYER_FIRST_SP_VRAM, player_facing, 0) 'Sprite Player
 
     end if
 
@@ -582,8 +623,19 @@ sub player_kill()
     print_energy()   
 #endif
     player_damaged = 0
-    'pequeño salto'
+
+    'pequeño salto al dañar player'
+#ifdef ENABLE_LADDERS
+#ifndef FALL_OFF_LADDER
+    if NOT PLAYER_ON_LADDER 
+#endif
+#endif
     brinco = 1
+#ifdef ENABLE_LADDERS
+#ifndef FALL_OFF_LADDER
+    end if
+#endif  
+#endif  
 
 #ifdef PLAYER_FLICKERS
     player_status = EST_PARP
@@ -650,3 +702,24 @@ sub set_player_animation (fpi as ubyte, f0 as ubyte , f1 as ubyte = 0, f2 as uby
 end sub
 
 
+function player_in_zone (x as integer, y as integer, x2 as integer, y2 as integer) as ubyte
+
+    dim absolute_y as integer = gpy + (cast(uinteger,level_floor*SCREENS_H)<<4)
+
+    if ((cast(integer, gpx) + x_scroll) >= (x<<4) AND (gpx + x_scroll) < ((x2+1)<<4) AND absolute_y >= (y<<4) AND absolute_y < ((y2+1)<<4)) return 1
+
+    return 0
+
+end function
+
+function get_player_xtiles () as ubyte
+
+    return cast(ubyte,(cast(uinteger,gpx)+x_scroll)>>4)
+    
+end function
+
+function get_player_ytiles () as ubyte
+
+    return cast(ubyte,(gpy>>4)) + (level_floor*SCREENS_H)
+
+end function

@@ -3,7 +3,7 @@
 ShowLayer2(0)
 clear_sprites()
 CLS  
-CLS320()
+' CLS320()
 DisableMusic
 ResetScroll320()
 MODE256 ' usar 256x192'

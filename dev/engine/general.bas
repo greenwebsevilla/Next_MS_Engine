@@ -26,10 +26,10 @@ sploop:
 end sub
 
 ' QTILE: la variable aux1 devuelve el tipo de tile (beh) que hay en las coordenadas x_punto,y_punto en tiles'
-        'la variable aux2 devuelve el número de tile en el tileset (posicion de 0 a 47 p.ej, si son 48 tiles)'
+        'la variable aux2 devuelve el número de tile en el tileset (posicion de 0 a 127)'
 sub qtile(byval x_punto as uinteger, byval y_punto as uinteger)
 
-  tilenum = x_punto + (ancho_mapa *cast(uinteger,y_punto)) 'Sin el cast tt pasa a valores ubyte' ' calcula la posicion del tile de la pantalla x_punto + y_punto*H (H = numero de tiles por fila en area de juego)
+  tilenum = x_punto + (ancho_mapa *cast(uinteger,y_punto+first_row)) 'Sin el cast tt pasa a valores ubyte' ' calcula la posicion del tile de la pantalla x_punto + y_punto*H (H = numero de tiles por fila en area de juego)
   mapbuffer = MAP_BUFFER
   p = peek(tilenum + mapbuffer) ' Lee el numero de tile que hay en esa posicion
   aux1 = behs(p) 'consultamos el tipo del tile en el array behs y lo almacenamos
@@ -91,6 +91,7 @@ sub play_music ()
   EnableMusic
 #endif
 end sub
+
 
 ' Get vertical frecuency speed
 sub get_frecuency()
@@ -221,15 +222,9 @@ end function
       for tile_id = 0 to MAX_TILANIMS
         _x = tiles_animados_x (tile_id)
         if _x = 255 then EXIT FOR
-          ' _x = _x - (x_scroll>>4)
-          ' if _x > 1 AND _x < 20  
-            _y = tiles_animados_y (tile_id)
-            _t = tiles_animados_t (tile_id) + tiles_frame 
-            ' resto_scrollx = (tiles_animados_x (tile_id) MOD 20) + 2
-            ' if _x > 0 AND _x < 20
-              update_tile(0)
-            ' end if
-          ' end if
+        _y = tiles_animados_y (tile_id)
+        _t = tiles_animados_t (tile_id) + tiles_frame 
+        update_tile(0)
       next tile_id
       
     end if
@@ -238,16 +233,16 @@ end function
 #endif
 
 sub game_over ()
+    DisableMusic
+    DisableSFX
 
     ShowLayer2(0)
     clear_sprites()
     CLS 
-    CLS320()
-    DisableMusic
+    ' CLS320()
     ResetScroll320()
     NextReg($70,0) ' usar 256x192'
-    DisableMusic
-    DisableSFX
+
     LoadSDBank("gfx/gameover.bin",0,0,0,18)
     ClipLayer2(0,255,0,191)
     ShowLayer2(1)
@@ -590,7 +585,11 @@ end function
 sub coloca_scroll()
   colocando_scroll = 1
   posicion_x_inicial = (cast(uinteger, player_x_ini) << 4) - CAM_RIGHT_LIMIT
-  total_vx = 512 'Avanza 4 px (asegura el dibujado de las columnas)'
+  if changing_floor
+    total_vx = 64 'Avanza 1 px (asegura la posicion del player al cambiar de floor)'
+  else
+    total_vx = 512 'Avanza 4 px (asegura el dibujado de las columnas)'
+  end if
   while x_scroll < posicion_x_inicial AND x_scroll < x_fin_mapa 
     calculos_vx_scroll()
     ScrollToRight()

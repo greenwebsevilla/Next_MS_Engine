@@ -48,29 +48,39 @@ do 'Game loop'
     end if
 
     if current_level <> level_number
-        
-        #include "../engine/level_screen.bas"
-        #include "../my/custom_code/game_cc/before_entering_map.bas" 
-        SHOW_SPRITES 'Activamos el área de juego para los sprites'
-        CLS320()
         ClipLayer2(0,0,0,0)
         ShowLayer2(0)
 
-        current_level = level_number
-        
-        if level_music(level_number) <> track
-            track = level_music(level_number) : play_music()
-        end if
-        EnableMusic
-        EnableSFX
+        DisableMusic
+        DisableSFX
 
+        #include "../engine/level_screen.bas"
+        #include "../my/custom_code/game_cc/before_entering_map.bas" 
+        SHOW_SPRITES 'Activamos el área de juego para los sprites'
+        ' CLS320()
+
+        current_level = level_number
+         
+        if level_music(level_number) <> track AND NOT changing_floor
+            ' track = level_music(level_number) : play_music()
+            new_track = level_music(level_number)
+        else 
+            EnableMusic
+        end if
+
+        EnableSFX
         draw_scr() 'Draws the screen'
         coloca_scroll()
         player_locate()
 
         ClipLayer2(17,144,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
         ShowLayer2(1)
+        
+    end if
 
+    if track <> new_track 
+        track = new_track 
+        play_music() 
     end if
 
 #ifdef TIMER_ENABLE
