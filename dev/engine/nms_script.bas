@@ -50,7 +50,7 @@
 
 'Utilidades / Loop'
 #define TEXT(x,y,color,text) PRINT AT y,x;INK color;PAPER 0;text
-#define MUSIC new_track
+#define MUSIC track
 #define SOUND PlaySFX
 #define STOP_MUSIC DisableMusic
 #define RESET_MUSIC play_music()

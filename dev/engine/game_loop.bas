@@ -62,8 +62,7 @@ do 'Game loop'
         current_level = level_number
          
         if level_music(level_number) <> track AND NOT changing_floor
-            ' track = level_music(level_number) : play_music()
-            new_track = level_music(level_number)
+            track = level_music(level_number)
         else 
             EnableMusic
         end if
@@ -78,8 +77,8 @@ do 'Game loop'
         
     end if
 
-    if track <> new_track 
-        track = new_track 
+    if track <> old_track 
+        old_track = track
         play_music() 
     end if
 

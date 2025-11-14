@@ -1,5 +1,5 @@
 'Variables generales
-dim track, new_track as ubyte
+dim track, old_track as ubyte
 dim fichero as string
 dim direccion, size as uinteger
 dim half_life, half_life2, success as ubyte
