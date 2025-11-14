@@ -4,7 +4,7 @@
 'Generales'
 #define MODE256 NextReg($70,0)
 #define MODE320 NextReg($70,$10)
-#define CROP_ULA ClipULA(0,255,0,31)
+#define CROP_ULA ClipULA(0,255,0,63)
 #define FULL_ULA ClipULA(0,255,0,191)
 #define HIDE_SPRITES ClipSprite(0,0,0,0)
 #define SHOW_SPRITES ClipSprite(16,143,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)

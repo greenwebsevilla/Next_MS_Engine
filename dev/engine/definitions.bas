@@ -190,12 +190,12 @@ dim timer_zero as ubyte
 
 'DEFINICION DE BUFFERS EN ZONA DE PANTALLA ULA'
 'PALETTE BUFFER
-#define PALETTE_BUFFER 18432 'SOLO SE USARíA PARA CARGAR UNA PALETA CUSTOM'
+#define PALETTE_BUFFER 18432 'SOLO SE USARíA PARA CARGAR UNA PALETA CUSTOM, luego se borra'
 'ENEMIES BUFFER
-#define ENEMIES_BUFFER  18432
-#define ENEMIES_DATA  18433
+#define ENEMIES_BUFFER  22784
+#define ENEMIES_DATA  ENEMIES_BUFFER+1
 'MAP BUFFER
-#define DIMENSIONES_MAPA ENEMIES_BUFFER + (MAX_ENEMS * 12) 'Después del buffer de los enemigos, 12 bytes por enemigo' 
+#define DIMENSIONES_MAPA 18432 'Después del buffer de los enemigos, 12 bytes por enemigo' 
 #define MAP_BUFFER DIMENSIONES_MAPA+2 '2 BYTES Después de DIMENSIONES_MAPA, esos dos bytes guardan el ancho y alto del mapa en tiles' 
 
 'Load the Charset (font)
