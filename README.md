@@ -9,9 +9,9 @@ El origen de este motor es una versión reducida y reprogramada del motor _MK1_ 
 
 # Características del motor:
 
- - **Configuración del player**: velocidades, salto, gravedad, disparo, energía, vidas, inercia, caja de colisión, etc
- - **Acepta mapas _Tiled_ (tmx)** de hasta 256 tiles (4096 píxeles) de ancho y hasta 256 tiles de altura siempre que el tamaño total no supere los 4094 tiles en total.
- - **Scroll horizontal**. Verticalmente el mapa se recorrerá cambiando de "_planta_" al salir de la pantalla por arriba o por abajo.  
+ - **Configuración del player**.
+ - **Acepta mapas _Tiled_ (tmx)**.
+ - **Scroll horizontal**.
  - Configuración de la **cámara**.
  - **Conexiones entre mapas** personalizables. 
  - **Hasta 128 tiles de 16x16 por mapa**.
