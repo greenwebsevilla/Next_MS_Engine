@@ -29,4 +29,4 @@ El origen de este motor es una versión reducida y reprogramada del motor _MK1_ 
 
 # ¿Te interesa?
 
-Sigue el manual en la sección **Wikis**.
+Sigue el manual en la sección [Wiki](https://github.com/greenwebsevilla/Next_MS_Engine/wiki).
