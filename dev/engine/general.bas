@@ -30,8 +30,10 @@ end sub
 sub qtile(byval x_punto as uinteger, byval y_punto as uinteger)
 
   tilenum = x_punto + (ancho_mapa *cast(uinteger,y_punto+first_row)) 'Sin el cast tt pasa a valores ubyte' ' calcula la posicion del tile de la pantalla x_punto + y_punto*H (H = numero de tiles por fila en area de juego)
-  mapbuffer = MAP_BUFFER
-  p = peek(tilenum + mapbuffer) ' Lee el numero de tile que hay en esa posicion
+  ' mapbuffer = MAP_BUFFER
+  asm : nextreg $56,90 : nextreg $57,91 : end asm 
+  p = peek(tilenum + MAP_BUFFER) ' Lee el numero de tile que hay en esa posicion
+  asm : nextreg $56,0 : nextreg $57,1 : end asm 
   aux1 = behs(p) 'consultamos el tipo del tile en el array behs y lo almacenamos
   aux2 = p
 end sub

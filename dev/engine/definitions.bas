@@ -195,7 +195,7 @@ dim timer_zero as ubyte
 #define ENEMIES_BUFFER  22784
 #define ENEMIES_DATA  ENEMIES_BUFFER+1
 'MAP BUFFER
-#define DIMENSIONES_MAPA 18432 'Después del buffer de los enemigos, 12 bytes por enemigo' 
+#define DIMENSIONES_MAPA $C000 'Después del buffer de los enemigos, 12 bytes por enemigo' 
 #define MAP_BUFFER DIMENSIONES_MAPA+2 '2 BYTES Después de DIMENSIONES_MAPA, esos dos bytes guardan el ancho y alto del mapa en tiles' 
 
 'Load the Charset (font)

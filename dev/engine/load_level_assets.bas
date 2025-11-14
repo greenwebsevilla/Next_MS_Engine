@@ -6,7 +6,8 @@ LoadSDBank ("spr/player.spr",0,0,0,32)
 
 'Load the map at DIMENSIONES_MAPA (loads 2 bytes (map width,height) + tiles)
 fichero = "bin/maps/level_"+str(level_number)+"_tiles.bin"
-LoadSD(fichero, DIMENSIONES_MAPA, 4092, 0)
+' LoadSD(fichero, DIMENSIONES_MAPA, 4092, 0)
+LoadSDBank (fichero,0,0,0,90)
 
 'Load the enemy data at ENEMIES_BUFFER
 fichero = "bin/maps/level_"+str(level_number)+"_enemies.bin"
