@@ -8,7 +8,6 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 ' ============================================================================
 ' General configuration
 ' ============================================================================
-#define ENABLE_SOUND 'Comentar para desactivar el sonido'
 #define FIX_MUSIC_60HZ 'Makes the music sound at the same speed in 50/60 hz (needs to modify Nextlib.bas)
 
 ' #define DEBUGGING     'If defined you can go to previous/next map by pressing Z/X'
