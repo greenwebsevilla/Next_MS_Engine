@@ -432,49 +432,6 @@ sub redefine_keys()
 
 end sub
 
-Sub fastcall CopyToBanks(startb as ubyte, destb as ubyte, nrbanks as ubyte)
-   asm 
-    pop hl
-    ld (HL_Temp),hl
-
-    ; a = start bank       
-    di 
-    ld c,a             ; store start bank in c 
-    pop de             ; dest bank in e 
-    ld e,c             ; d = source e = dest 
-    pop af 
-    ld b,a             ; number of loops 
-
-copybankloop:  
-    push bc
-    push de 
-    ld a,e
-    nextreg $50,a
-    ld a,d
-    nextreg $51,a 
-    ld hl,$0000
-    ld de,$2000
-    ld bc,$2000
-    ldir 
-    pop de
-    pop bc
-    inc d
-    inc e
-    djnz copybankloop
-    
-    nextreg $50,$ff
-    nextreg $51,$ff
-    ei
-    ld hl,(HL_Temp)
-    push hl
-    ret
-
-HL_Temp:
-    db 0,0
-   end asm  
-end sub
-
-
 sub control_vars() 
 
     if control = 1 'Control por kempston 3 botones'
@@ -601,28 +558,6 @@ sub coloca_scroll()
   total_vx = 0
   colocando_scroll = 0
 end sub
-
-
-
-sub ClearBank()
-	asm
-	;	di 
-		nextreg $52,18
-		ld hl,$4000 
-		ld de,$4001 
-		ld (hl),0
-		ld bc,$2000
-		ldir 
-		nextreg $52,$0a 
-	;	ei 
-	end asm
-end sub 
-
-sub CLS320()
-  ClearBank()
-  CopyToBanks(18,19,9)
-end sub
-
 
 
 
