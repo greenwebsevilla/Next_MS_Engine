@@ -2,11 +2,10 @@
 sub draw_scr()
 
     first_row = level_floor*SCREENS_H
-
-    detect_tilanims() ' detectamos tiles animados de todo el mapa'
-    ' mapbuffer = MAP_BUFFER	' point to the map 	
+#ifdef TILANIMS
+    detect_tilanims() ' detectamos tiles animados de todo el level_floor'
+#endif
     columna_inicial = cast(byte, x_scroll>>4)
-    ink 6
 
     for y = 0 to (SCREENS_H-1)
         
@@ -110,7 +109,7 @@ end sub
 sub detect_tilanims()
     
     tilanim_num = 0
-    ' mapbuffer = MAP_BUFFER	' point to the map 	
+      	
 
     for y = first_row to first_row+SCREENS_H-1
         

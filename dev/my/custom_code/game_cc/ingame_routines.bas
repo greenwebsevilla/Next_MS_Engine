@@ -46,6 +46,4 @@ END IF
 
 
 
-' print at 0,0;ink 7;gpx;" "
-
 

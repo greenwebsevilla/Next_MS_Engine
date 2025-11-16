@@ -1,8 +1,7 @@
 
 ShowLayer2(0) 'Turn off Layer 2'
-
+NextReg($70,$10) ' usar MODO 320x256'
 clear_sprites()
-' CLS320()
 
 'Reset scroll stuff'
 ResetScroll320()
@@ -13,10 +12,6 @@ x_scroll_temp_6 = 0
 columna_actual = 0
 columna_anterior = 0
 
-
-NextReg($70,$10) ' usar MODO 320x256'
-ShowLayer2(0) 'Turn off Layer 2'
-' CLS320()
 
 ' Load the level assets'
 '----------------------'

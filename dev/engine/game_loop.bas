@@ -5,9 +5,8 @@ game_init ()
 
 #include "../my/custom_code/game_cc/before_game_loop.bas"
 
-CROP_ULA ' recortamos la ULA a solo la parte superior para el marcador
-' ClipLayer2(17,144,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16) 'Define game area' 
 
+ 
 do 'Game loop' 
     WaitRetrace(1) 'Espera al siguiente frame o interrupcion'
     
@@ -48,6 +47,7 @@ do 'Game loop'
     end if
 
     if current_level <> level_number
+     
         ClipLayer2(0,0,0,0)
         ShowLayer2(0)
 
@@ -55,9 +55,9 @@ do 'Game loop'
         DisableSFX
 
         #include "../engine/level_screen.bas"
+      
         #include "../my/custom_code/game_cc/before_entering_map.bas" 
         SHOW_SPRITES 'Activamos el área de juego para los sprites'
-        ' CLS320()
 
         current_level = level_number
          
@@ -76,6 +76,7 @@ do 'Game loop'
         ShowLayer2(1)
         
     end if
+
 
     if track <> old_track 
         old_track = track
@@ -124,7 +125,7 @@ loop until playing = 0
     CLS
 
     if success = 1 
-        fin()
+        ' fin()
     else
     
         game_over ()

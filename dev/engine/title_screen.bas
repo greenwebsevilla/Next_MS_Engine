@@ -1,9 +1,8 @@
 ' Pantalla de inicio, menu, etc
 DisableMusic
 DisableSFX
-' ShowLayer2(0)
-' CLS256(0)
-' CLS
+MODE256
+HIDE_SPRITES
 ScrollLayer(0,0)
 LoadSDBank("gfx/title.bin",0,0,0,18)
 ClipLayer2(0,255,0,191)
@@ -12,7 +11,7 @@ ShowLayer2(1)
 EnableSFX
 contador = 0
 track = MUSIC_TITLE : play_music()
-
+border 0
 menu:
 control = 1
 	
@@ -33,17 +32,18 @@ do
 	'Redefinir teclas'
 	if MultiKeys(KEYR) 
 			redefine_keys()
-		'  GOTO menu
 	end if
 
 	WaitForNoKey()
 loop
 
-RANDOMIZE
 DisableMusic
 PlaySFX(SOUND_START_GAME)
 pausa (50)
 CLS
 ShowLayer2(0)
 CLS256(0)
-' CLS320()
+asm 
+okok:
+end asm
+CROP_ULA ' recortamos la ULA a solo la parte superior para el marcador

@@ -457,11 +457,10 @@ sub comprobar_limites()
 
     if _en_x <= _en_x1 then 
         _en_mx = enemies_mx_ini(enit)
-        ' goto limitex_ok
     
     else if _en_x >= _en_x2
         _en_mx = -enemies_mx_ini(enit)
-        ' goto limitex_ok
+
     end if
 
     ' limitex_ok:

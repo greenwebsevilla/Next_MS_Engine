@@ -155,9 +155,9 @@ dim tiles_animados_x (0 to MAX_TILANIMS) as ubyte
 dim tiles_animados_y (0 to MAX_TILANIMS) as ubyte
 dim tiles_animados_t (0 to MAX_TILANIMS) as ubyte
 dim tiles_frame, tiles_subframe, tilanim_num as ubyte
-dim resto_scrollx as integer
 dim tilanims_first as ubyte
 #endif     
+dim resto_scrollx as integer
 
 '************************************************'
 'Variables scroll'
@@ -192,10 +192,10 @@ dim timer_zero as ubyte
 'PALETTE BUFFER
 #define PALETTE_BUFFER 18432 'SOLO SE USARíA PARA CARGAR UNA PALETA CUSTOM, luego se borra'
 'ENEMIES BUFFER
-#define ENEMIES_BUFFER  22784
+#define ENEMIES_BUFFER  18432
 #define ENEMIES_DATA  ENEMIES_BUFFER+1
 'MAP BUFFER
-#define DIMENSIONES_MAPA $C000 'Después del buffer de los enemigos, 12 bytes por enemigo' 
+#define DIMENSIONES_MAPA $C000 'En los bancos 90,91. Paginamos para acceder.
 #define MAP_BUFFER DIMENSIONES_MAPA+2 '2 BYTES Después de DIMENSIONES_MAPA, esos dos bytes guardan el ancho y alto del mapa en tiles' 
 
 'Load the Charset (font)
@@ -216,16 +216,5 @@ dim v, VarFrec, contador_frecuencia60 as ubyte
 #define SCREENS_H (12-HUD_HEIGHT)
 
 
-' ============================================================================
-' Tile behaviour
-' ============================================================================
-
-' Defines the behaviour for each tile.
-' Array de los comportamientos de los tiles
-' 0 = Walkable (no action)
-' 1 = Walkable and kills.
-' 4 = Platform (only stops player if falling on it)
-' 8 = Full obstacle (blocks player from all directions)
-
-dim behs(128) as ubyte
+dim behs(128) as ubyte AT $5b00
 

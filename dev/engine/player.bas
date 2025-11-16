@@ -33,6 +33,7 @@ sub game_init()
     player_status = 0 : p_ct_estado = 0
     num_objects = 0 : player_damaged = 0
     level_floor = 0 : changing_floor = 0
+    old_track = 255
 
 #ifdef TIMER_ENABLE
     timer_t = TIMER_INITIAL
@@ -496,7 +497,9 @@ sub PlayerMove()
         if player_damaged 
 
             player_energy = player_energy - 1
-            print_energy()
+#ifdef SHOW_ENERGYBAR
+            print_energy()   
+#endif
             if player_energy > 0
                 player_kill()
                 #include "../my/custom_code/player_cc/player_damaged.bas"
@@ -619,9 +622,7 @@ end sub
 
 
 sub player_kill()
-#ifdef SHOW_ENERGYBAR
-    print_energy()   
-#endif
+
     player_damaged = 0
 
     'pequeño salto al dañar player'
@@ -656,9 +657,10 @@ sub check_death()
         'Si no hay mas vidas, Game Over'
         if lives > 0
             DisableMusic
-            track = 255 'Reinicio la musica aunque toque la misma música luego'
+            old_track = 255 'Reinicio la musica '
             current_level = 255 'Reinicio del nivel
             player_energy = INIT_ENERGY
+          
         else
             playing = 0
             GOTO fin_playing_loop

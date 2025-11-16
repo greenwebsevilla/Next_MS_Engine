@@ -1,27 +1,27 @@
 #ifdef SHOW_OBJECTS
-function print_objs() as ubyte
+sub print_objs() 
 #if OBJECTS_X < 32
     PRINT AT OBJECTS_Y,OBJECTS_X;INK 7;BRIGHT 1;str(num_objects)+" "
 #endif
-end function
+end sub
 #endif
 
 #ifdef TIMER_ENABLE
 #ifdef SHOW_TIMER
-function print_time() as ubyte
+sub print_time()
        PRINT AT TIMER_Y,TIMER_X;INK 7;BRIGHT 1;str(timer_t)+" "
-end function
+end sub
 #endif
 #endif
 
 #ifdef SHOW_LIVES
-function print_number_of_lives() as ubyte
+sub print_number_of_lives()
        PRINT AT LIVES_Y,LIVES_X;INK 7;BRIGHT 1;str(lives)+" "
-end function
+end sub
 #endif
 
 #ifdef SHOW_SCORE
-function print_score() as ubyte
+sub print_score()
     dim x_score as ubyte
         
     if score < 100 then 
@@ -41,12 +41,12 @@ function print_score() as ubyte
 			PlaySFX (SOUND_EXTRA_LIFE)
 	end if
     
-end function
+end sub
 #endif
 
 
 #ifdef SHOW_ENERGYBAR
-function print_energy() as ubyte
+sub print_energy() 
     if player_energy = 0 
         PRINT AT ENERGYBAR_Y,ENERGYBAR_X;"     "
     else
@@ -54,10 +54,10 @@ function print_energy() as ubyte
             PRINT AT ENERGYBAR_Y, uit + ENERGYBAR_X;ink 2;BRIGHT 1;"# "
         next uit
     end if	
-end function
+end sub
 #endif
 
-function print_hud() as ubyte
+sub print_hud() 
 
 #include "../my/custom_code/game_cc/hud.bas"
 
@@ -74,15 +74,17 @@ function print_hud() as ubyte
     print_number_of_lives()
 #endif
 
+#ifdef TIMER_ENABLE
 #ifdef SHOW_TIMER
     print_time()
+#endif
 #endif
 
 #ifdef SHOW_OBJECTS
     print_objs()
 #endif
 
-end function
+end sub
 
 
 sub add_points (points as ubyte)

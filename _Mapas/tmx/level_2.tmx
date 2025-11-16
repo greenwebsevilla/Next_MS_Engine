@@ -33,8 +33,6 @@
   <object id="239" x="160" y="64">
    <point/>
   </object>
-  <object id="262" name="Limit A" x="240" y="128" width="16" height="16"/>
-  <object id="263" name="Limit B" x="240" y="128" width="16" height="16"/>
  </objectgroup>
  <objectgroup color="#ff3366" id="19" name="enemies">
   <object id="231" name="Type 3" type="Enemy" gid="129" x="112" y="144" width="16" height="16">
@@ -59,11 +57,11 @@
     <property name="velocidad_x" type="int" value="1"/>
    </properties>
   </object>
-  <object id="261" name="Type 255" type="Enemy" gid="129" x="240" y="144" width="16" height="16">
+  <object id="261" name="Type 255" type="Enemy" gid="129" x="32" y="96" width="16" height="16">
    <properties>
-    <property name="enem_life" type="int" value="1"/>
-    <property name="limitA" type="object" value="262"/>
-    <property name="limitB" type="object" value="263"/>
+    <property name="enem_life" type="int" value="0"/>
+    <property name="limitA" type="object" value="0"/>
+    <property name="limitB" type="object" value="0"/>
     <property name="num_pantalla" type="int" value="0"/>
     <property name="sprite" type="int" value="0"/>
     <property name="tipo" type="int" value="255"/>
