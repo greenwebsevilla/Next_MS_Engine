@@ -100,12 +100,12 @@ end sub
 
 'Play a song from the begining (track = number of song) / Save the songs as 1.pt3 , 2.pt3, etc'
 sub play_music ()
-#ifdef ENABLE_SOUND
+
   DisableMusic
   LoadSDBank("music/"+ str(track) +".pt3",0,0,0,31) 
   InitMusic(30,31,0000)
   EnableMusic
-#endif
+
 end sub
 
 
