@@ -129,8 +129,8 @@ sub PlayerMove()
     check_n_points(2)
     if ct1 = 2 AND ct2 = 2 then ladder_middle = 1 else ladder_middle = 0
 
-    if ladder_up AND KEY_TO_UP then PLAYER_ON_LADDER = TRUE : p_vx = 0 : player_jumping = 0 
-    if ladder_down AND KEY_TO_DOWN then PLAYER_ON_LADDER = TRUE : p_vx = 0 : player_jumping = 0 
+    if ladder_up AND KEY_TO_UP then PLAYER_ON_LADDER = 1 : p_vx = 0 : player_jumping = 0 
+    if ladder_down AND KEY_TO_DOWN then PLAYER_ON_LADDER = 1 : p_vx = 0 : player_jumping = 0 
 
     if PLAYER_ON_LADDER
 
