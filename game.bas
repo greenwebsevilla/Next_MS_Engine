@@ -31,9 +31,8 @@ set_registers()
 #ifdef CUSTOM_PALETTE
 load_palettes()
 #endif
-#ifdef ENABLE_SOUND
 init_sound()
-#endif
+
 
 paper 3: border 0 : bright 1: ink 0 : cls 'Magenta background on the ULA layer to use it for the hud'
 
