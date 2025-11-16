@@ -9,3 +9,4 @@ NMS_Engine.code-workspace
 config_protmx.txt
 config_tb.txt
 cspect.log
+*.log
