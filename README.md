@@ -9,7 +9,7 @@ El origen de este motor es una versión reducida y reprogramada del motor _MK1_ 
 
 # Características del motor:
 
- - **Configuración del player**.
+ - **Configuración del jugador** para diferentes tipos de gameplay.
  - **Acepta mapas _Tiled_ (tmx)**.
  - **Scroll horizontal**.
  - Configuración de la **cámara**.
