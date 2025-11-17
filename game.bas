@@ -8,6 +8,7 @@
 #define IM2
 
 #include <nextlib.bas>
+' #include <nextlib_ints.bas>
 #include <keys.bas>
 #include <string.bas>
 #include <asc.bas>
@@ -33,7 +34,6 @@ load_palettes()
 #endif
 init_sound()
 
-
 paper 3: border 0 : bright 1: ink 0 : cls 'Magenta background on the ULA layer to use it for the hud'
 
 #include "dev/my/custom_code/game_cc/after_load.bas" 'Custom code for intro, language selection, etc'
@@ -50,6 +50,3 @@ font_buffer:
 asm
   defs 512
 end asm  
-
-
-

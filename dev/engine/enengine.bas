@@ -77,6 +77,7 @@ sub enems_load ()
 
 	next enit
     teleport = 0
+    
 end sub
 
 

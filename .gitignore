@@ -10,3 +10,8 @@ config_protmx.txt
 config_tb.txt
 cspect.log
 *.log
+test.bas
+test.bin
+test.cfg
+test.nex
+cspect.log

@@ -41,7 +41,8 @@ do 'Game loop'
         'SALIR DEL BUCLE SI GANAMOS EL JUEGO'
         if level_number = MAX_LEVELS 'si se pasa el ultimo nivel de alguna forma, se termina el juego'
             success = 1: playing = 0
-            GOTO fin_playing_loop
+            ' GOTO fin_playing_loop
+            EXIT DO
         end if
 
     end if
@@ -51,8 +52,8 @@ do 'Game loop'
         ClipLayer2(0,0,0,0)
         ShowLayer2(0)
 
-        DisableMusic
-        DisableSFX
+        ' DisableMusic
+        ' DisableSFX
 
         #include "../engine/level_screen.bas"
       
@@ -64,7 +65,7 @@ do 'Game loop'
         if level_music(level_number) <> track AND NOT changing_floor
             track = level_music(level_number)
         else 
-            EnableMusic
+            ' EnableMusic
         end if
 
         EnableSFX

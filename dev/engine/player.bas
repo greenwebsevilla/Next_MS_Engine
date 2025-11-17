@@ -663,7 +663,7 @@ sub check_death()
           
         else
             playing = 0
-            GOTO fin_playing_loop
+            ' GOTO fin_playing_loop
         end if
         
     end if
