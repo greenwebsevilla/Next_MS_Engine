@@ -1,8 +1,8 @@
-# Next MS Engine
+# Next MS Engine <img src="https://github.com/greenwebsevilla/Next_MS_Engine/blob/main/utils/resources/Boriel_logo.bmp">
 
 **Next MS Engine** es un motor para hacer juegos para ***ZX Spectrum Next***. Está programado en ZX Basic de Boriel (Jose Rodriguez - https://boriel.com/pages/the-zx-basic-compiler.html) más las librerías Nextlib de em00k (David Saphier). Además, se incluyen las herramientas necesarias para crear los ficheros gráficos y mapas y exportarlos al formato que maneja el propio motor. 
 
-<img src="https://github.com/greenwebsevilla/Next_MS_Engine/blob/main/utils/resources/captura_demo.gif">  <img src="https://github.com/greenwebsevilla/Next_MS_Engine/blob/main/utils/resources/captura_demo2.gif">  <img src="https://github.com/greenwebsevilla/Next_MS_Engine/blob/main/utils/resources/Boriel_logo.bmp">
+<img src="https://github.com/greenwebsevilla/Next_MS_Engine/blob/main/utils/resources/captura_demo.gif">  <img src="https://github.com/greenwebsevilla/Next_MS_Engine/blob/main/utils/resources/captura_demo2.gif">  
 
 El origen de este motor es una versión reducida y reprogramada del motor _MK1_ de los _**Mojon Twins**_ (https://github.com/mojontwins/MK1) que sirvió para portar el juego _Shovel Adventure_ al _Spectrum Next_. Partiendo de él, se fueron añadiendo funcionalidades extra, algunas también existentes en el MK1 pero hechas desde cero en el lenguaje _ZX Basic_ y aprovechando las características del _Next_.
 
