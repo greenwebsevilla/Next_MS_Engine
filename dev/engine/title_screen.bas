@@ -1,6 +1,6 @@
 ' Pantalla de inicio, menu, etc
 DisableMusic
-DisableSFX
+' DisableSFX
 MODE256
 HIDE_SPRITES
 ScrollLayer(0,0)
@@ -8,9 +8,10 @@ LoadSDBank("gfx/title.bin",0,0,0,18)
 ClipLayer2(0,255,0,191)
 ClipULA(0,255,0,191)
 ShowLayer2(1)
-EnableSFX
+' EnableSFX
 contador = 0
 track = MUSIC_TITLE : play_music()
+EnableMusic
 border 0
 menu:
 control = 1
@@ -44,6 +45,6 @@ CLS
 ShowLayer2(0)
 CLS256(0)
 asm 
-okok:
+
 end asm
 CROP_ULA ' recortamos la ULA a solo la parte superior para el marcador

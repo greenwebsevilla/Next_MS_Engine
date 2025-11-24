@@ -5,17 +5,16 @@
 'Adjust these parameters only if you know what you're doing, otherwise leave them as they are.'
 'Ajusta estos parámetros si sabes bien lo que haces, si no, mejor déjalos como están.'
 
-#define IM2
+#include "dev/engine/control_keys_def.bas"
+#include "dev/my/config.bas"
+#include "dev/engine/definitions.bas"
 
+#define IM2
 #include <nextlib.bas>
-' #include <nextlib_ints.bas>
 #include <keys.bas>
 #include <string.bas>
 #include <asc.bas>
 
-#include "dev/engine/control_keys_def.bas"
-#include "dev/my/config.bas"
-#include "dev/engine/definitions.bas"
 #include "dev/engine/nms_script.bas"
 #include "dev/engine/levels_config.bas"
 #include "dev/engine/printer.bas"

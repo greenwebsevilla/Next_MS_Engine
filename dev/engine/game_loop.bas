@@ -6,7 +6,7 @@ game_init ()
 #include "../my/custom_code/game_cc/before_game_loop.bas"
 
 
- 
+
 do 'Game loop' 
     WaitRetrace(1) 'Espera al siguiente frame o interrupcion'
     
@@ -52,11 +52,10 @@ do 'Game loop'
         ClipLayer2(0,0,0,0)
         ShowLayer2(0)
 
-        ' DisableMusic
         ' DisableSFX
 
         #include "../engine/level_screen.bas"
-      
+
         #include "../my/custom_code/game_cc/before_entering_map.bas" 
         SHOW_SPRITES 'Activamos el área de juego para los sprites'
 
@@ -64,11 +63,9 @@ do 'Game loop'
          
         if level_music(level_number) <> track AND NOT changing_floor
             track = level_music(level_number)
-        else 
-            ' EnableMusic
         end if
-
-        EnableSFX
+        
+        ' EnableSFX
         draw_scr() 'Draws the screen'
         coloca_scroll()
         player_locate()
@@ -81,7 +78,8 @@ do 'Game loop'
 
     if track <> old_track 
         old_track = track
-        play_music() 
+        play_music () 
+        EnableMusic
     end if
 
 #ifdef TIMER_ENABLE
@@ -126,7 +124,7 @@ loop until playing = 0
     CLS
 
     if success = 1 
-        ' fin()
+        fin()
     else
     
         game_over ()

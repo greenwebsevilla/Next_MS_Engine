@@ -87,25 +87,22 @@ MUSIC AND SOUND
 'Iniciar players de sonido y musica'
 sub init_sound()
   ' MUSIC
-  LoadSDBank("music/0.pt3",0,0,0,31) 				' load music.pt3 into bank 31
-  LoadSDBank("music/vt24000.bin",0,0,0,30) 		' load the music replayer into bank 30
-  LoadSDBank("music/fx.afb",0,0,0,29) 		' load SFX afb file into bank  29
+  LoadSDBank("music/0.pt3",0,0,0,51) 				' load music.pt3 into bank 31
+  LoadSDBank("music/vt24000.bin",0,0,0,50) 		' load the music replayer into bank 30
+  LoadSDBank("music/fx.afb",0,0,0,52) 		' load SFX afb file into bank  29
   ' SFX
-  InitSFX(29)							          ' init the SFX engine, sfx are in bank 29
-  InitMusic(30,31,0000)				      ' init the music engine 30 has the player, 31 the pt3, 0000 the offset in bank 31
+  InitSFX(52)							          ' init the SFX engine, sfx are in bank 29
+  InitMusic(50,51,0000)				      ' init the music engine 30 has the player, 31 the pt3, 0000 the offset in bank 31
   SetUpIM()							            ' init the IM2 code 
   EnableSFX							            ' Enables the AYFX, use DisableSFX to top
   DisableMusic
+  
 end sub
 
 'Play a song from the begining (track = number of song) / Save the songs as 1.pt3 , 2.pt3, etc'
 sub play_music ()
-
-  DisableMusic
-  LoadSDBank("music/"+ str(track) +".pt3",0,0,0,31) 
-  InitMusic(30,31,0000)
-  EnableMusic
-
+	LoadSDBank("music/"+ str(track) +".pt3",0,0,0,51)
+	InitMusic(50,51,0000)
 end sub
 
 
@@ -237,8 +234,8 @@ end function
 #endif
 
 sub game_over ()
-    DisableMusic
-    DisableSFX
+    ' DisableMusic
+    ' DisableSFX
 
     ShowLayer2(0)
     clear_sprites()
@@ -250,7 +247,7 @@ sub game_over ()
     LoadSDBank("gfx/gameover.bin",0,0,0,18)
     ClipLayer2(0,255,0,191)
     ShowLayer2(1)
-    EnableSFX
+    ' EnableSFX
     track = MUSIC_GAMEOVER : play_music()
     pausa (200)
     
@@ -424,11 +421,11 @@ sub redefine_keys()
     CLS
 
     WaitRetrace(60)
-    DisableMusic
-    DisableSFX
+    ' DisableMusic
+    ' DisableSFX
     SaveSD("bin/keys.bin",@keys_to_play(0), 14)
-    EnableMusic
-    EnableSFX
+    ' EnableMusic
+    ' EnableSFX
 
 end sub
 

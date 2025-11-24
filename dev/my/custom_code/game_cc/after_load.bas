@@ -9,6 +9,7 @@ do
      idioma = 1 : EXIT DO
     end if
 loop
+
 PlaySFX(SOUND_LANGUAGE_SELECTED)
 WaitForNoKey()
 pausa(30)

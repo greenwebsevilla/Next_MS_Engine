@@ -1,3 +1,5 @@
+#define _check_interrupts _checkints
+
 'Variables generales
 dim track, old_track as ubyte
 dim fichero as string

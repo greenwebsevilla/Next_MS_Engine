@@ -3,18 +3,16 @@
 ShowLayer2(0)
 clear_sprites()
 CLS  
-' CLS320()
-DisableMusic
 ResetScroll320()
 MODE256 ' usar 256x192'
-DisableMusic
-DisableSFX
+' DisableMusic
+' DisableSFX
 LoadSDBank("gfx/ending.bin",0,0,0,18)
 ScrollLayer(0,175)
 ClipLayer2(0,255,0,191)
 ShowLayer2(1)
-EnableMusic
-EnableSFX
+' EnableMusic
+' EnableSFX
 track = MUSIC_ENDING : play_music()
  
 if idioma = 0

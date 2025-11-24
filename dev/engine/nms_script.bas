@@ -52,7 +52,7 @@
 #define MUSIC track
 #define SOUND PlaySFX
 #define STOP_MUSIC DisableMusic
-#define RESET_MUSIC play_music()
+#define RESET_MUSIC NewMusic(31,0000)
 #define PAUSA pausa
 #define PRINT_TILE pintar_tile          '(x_tile as ubyte, y_tile as ubyte, num_tile as ubyte)'
 #define UPDATE_TILE actualizar_tile     '(x_tile as ubyte, y_tile as ubyte, num_tile as ubyte)'

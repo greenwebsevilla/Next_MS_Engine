@@ -656,14 +656,14 @@ sub check_death()
 
         'Si no hay mas vidas, Game Over'
         if lives > 0
-            DisableMusic
+            ' DisableMusic
             old_track = 255 'Reinicio la musica '
             current_level = 255 'Reinicio del nivel
             player_energy = INIT_ENERGY
           
         else
             playing = 0
-            ' GOTO fin_playing_loop
+            GOTO fin_playing_loop
         end if
         
     end if
