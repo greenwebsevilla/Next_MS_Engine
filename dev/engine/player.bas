@@ -234,7 +234,7 @@ sub PlayerMove()
                 cx1 = ptx1 : cy1 = pty2-4
                 cx2 = ptx2 : cy2 = cy1
                 check_n_points(2)
-                if ct1 <> 4 AND ct2 <> 4 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
+                if gpy MOD 16 < (PLAYER_MAX_VY_FALLING>>6) 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
                     p_vy = 0
 #ifdef ENABLE_LADDERS
                     PLAYER_ON_LADDER = 0
