@@ -44,10 +44,10 @@ dim val_a, val_b as ubyte
 #define FACING_UP       2
 #define FACING_DOWN     3
 
-#define EST_NORMAL 		0
-#define EST_SALTANDO	1
-#define EST_PARP 		9
-#define EST_MURIENDO	10
+#define NORMAL_ST 		0
+#define JUMPING_ST	1
+#define FLICKERING_ST 		9
+#define DYING_ST	10
 
 'Array frames player'
 dim player_frames(MAX_FRAMES_PLAYER-1) as ubyte

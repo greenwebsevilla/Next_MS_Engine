@@ -37,7 +37,7 @@ ELSE IF LEVEL_NUM = 2  'SI ESTAMOS EN EL MAPA O NIVEL 2'
 
     'ZONA QUE TERMINA EL JUEGO SI LA TOCAMOS'
     IF PLAYER_IN_ZONE(0,7,0,8)
-        SOUND(10)   'Suena el sonido 1'
+        SOUND(1)   'Suena el sonido 1'
         PAUSA(50)   'Hace una pausa de 50 frames'  
         END_GAME
     END IF

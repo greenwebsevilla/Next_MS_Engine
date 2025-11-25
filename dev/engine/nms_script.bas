@@ -41,10 +41,13 @@
 'Estados del player para diferentes animaciones'
 #define PLAYER_JUMPING player_jumping
 #define PLAYER_WALKING p_vx
-#define PLAYER_DYING player_status = EST_MURIENDO
+#define PLAYER_GOING_LEFT p_vx<0
+#define PLAYER_GOING_RIGHT p_vx>0
+#define PLAYER_DYING player_status = DYING_ST
 #define PLAYER_GOING_UP p_vy<0
 #define PLAYER_GOING_DOWN p_vy>0
 #define PLAYER_ON_LADDER ladder_on
+#define PLAYER_FLICKERING player_status = FLICKERING_ST
 
 
 'Utilidades / Loop'
@@ -52,6 +55,7 @@
 #define MUSIC track
 #define SOUND PlaySFX
 #define STOP_MUSIC DisableMusic
+#define PLAY_MUSIC EnableMusic
 #define RESET_MUSIC NewMusic(31,0000)
 #define PAUSA pausa
 #define PRINT_TILE pintar_tile          '(x_tile as ubyte, y_tile as ubyte, num_tile as ubyte)'
@@ -59,16 +63,18 @@
 #define DELETE_HUD delete_hud(0)
 #define DELETE_TEXT_AREA delete_hud(HUD_HEIGHT*2)
 #define PRINT_HUD print_hud()
-#define NEW_SPRITE new_sprite
+' #define NEW_SPRITE new_sprite
 '  NEW_SPRITE (61, 50, PLAYER_X_IN_TILES, PLAYER_Y_IN_TILES-1, 1) 'Creamos un objeto a la izquierda del jugador: sprite 61, tipo 50
 #define TIMER_ON timer_on = 1
 #define TIMER_OFF timer_on = 0
-
+#define TIME timer_t
+#define RESTART_TIME timer_t=TIMER_INITIAL
 
 'Enemigos'
 #define ENEMY_TYPE _en_t
 #define ENEMY_STATUS enem_status
 #define NO_KILL no_kill=1
+#define KILL_SPRITE enem_status=ENEM_DEAD
 #define KILL_SPRITE_NO_RESPAWN enem_status=ENEM_NO_RESPAWN
 #define ENEMY_ANIMATION set_enem_animation
 #define ENEMY_COUNTER enem_counter2(enit)
@@ -89,8 +95,6 @@
 #define ENEMY_EXTRA_TOP_BB enem_ajuste_ccol_y
 
 'Acceso a otras variables'
-#define TIME timer_t
-#define RESTART_TIME timer_t=TIMER_INITIAL
 #define OBJECTS_NUMBER num_objects
 #define SCORE score
 #define FIRST_TILANIM tilanims_first

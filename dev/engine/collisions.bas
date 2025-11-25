@@ -48,7 +48,7 @@ if _en_t <> PLATFORM_TYPE 'No afecta a plataformas'
 #ifdef OBJECT_TYPE    
     end if
 #endif
-        if player_status < EST_PARP
+        if player_status < FLICKERING_ST
             if enem_status < ENEM_DYING
                 if collide() = 1
 #ifdef OBJECT_TYPE

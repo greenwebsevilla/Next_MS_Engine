@@ -83,7 +83,7 @@ do 'Game loop'
     end if
 
 #ifdef TIMER_ENABLE
-    if player_status < EST_MURIENDO then run_timer() 'Hace las cosas del temporizador (tiempo) siempre que no esté muriendo'
+    if player_status < DYING_ST then run_timer() 'Hace las cosas del temporizador (tiempo) siempre que no esté muriendo'
 #endif
 
     '1/2 TIEMPO Y 1/4 de TIEMPO'

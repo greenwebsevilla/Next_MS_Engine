@@ -660,7 +660,7 @@ sub EnemyBulletsMove()
 
             UpdateSprite(x_enemyBullet(i)- x_scroll, y_enemyBullet(i) + (SCREEN_Y_OFFSET<<4),ENEMBULLET_FIRST_SP_VRAM+i,ENEMBULLET_FIRST_SP_VRAM,0,0)
 
-            if player_status < EST_PARP
+            if player_status < FLICKERING_ST
                 cx2 = x_enemyBullet(i) + 8 - x_scroll
                 cy2 = y_enemyBullet(i) + 8
                 if point_collide() = 1
@@ -683,24 +683,24 @@ sub EnemyBulletsMove()
 end sub
 
 
-sub new_sprite (sprite as ubyte, type as ubyte, x as ubyte, y as ubyte, vida as ubyte = 1, lim_ax as ubyte = 0, lim_ay as ubyte = 0, lim_bx as ubyte = 0,lim_by as ubyte = 0,mx as byte = 0,my as byte = 0)
+' sub new_sprite (sprite as ubyte, type as ubyte, x as ubyte, y as ubyte, vida as ubyte = 1, lim_ax as ubyte = 0, lim_ay as ubyte = 0, lim_bx as ubyte = 0,lim_by as ubyte = 0,mx as byte = 0,my as byte = 0)
 
-        enemies_x(total_enemies) = cast(uinteger,x)<<4
-        enemies_y(total_enemies) = cast(uinteger,y)<<4
-        enemies_x1(total_enemies) = cast(uinteger,lim_ax)<<4
-        enemies_y1(total_enemies) = cast(uinteger,lim_ay)<<4
-        enemies_x2(total_enemies) = cast(uinteger,lim_ax)<<4
-        enemies_y2(total_enemies) = cast(uinteger,lim_ay)<<4
-        enemies_mx(total_enemies) = mx
-        enemies_my(total_enemies) = my
-        enem_vy(total_enemies) = 0
-        enemies_t(total_enemies) = type
-        en_an_facing(total_enemies) = 0
-        enemies_spritenum(total_enemies) = sprite
-        enemies_life(total_enemies) = vida
-        en_an_state (total_enemies) = 0
+'         enemies_x(total_enemies) = cast(uinteger,x)<<4
+'         enemies_y(total_enemies) = cast(uinteger,y)<<4
+'         enemies_x1(total_enemies) = cast(uinteger,lim_ax)<<4
+'         enemies_y1(total_enemies) = cast(uinteger,lim_ay)<<4
+'         enemies_x2(total_enemies) = cast(uinteger,lim_ax)<<4
+'         enemies_y2(total_enemies) = cast(uinteger,lim_ay)<<4
+'         enemies_mx(total_enemies) = mx
+'         enemies_my(total_enemies) = my
+'         enem_vy(total_enemies) = 0
+'         enemies_t(total_enemies) = type
+'         en_an_facing(total_enemies) = 0
+'         enemies_spritenum(total_enemies) = sprite
+'         enemies_life(total_enemies) = vida
+'         en_an_state (total_enemies) = 0
 
-        total_enemies = total_enemies + 1
+'         total_enemies = total_enemies + 1
 
-        poke ENEMIES_BUFFER,total_enemies 'update the total enemies amount'
-end sub
+'         poke ENEMIES_BUFFER,total_enemies 'update the total enemies amount'
+' end sub

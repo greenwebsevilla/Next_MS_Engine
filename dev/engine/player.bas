@@ -91,7 +91,7 @@ end function
 
 sub PlayerMove()
 
-    if player_status < EST_MURIENDO 
+    if player_status < DYING_ST 
         control_vars () 'Read the control'
     end if
 
@@ -262,14 +262,14 @@ sub PlayerMove()
             end if
 #endif
             if ct1 = 1 OR ct2 = 1
-                if player_status < EST_PARP 
+                if player_status < FLICKERING_ST 
 
                 spike_touched = 1
                 end if
 #ifdef ENABLE_LADDERS
                 if PLAYER_ON_LADDER = 0
 #endif
-                if player_status < EST_MURIENDO
+                if player_status < DYING_ST
                     brinco = 1
                 end if
 #ifdef ENABLE_LADDERS
@@ -295,7 +295,7 @@ sub PlayerMove()
         end if
 
         if ct1 = 1 OR ct2 = 1
-            if player_status < EST_PARP 
+            if player_status < FLICKERING_ST 
             spike_touched = 1
             end if
         endif
@@ -381,7 +381,7 @@ sub PlayerMove()
 #endif
 
     ' Colisiones horizontales'
-    if player_status < EST_MURIENDO
+    if player_status < DYING_ST
 
 #ifdef ENABLE_LADDERS
     if NOT PLAYER_ON_LADDER
@@ -405,7 +405,7 @@ sub PlayerMove()
                 end if
 #ifndef SPIKES_KILL_VERTICAL_ONLY
                 if ct1 = 1 OR ct2 = 1
-                    if player_status < EST_PARP 
+                    if player_status < FLICKERING_ST 
                     spike_touched = 1
                     end if
                 endif
@@ -446,7 +446,7 @@ sub PlayerMove()
 
 #ifndef SPIKES_KILL_VERTICAL_ONLY
                 if ct1 = 1 OR ct2 = 1
-                    if player_status < EST_PARP 
+                    if player_status < FLICKERING_ST 
                     spike_touched = 1
                     end if
                 endif
@@ -485,10 +485,10 @@ sub PlayerMove()
 
         #ifdef PLAYER_FLICKERS
             ' // Flickering
-            if player_status = EST_PARP
+            if player_status = FLICKERING_ST
                     p_ct_estado = p_ct_estado - 1
                     if p_ct_estado = 0
-                        player_status = EST_NORMAL
+                        player_status = NORMAL_ST
                     end if
             end if
         #endif
@@ -506,7 +506,7 @@ sub PlayerMove()
             else
                 #include "../my/custom_code/player_cc/player_dies.bas"
                 player_damaged = 0
-                player_status = EST_MURIENDO
+                player_status = DYING_ST
                 player_counter = 100
                 lives = lives - 1
                 print_number_of_lives()
@@ -516,7 +516,7 @@ sub PlayerMove()
 
 
     
-    end if ' if player_status < EST_MURIENDO
+    end if ' if player_status < DYING_ST
 
     if p_x < 2048 then p_x = 2048 'límite izquierdo pantalla'
 
@@ -590,7 +590,7 @@ sub UpdatePlayer()
     _x1 = gpx
     _y1 = gpy + (SCREEN_Y_OFFSET<<4)
 
-    if player_status = EST_PARP AND half_life2 = 0
+    if player_status = FLICKERING_ST AND half_life2 = 0
 
         RemoveSprite(PLAYER_FIRST_SP_VRAM,0)
 #ifdef PLAYER_SPRITE_16X32
@@ -639,7 +639,7 @@ sub player_kill()
 #endif  
 
 #ifdef PLAYER_FLICKERS
-    player_status = EST_PARP
+    player_status = FLICKERING_ST
     p_ct_estado = FLICKERING_TIME
 #endif   
 
@@ -649,10 +649,10 @@ end sub
 sub check_death()
     player_counter = player_counter - 1
     'Ultimo frame de muerte'
-    if player_status = EST_MURIENDO AND player_counter = 0
+    if player_status = DYING_ST AND player_counter = 0
 
         pausa(50)
-        player_status = EST_NORMAL
+        player_status = NORMAL_ST
 
         'Si no hay mas vidas, Game Over'
         if lives > 0

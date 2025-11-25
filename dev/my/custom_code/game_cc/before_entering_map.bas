@@ -6,7 +6,7 @@
 
 /'
 
-IF LEVEL_NUM = p
+IF LEVEL_NUM = 2
     FIRST_TILANIM = 120
 END IF
 
