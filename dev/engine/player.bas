@@ -154,7 +154,7 @@ sub PlayerMove()
 
 #ifdef PLAYER_JUMPS
 #ifdef DAMAGE_BOUNCE_POWER
-        if (KEY_TO_JUMP OR brinco) AND player_jumping = 0 AND jump_pressed = 0
+        if (KEY_TO_JUMP AND player_jumping = 0 AND jump_pressed = 0) OR brinco
 #else
         if KEY_TO_JUMP AND player_jumping = 0 AND jump_pressed = 0
 #endif
@@ -171,15 +171,16 @@ sub PlayerMove()
             end if
 #endif
         end if
-#endif
+
 
         if NOT KEY_TO_JUMP then jump_pressed = 0
 
 #ifdef DAMAGE_BOUNCE_POWER
-    if brinco then 
-        p_vy = - DAMAGE_BOUNCE_POWER
-        brinco = 0
-    end if
+        if brinco then 
+            p_vy = - DAMAGE_BOUNCE_POWER
+            brinco = 0
+        end if
+#endif
 #endif
 
 #else 'defined ENABLE_UPDOWN'
@@ -269,9 +270,7 @@ sub PlayerMove()
 #ifdef ENABLE_LADDERS
                 if PLAYER_ON_LADDER = 0
 #endif
-                if player_status < DYING_ST
-                    brinco = 1
-                end if
+
 #ifdef ENABLE_LADDERS
                 end if
 #endif
@@ -500,8 +499,28 @@ sub PlayerMove()
 #ifdef SHOW_ENERGYBAR
             print_energy()   
 #endif
+
+   'pequeño salto al dañar player'
+#ifdef ENABLE_LADDERS
+#ifndef FALL_OFF_LADDER
+            if NOT PLAYER_ON_LADDER 
+#endif
+#endif
+                brinco = 1
+#ifdef ENABLE_LADDERS
+#ifndef FALL_OFF_LADDER
+            end if
+#endif  
+#endif  
+
             if player_energy > 0
-                player_kill()
+
+                player_damaged = 0
+
+#ifdef PLAYER_FLICKERS
+                player_status = FLICKERING_ST
+                p_ct_estado = FLICKERING_TIME
+#endif   
                 #include "../my/custom_code/player_cc/player_damaged.bas"
             else
                 #include "../my/custom_code/player_cc/player_dies.bas"
@@ -620,30 +639,6 @@ sub player_calc_bounding_box()
 end sub
 
 
-
-sub player_kill()
-
-    player_damaged = 0
-
-    'pequeño salto al dañar player'
-#ifdef ENABLE_LADDERS
-#ifndef FALL_OFF_LADDER
-    if NOT PLAYER_ON_LADDER 
-#endif
-#endif
-    brinco = 1
-#ifdef ENABLE_LADDERS
-#ifndef FALL_OFF_LADDER
-    end if
-#endif  
-#endif  
-
-#ifdef PLAYER_FLICKERS
-    player_status = FLICKERING_ST
-    p_ct_estado = FLICKERING_TIME
-#endif   
-
-end sub
 
 
 sub check_death()
