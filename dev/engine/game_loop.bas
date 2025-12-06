@@ -41,7 +41,6 @@ do 'Game loop'
         'SALIR DEL BUCLE SI GANAMOS EL JUEGO'
         if level_number = MAX_LEVELS 'si se pasa el ultimo nivel de alguna forma, se termina el juego'
             success = 1: playing = 0
-            ' GOTO fin_playing_loop
             EXIT DO
         end if
 

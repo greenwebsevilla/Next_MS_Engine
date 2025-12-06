@@ -229,29 +229,28 @@ sub PlayerMove()
         check_n_points(2)
         
         if ct1 bAND 12 OR ct2 bAND 12 OR on_ground 'on_ground IMPORTANTE para plataformas móviles
+            if (cy1 >= 0)
 #ifdef ENABLE_LADDERS
-            if not (PLAYER_ON_LADDER AND ct1 = 4) 
+                if not (PLAYER_ON_LADDER AND ct1 = 4) 
 #endif
-                cx1 = ptx1 : cy1 = pty2-4
-                cx2 = ptx2 : cy2 = cy1
-                check_n_points(2)
-                if gpy MOD 16 < (PLAYER_MAX_VY_FALLING>>6) 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
-                    p_vy = 0
+                    if gpy MOD 16 < (PLAYER_MAX_VY_FALLING>>6) 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
+                        p_vy = 0
 #ifdef ENABLE_LADDERS
-                    PLAYER_ON_LADDER = 0
+                        PLAYER_ON_LADDER = 0
 #endif
 #ifdef PLAYER_JUMPS
-                    player_jumping = 0: brinco = 0
+                        player_jumping = 0: brinco = 0
                     
 #endif
-                    if on_ground = 0
-                        gpy = gpy bAND 0xfff0
-                        p_y = gpy << 6 
+                        if on_ground = 0
+                            gpy = gpy bAND 0xfff0
+                            p_y = gpy << 6 
+                        end if
                     end if
-                end if
 #ifdef ENABLE_LADDERS
-            end if
+                end if
 #endif
+            end if
         else 
 #ifdef ENABLE_LADDERS
             if PLAYER_ON_LADDER = 0
@@ -262,18 +261,13 @@ sub PlayerMove()
 #ifdef ENABLE_LADDERS
             end if
 #endif
-            if ct1 = 1 OR ct2 = 1
-                if player_status < FLICKERING_ST 
+            if (cy1 >= 0)
+                if ct1 = 1 OR ct2 = 1
+                    if player_status < FLICKERING_ST 
 
-                spike_touched = 1
+                    spike_touched = 1
+                    end if
                 end if
-#ifdef ENABLE_LADDERS
-                if PLAYER_ON_LADDER = 0
-#endif
-
-#ifdef ENABLE_LADDERS
-                end if
-#endif
             end if
        
         end if
@@ -288,16 +282,19 @@ sub PlayerMove()
         cy1 = cy1 - PLAYER_EXTRA_TOP_BB
         cy2 = cy1
 #endif
-        check_n_points(2)
-        if ct1 = 8 OR ct2 = 8
-            p_vy = 0
-        end if
-
-        if ct1 = 1 OR ct2 = 1
-            if player_status < FLICKERING_ST 
-            spike_touched = 1
+        if (cy1 >= 0)
+            check_n_points(2)
+            if ct1 = 8 OR ct2 = 8
+                p_vy = 0
             end if
-        endif
+
+            if ct1 = 1 OR ct2 = 1
+                if player_status < FLICKERING_ST 
+                spike_touched = 1
+                end if
+            end if
+        end if
+        
     end if 
 
    
@@ -392,30 +389,31 @@ sub PlayerMove()
        
                 cx1 = ptx2+1 : cy1 = pty1 
                 cx2 = ptx2+1 : cy2 = pty2 
-                check_n_points(2)
+                if (cy1 >= 0)
+                    check_n_points(2)
 #ifdef SPIKES_KILL_VERTICAL_ONLY
-                if ct1 bAND 9 OR ct2 bAND 9
+                    if ct1 bAND 9 OR ct2 bAND 9
 #else
-                if ct1 = 8 OR ct2 = 8
+                    if ct1 = 8 OR ct2 = 8
 #endif
-                    ' if p_x < 17216 'Este IF es para que no detecte colisiones al salir del mapa por la derecha'
                         total_vx = 0 
-                    ' endif
-                end if
-#ifndef SPIKES_KILL_VERTICAL_ONLY
-                if ct1 = 1 OR ct2 = 1
-                    if player_status < FLICKERING_ST 
-                    spike_touched = 1
                     end if
-                endif
+#ifndef SPIKES_KILL_VERTICAL_ONLY
+                    if ct1 = 1 OR ct2 = 1
+                        if player_status < FLICKERING_ST 
+                        spike_touched = 1
+                        end if
+                    end if
 #endif
-
+                end if
 #ifdef PLAYER_SPRITE_16X32 
                 cx1 = ptx2+1
                 cy1 = pty1 - PLAYER_EXTRA_TOP_BB
-                check_n_points(2)
-                if ct1 bAND 9
-                        total_vx = 0 
+                if (cy1 > 0)
+                    check_n_points(2)
+                    if ct1 bAND 9
+                            total_vx = 0 
+                    end if
                 end if
 #endif
                 p_x = p_x + total_vx
@@ -424,7 +422,7 @@ sub PlayerMove()
                     if ScrollToRight()
                     p_x = CAM_RIGHT_LIMIT*64 
                     end if
-                endif
+                end if
                 
         end if
 
@@ -433,30 +431,33 @@ sub PlayerMove()
         
                 cx1 = ptx1-1 : cy1 = pty1 
                 cx2 = ptx1-1 : cy2 = pty2 
-
-                check_n_points(2)
+                if (cy1 > 0)
+                    check_n_points(2)
 #ifdef SPIKES_KILL_VERTICAL_ONLY
-                if ct1 bAND 9 OR ct2 bAND 9
+                    if ct1 bAND 9 OR ct2 bAND 9
 #else
-                if ct1 = 8 OR ct2 = 8
+                    if ct1 = 8 OR ct2 = 8
 #endif
-                total_vx = 0
-                end if
+                        total_vx = 0
+                    end if
 
 #ifndef SPIKES_KILL_VERTICAL_ONLY
-                if ct1 = 1 OR ct2 = 1
-                    if player_status < FLICKERING_ST 
-                    spike_touched = 1
+                    if ct1 = 1 OR ct2 = 1
+                        if player_status < FLICKERING_ST 
+                        spike_touched = 1
+                        end if
                     end if
-                endif
+               
 #endif
-
+                end if
 #ifdef PLAYER_SPRITE_16X32 
                 cx1 = ptx1-1
                 cy1 = pty1 - PLAYER_EXTRA_TOP_BB
-                check_n_points(2)
-                if ct1 bAND 9
-                        total_vx = 0 
+                if (cy1 > 0)
+                    check_n_points(2)
+                    if ct1 bAND 9
+                            total_vx = 0 
+                    end if
                 end if
 #endif
 

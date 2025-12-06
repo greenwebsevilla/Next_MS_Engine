@@ -2,6 +2,7 @@
 '!ORG=24576
 '!HEAP=1024
 '!OPT=2
+'!copy=.\data\My_Game.nex
 'Adjust these parameters only if you know what you're doing, otherwise leave them as they are.'
 'Ajusta estos parámetros si sabes bien lo que haces, si no, mejor déjalos como están.'
 

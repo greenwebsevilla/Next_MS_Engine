@@ -251,14 +251,13 @@ sub animate_enemy()
         else
             en_an_subframe(enit) =  en_an_subframe(enit) +1
             
-                if en_an_subframe(enit) = en_an_fps(enit) 
+                if en_an_subframe(enit) >= en_an_fps(enit) 
                     en_an_subframe(enit) = 0
                     en_an_frame(enit) =  en_an_frame(enit) + 1
                     if  en_an_frame(enit) = en_an_num_frames(enit)
                         en_an_frame(enit) = 0
                     end if
                 end if
-            ' spnum = en_an_frame(enit) + _en_sprnum
             
             if enem_status = ENEM_DYING 'Estado muriendo'
 

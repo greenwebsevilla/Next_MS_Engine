@@ -88,7 +88,6 @@ sub update_tile(modify_map as ubyte)
     _y = _y+SCREEN_Y_OFFSET-first_row
     if _x > 0 AND _x < 20 AND _y < 16
         FDoTile16(_t,resto_scrollx, _y, 36)	' draw tiles from bank 36
-        print at 0,0;ink 7;_y
     end if
     
 end sub
