@@ -177,9 +177,9 @@ end sub
 function collide () as ubyte
 
 	#ifdef SMALL_COLLISION_ENEM
-		if (gpx + 8 >= cx2 AND gpx <= cx2 + 8 AND gpy + 8 - PLAYER_EXTRA_TOP_BB >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB <= cy2 + 8)
+		if (gpx + 8 >= cx2 AND gpx <= cx2 + 8 AND gpy + 8 >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB <= cy2 + 8)
 	#else
-		if (gpx + 13 >= cx2 AND gpx <= cx2 + 13 AND gpy + 12 - PLAYER_EXTRA_TOP_BB >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB  <= cy2 + 12)
+		if (gpx + 13 >= cx2 AND gpx <= cx2 + 13 AND gpy + 13 >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB  <= cy2 + 13)
 	#endif
       colision_ok = 1
     else 
@@ -194,7 +194,7 @@ end function
 function point_collide () as ubyte
 
 	#ifdef SMALL_COLLISION_SHOTS
-		if (cx2 > gpx  AND cx2 < gpx+12 AND cy2 > gpy+4- PLAYER_EXTRA_TOP_BB AND cy2 < gpy+12)
+		if (cx2 > gpx  AND cx2 < gpx+12 AND cy2 > gpy + 4- PLAYER_EXTRA_TOP_BB AND cy2 < gpy+12)
 	#else
 		if (cx2 > gpx  AND cx2 < gpx+15 AND cy2 > gpy- PLAYER_EXTRA_TOP_BB AND cy2 < gpy+15)
 	#endif
