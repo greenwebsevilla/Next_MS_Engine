@@ -320,9 +320,10 @@ sub draw_current_enemy()
     direccion = $0000+(256*spnum)
     Test_SetSprites(1,direccion,ENEMIES_FIRST_SP_VRAM+enviit) ' cargamos el frame que hay en direccion en el sprite 10+enviit'
 #ifdef ENEMY_SPRITES_16X32
-    direccion = $0000+(256*spnum-(16*256))
-    Test_SetSprites(1,direccion,ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit) ' cargamos el frame que hay en direccion en el sprite 10+MAX_SPRITES_ON_SCREEN+enviit'
-
+    if (ENEMY_EXTRA_TOP_BB>0)
+        direccion = $0000+(256*spnum-(16*256))
+        Test_SetSprites(1,direccion,ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit) ' cargamos el frame que hay en direccion en el sprite 10+MAX_SPRITES_ON_SCREEN+enviit'
+    end if
 #endif
     
     asm : nextreg $50,$ff : nextreg $51,$ff : end asm   ' paginamos a los bancos por defecto
@@ -332,7 +333,11 @@ sub draw_current_enemy()
         _y = _en_y + (SCREEN_Y_OFFSET<<4) 'Imprimimos los sprites desplazados por haber desplazado el area de juego'
         UpdateSprite(_x1, _y, ENEMIES_FIRST_SP_VRAM+enviit, ENEMIES_FIRST_SP_VRAM+enviit, _en_facing, 0) 
 #ifdef ENEMY_SPRITES_16X32
-        UpdateSprite(_x1, _y-16, ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit, ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit, _en_facing, 0) 'Parte superior del sprite enemigo de 16x32
+        if (ENEMY_EXTRA_TOP_BB>0)
+            UpdateSprite(_x1, _y-16, ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit, ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit, _en_facing, 0) 'Parte superior del sprite enemigo de 16x32
+        else
+            RemoveSprite(ENEMIES_FIRST_SP_VRAM+MAX_SPRITES_ON_SCREEN+enviit, 0)  'Borrar enemigos inactivos'
+        end if
 #endif
     else
         RemoveSprite(ENEMIES_FIRST_SP_VRAM+enviit, 0)  'Borrar enemigos inactivos'

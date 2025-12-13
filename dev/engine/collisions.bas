@@ -19,7 +19,9 @@ if player_status < DYING_ST
 #ifdef OBJECT_TYPE
         if _en_t <> OBJECT_TYPE
 #endif
-            'Bucle colisiones balas con enemigos'
+
+#ifdef PLAYER_CAN_FIRE
+            'Bucle colisiones balas del player con enemigos'
             for i = 0 to MAX_BULLETS-1
                 if estado_bala(i) = 1 
                     cx1 = x_bala(i)
@@ -30,7 +32,7 @@ if player_status < DYING_ST
                     end if
                 end if
             next i
-            
+#endif           
 
 #ifdef STOMP_ENEMIES
             'Colision player pisando enemigos'
@@ -49,6 +51,7 @@ if player_status < DYING_ST
 #ifdef OBJECT_TYPE    
         end if
 #endif
+            if enit bAND 1 = half_life 'Process only half enemies each cycle'
             if player_status < FLICKERING_ST
                 if enem_status < ENEM_DYING
                     if collide() = 1
@@ -74,8 +77,7 @@ if player_status < DYING_ST
                     end if
                 end if
             end if
-
-
+            end if
 
         end if
 

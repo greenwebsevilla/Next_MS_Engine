@@ -631,7 +631,7 @@ end sub
 
 sub EnemyBulletsMove() 
 
-    for i = 0 to 2
+    for i = 0 to MAX_ENEMY_BULLETS-1
         if estado_enemyBullet(i) = 1 
 
             spnum = sprite_enemyBullet(frame_enemyBullet)
@@ -660,16 +660,19 @@ sub EnemyBulletsMove()
 
             UpdateSprite(x_enemyBullet(i)- x_scroll, y_enemyBullet(i) + (SCREEN_Y_OFFSET<<4),ENEMBULLET_FIRST_SP_VRAM+i,ENEMBULLET_FIRST_SP_VRAM,0,0)
 
-            if player_status < FLICKERING_ST
-                cx2 = x_enemyBullet(i) + 8 - x_scroll
-                cy2 = y_enemyBullet(i) + 8
-                if point_collide() = 1
+            'Collision with player'
+            if i bAND 1 = half_life 'Process only half bullets each cycle'
+              if player_status < FLICKERING_ST
+                  cx2 = x_enemyBullet(i) + 8 - x_scroll
+                  cy2 = y_enemyBullet(i) + 8
+                  if point_collide() = 1
 
-                    estado_enemyBullet(i) = 0
-                    player_damaged = 1
-                    PlaySFX(SOUND_PLAYER_DAMAGED)
+                      estado_enemyBullet(i) = 0
+                      player_damaged = 1
+                      PlaySFX(SOUND_PLAYER_DAMAGED)
 
-                end if
+                  end if
+              end if
             end if
 
         else 

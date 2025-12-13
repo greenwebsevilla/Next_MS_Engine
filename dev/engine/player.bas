@@ -88,6 +88,9 @@ function player_touch_tile_type() as ubyte
     
 end function
 
+sub stop_hz_speed()
+    total_vx = 0
+end sub
 
 sub PlayerMove()
 
@@ -388,7 +391,7 @@ sub PlayerMove()
         if total_vx > 0
        
                 cx1 = ptx2+1 : cy1 = pty1 
-                cx2 = ptx2+1 : cy2 = pty2 
+                cx2 = ptx2+1 : cy2 = pty2-1 
                 if (cy1 >= 0)
                     check_n_points(2)
 #ifdef SPIKES_KILL_VERTICAL_ONLY
@@ -396,7 +399,7 @@ sub PlayerMove()
 #else
                     if ct1 = 8 OR ct2 = 8
 #endif
-                        total_vx = 0 
+                        stop_hz_speed() 
                     end if
 #ifndef SPIKES_KILL_VERTICAL_ONLY
                     if ct1 = 1 OR ct2 = 1
@@ -412,7 +415,7 @@ sub PlayerMove()
                 if (cy1 > 0)
                     check_n_points(2)
                     if ct1 bAND 9
-                            total_vx = 0 
+                            stop_hz_speed() 
                     end if
                 end if
 #endif
@@ -430,7 +433,7 @@ sub PlayerMove()
         if total_vx < 0
         
                 cx1 = ptx1-1 : cy1 = pty1 
-                cx2 = ptx1-1 : cy2 = pty2 
+                cx2 = ptx1-1 : cy2 = pty2-1 
                 if (cy1 > 0)
                     check_n_points(2)
 #ifdef SPIKES_KILL_VERTICAL_ONLY
@@ -438,7 +441,7 @@ sub PlayerMove()
 #else
                     if ct1 = 8 OR ct2 = 8
 #endif
-                        total_vx = 0
+                        stop_hz_speed()
                     end if
 
 #ifndef SPIKES_KILL_VERTICAL_ONLY
@@ -456,7 +459,7 @@ sub PlayerMove()
                 if (cy1 > 0)
                     check_n_points(2)
                     if ct1 bAND 9
-                            total_vx = 0 
+                        stop_hz_speed() 
                     end if
                 end if
 #endif
