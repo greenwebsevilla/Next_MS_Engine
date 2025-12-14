@@ -73,6 +73,8 @@
 'Enemigos'
 #define ENEMY_TYPE _en_t
 #define ENEMY_STATUS enem_status
+#define ENEMY_VX _en_mx
+#define ENEMY_VY _en_my
 #define NO_KILL no_kill=1
 #define KILL_SPRITE enem_status=ENEM_DEAD
 #define KILL_SPRITE_NO_RESPAWN enem_status=ENEM_NO_RESPAWN
