@@ -56,6 +56,8 @@ end sub
 sub go_to_another_map(level_num as ubyte, x_inicial as ubyte = 255, y_inicial as ubyte = 255)
 
     level_number = level_num
+    current_level = 255 'Fuerza a repintar el nivel aunque vayamos al mismo nivel en el que estamos
+
     if y_inicial < 255 'Si no indicamos coordenadas x e y, solo vamos al mapa nuevo y apareceremos donde esté definido en el mapa
         player_x_ini = x_inicial
         player_y_ini = y_inicial MOD SCREENS_H
