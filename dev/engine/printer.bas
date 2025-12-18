@@ -12,7 +12,7 @@ sub draw_scr()
         tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
         tt = tt + columna_inicial + 2
 
-        for x = 2  to 21 'Sumo 2 para empezar desde el tile 0, que se oculta con el clip de layer 2'
+        for x = 2  to 19 'Sumo 2 para empezar desde el tile 0, que se oculta con el clip de layer 2'
             asm : nextreg $56,90 : nextreg $57,91 : end asm 
             p = peek(tt+MAP_BUFFER)
             asm : nextreg $56,0 : nextreg $57,1 : end asm 
