@@ -156,7 +156,7 @@ dim level_floor, first_row, changing_floor as ubyte
 dim tiles_animados_x (0 to MAX_TILANIMS) as ubyte
 dim tiles_animados_y (0 to MAX_TILANIMS) as ubyte
 dim tiles_animados_t (0 to MAX_TILANIMS) as ubyte
-dim tiles_frame, tiles_subframe, tilanim_num as ubyte
+dim tiles_frame, tiles_subframe, tilanim_num, total_tilanims, tile_id as ubyte
 dim tilanims_first as ubyte
 #endif     
 dim resto_scrollx as integer

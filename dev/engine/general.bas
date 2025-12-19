@@ -213,7 +213,6 @@ end function
     tiles_subframe = tiles_subframe + 1
     if tiles_subframe = TILANIM_FREQUENCY 'Cambio de tile cada n frames' 
       tiles_subframe = 0
-      dim tile_id as ubyte = 0
 
       tiles_frame = tiles_frame + 1
       if tiles_frame = MAX_FRAMES_TILANIM 
@@ -221,10 +220,11 @@ end function
       end if
 
       for tile_id = 0 to MAX_TILANIMS
+        _t = tiles_animados_t (tile_id) 
+        if _t = 255 then EXIT FOR
         _x = tiles_animados_x (tile_id)
-        if _x = 255 then EXIT FOR
         _y = tiles_animados_y (tile_id)
-        _t = tiles_animados_t (tile_id) + tiles_frame 
+        _t = _t + tiles_frame 
         update_tile(0)
       next tile_id
       

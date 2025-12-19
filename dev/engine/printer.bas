@@ -108,7 +108,6 @@ end sub
 sub detect_tilanims()
     
     tilanim_num = 0
-      	
 
     for y = first_row to first_row+SCREENS_H-1
         
@@ -124,15 +123,24 @@ sub detect_tilanims()
                 tiles_animados_t (tilanim_num) = p
                 tilanim_num = tilanim_num + 1
             end if
+
             tt=tt+1 						' increase tile number
             
         next x
 
     next y 
-'     print at 0,0;tilanim_num
-' pausa(999)
-    tiles_animados_x (tilanim_num) = 255 'no mas tiles animados'
-    tiles_animados_y (tilanim_num) = 255
+    total_tilanims = tilanim_num
+    tiles_subframe = 0
+    
+end sub
+
+
+sub reset_tilanims ()
+
+    for tile_id = 0 to MAX_TILANIMS
+        tiles_animados_t(tile_id) = 255
+    next tile_id
+
 end sub
 #endif
 

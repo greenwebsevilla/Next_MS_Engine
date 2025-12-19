@@ -65,6 +65,7 @@ do 'Game loop'
         end if
         
         ' EnableSFX
+        reset_tilanims ()
         draw_scr() 'Draws the screen'
         coloca_scroll()
         player_locate()
