@@ -435,7 +435,7 @@ sub control_vars()
 
         v=in(31) 'leer el puerto kempston 1'
         press_up = v bAND %1000 
-        press_down = v bAND %1000000 
+        press_down = v bAND %100
         press_left = v bAND %10
         press_right = v bAND %1
         press_fire = v bAND %10000
