@@ -70,7 +70,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define FLICKERING_TIME     100             ' number of frames flickering
 
 ' Player data
-#define INIT_ENERGY 				3		' Max and starting energy gauge (put 1 for touched = death)
+#define INIT_ENERGY 				4		' Max and starting energy gauge (put 1 for touched = death)
 #define INIT_LIVES				    3		' Max and starting lives gauge. (put 1 for just one life and use energy instead)
 
 ' Fire
@@ -86,7 +86,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define JUMP_POWER		            255 	' Jump initial Y speed 
 #define DAMAGE_BOUNCE_POWER    		200 	' If defined, player bounces when damaged. Value is Y speed 
 
-' #define ENABLE_UPDOWN_MOVE                ' If defined, player can move up and down (for top view games, remember to disable gravity and jump)
+'  #define ENABLE_UPDOWN_MOVE                ' If defined, player can move up and down (for top view games, remember to disable gravity and jump)
 
 #define ENABLE_LADDERS                      ' If defined, tile type 2 are ladders.
 #define LADDER_VY                   64      ' Y speed when moving up/down on ladders.
@@ -141,7 +141,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 
 ' Oscillators
 #define OSCILLATORS              ' Oscillating enemy (type 4)'
-
+ 
 #define ENEMY_GRAVITY       2    ' For jumpers, oscillators, or enemies that can fall
 #define ENEMY_MAX_VY        96   ' For jumpers, oscillators, or enemies that can fall  
 
@@ -155,7 +155,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 ' ============================================================================
 #define HUD_HEIGHT 1 'how many ROWS OF TILES (16px each): Recommended 1 or 2 depends on your needs, 0 if you don't use hud. 
 ' IMPORTANT: There is not vertical scroll at this point, so make your maps height according to the hud used: Game area height in tiles = 18-Hud height
-#define SHOW_SCORE                      ' If defined, print score points on hud
+' #define SHOW_SCORE                      ' If defined, print score points on hud
 #define SCORE_X                 26      ' Score coord X on hud
 #define SCORE_Y                 1       ' Score coord Y on hud
 #define SHOW_ENERGYBAR                  ' If defined, print energy bar on hud
@@ -168,7 +168,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define TIMER_X                 20      ' Timer coord X on hud
 #define TIMER_Y                 1       ' Timer coord Y on hud
 #define SHOW_OBJECTS                    ' If defined, print # of captured objects on hud
-#define OBJECTS_X               6       ' Timer coord X on hud
+#define OBJECTS_X               7       ' Timer coord X on hud
 #define OBJECTS_Y               1       ' Timer coord Y on hud
 
 

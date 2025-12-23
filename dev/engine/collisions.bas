@@ -90,14 +90,15 @@ if player_status < DYING_ST
         if gpx > cx2 - 15
         if gpx < cx2 + 15
         if gpy >= cy2 - 17
-        if gpy < cy2 - 9
+        if gpy < cy2 - 10
 
             on_ground = 1
             plataforma_vx = 0: plataforma_vy = 0
             if half_life = 0
-                plataforma_vx = _en_mx << 6 
-                plataforma_vy = _en_my << 6 
+                plataforma_vx = _en_mx << 6 'Aplicamos la velocidad de la plataforma al player'
             end if
+
+            'Y "pegamos" el player a la parte superior de la plataforma'
             gpy = cy2 - 16
             p_y = gpy << 6
     

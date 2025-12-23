@@ -8,7 +8,7 @@
 'LOGICA DE LOS ENEMIGOS'
 
 'ENEMIGO TIPO 1 y 49: Patrollers y plataformas'
-IF ENEMY_TYPE = 1 OR ENEMY_TYPE = PLATFORM_TYPE   
+IF ENEMY_TYPE = 1 
 
         IF ENEMY_STATUS = 0         ' Si está en estado 0 (moviéndose)
 
@@ -19,6 +19,20 @@ IF ENEMY_TYPE = 1 OR ENEMY_TYPE = PLATFORM_TYPE
             END IF
 
         END IF
+
+#ifdef ENABLE_PLATFORMS
+ELSE IF ENEMY_TYPE = PLATFORM_TYPE   
+
+        IF ENEMY_STATUS = 0         ' Si está en estado 0 (moviéndose)
+
+            IF HALF_LIFE            'Solo se ejecuta cada 2 frames (se usa para enlentecer los enemigos, tambien existe QUARTER_LIFE, cada 4 frames)
+                MOVE_ENEMY          'Mueve a los enemigos en los ejes X e Y
+                CHECK_ENEMY_LIMITS  'Comprueba si llega a los límites y rebota si llega a alguno de ellos
+                CHECK_ENEMY_TILES   'Comprueba si toca un tile sólido y rebota si los toca'
+            END IF
+
+        END IF
+#endif
 
 #ifdef FANTYS
 'ENEMIGO TIPO 2: Perseguidores. 

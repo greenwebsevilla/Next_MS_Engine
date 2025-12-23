@@ -238,7 +238,10 @@ sub PlayerMove()
 #ifdef ENABLE_LADDERS
                 if not (PLAYER_ON_LADDER AND ct1 = 4) 
 #endif
-                    if gpy MOD 16 < (PLAYER_MAX_VY_FALLING>>6) 'Nos aseguramos que esté en la parte superior de la plataforma, y no por debajo'
+                cx1 = ptx1 : cy1 = pty2-4
+                cx2 = ptx2 : cy2 = cy1
+                check_n_points(2)
+                if ct1 <> 4 AND ct2 <> 4 'Nos aseguramos que esté en la parte superior de la plataforma (TILE 4), y no por debajo'
                         p_vy = 0
 #ifdef ENABLE_LADDERS
                         PLAYER_ON_LADDER = 0
@@ -247,7 +250,7 @@ sub PlayerMove()
                         player_jumping = 0: brinco = 0
                     
 #endif
-                        if on_ground = 0
+                        if on_ground = 0 'Si no está subido a una plataforma, ajustamos la Y a la cuadrícula
                             gpy = gpy bAND 0xfff0
                             p_y = gpy << 6 
                         end if
