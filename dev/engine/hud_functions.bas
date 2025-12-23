@@ -89,7 +89,9 @@ end sub
 
 sub add_points (points as ubyte)
     score = score + points
+#ifdef SHOW_SCORE
     print_score()
+#endif
 end sub
 
 sub delete_hud(start_y as ubyte)
