@@ -21,10 +21,10 @@ end if
 
 
 'Precalculos del mapa'
-asm : nextreg $56,90 : nextreg $57,91 : end asm 
+asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
 ancho_mapa = cast(uinteger, PEEK(DIMENSIONES_MAPA))
 alto_mapa = cast(uinteger, PEEK(DIMENSIONES_MAPA+1))
-asm : nextreg $56,0 : nextreg $57,1 : end asm 
+asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
 
 x_fin_mapa = ((ancho_mapa - 18) << 4) - 2
 

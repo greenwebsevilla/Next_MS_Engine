@@ -13,9 +13,9 @@ sub draw_scr()
         tt = tt + columna_inicial + 2
 
         for x = 2  to 19 'Sumo 2 para empezar desde el tile 0, que se oculta con el clip de layer 2'
-            asm : nextreg $56,90 : nextreg $57,91 : end asm 
+            asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
             p = peek(tt+MAP_BUFFER)
-            asm : nextreg $56,0 : nextreg $57,1 : end asm 
+            asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
             
             FDoTile16(p,x,y+SCREEN_Y_OFFSET,36)			' draw tiles from bank 36
             tt=tt+1 						' increase tile number
@@ -27,16 +27,16 @@ end sub
 'Dibujar nueva columna de tiles a la derecha'
 sub draw_column_right()
 
-    ' mapbuffer = MAP_BUFFER			' point to the map 	
+     			' point to the map 	
     tt=0
     addx = (x_scroll>>4) + 19 'es el offset para leer el mapa, a partir de la columna que toque'
     ' if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4)) < 30 'pintamos solo las ultimas 30 si estamos colocando scroll'
         for y = 0 to (SCREENS_H-1)
             tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
             tt = tt + cast(uinteger,addx)
-            asm : nextreg $56,90 : nextreg $57,91 : end asm 
+            asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
             p = peek(tt+MAP_BUFFER)
-            asm : nextreg $56,0 : nextreg $57,1 : end asm 
+            asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
             FDoTile16(p,columna_anterior,y+SCREEN_Y_OFFSET,36)			' draw tiles from bank 36
             tt=tt+1 						' increase tile number
             
@@ -48,15 +48,15 @@ end sub
 'Dibujar nueva columna de tiles a la izquierda'
 sub draw_column_left()
 
-    ' mapbuffer = MAP_BUFFER			' point to the map 	
+     			' point to the map 	
     tt=0
     addx = (x_scroll>>4) 'es el offset para leer el mapa, a partir de la columna que toque'
     for y = 0 to (SCREENS_H-1)
         tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
         tt = tt + cast(uinteger,addx)
-        asm : nextreg $56,90 : nextreg $57,91 : end asm 
+        asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
         p = peek(tt + MAP_BUFFER)
-        asm : nextreg $56,0 : nextreg $57,1 : end asm 
+        asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
 
         FDoTile16(p,columna_actual,y+SCREEN_Y_OFFSET,36)			' draw tiles from bank 36
         tt=tt+1 						' increase tile number
@@ -70,11 +70,11 @@ sub update_tile(modify_map as ubyte)
 
     'Si modifica permanentemente el mapa actual, se cambia el valor del tile en el buffer'
     if modify_map = 1 
-        ' mapbuffer = MAP_BUFFER
+         
         tt = _x + (ancho_mapa * cast(uinteger,_y) )
-        asm : nextreg $56,90 : nextreg $57,91 : end asm 
+        asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
         poke(MAP_BUFFER + tt, _t) '  modificamos el mapa'
-        asm : nextreg $56,0 : nextreg $57,1 : end asm 
+        asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
         
     end if
 
@@ -114,9 +114,9 @@ sub detect_tilanims()
         tt = ancho_mapa * cast(uinteger,y) 'Sin el cast tt pasa a valores ubyte'
 
         for x = 0  to ancho_mapa-1 
-            asm : nextreg $56,90 : nextreg $57,91 : end asm 
+            asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
             p = peek(tt+MAP_BUFFER)
-            asm : nextreg $56,0 : nextreg $57,1 : end asm 
+            asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
             if p >= tilanims_first AND tilanim_num < MAX_TILANIMS
                 tiles_animados_x (tilanim_num) = x  'guardamos la x global en tiles'
                 tiles_animados_y (tilanim_num) = y  'guardamos la y global en tiles'
