@@ -216,7 +216,7 @@ dim v, VarFrec, contador_frecuencia60 as ubyte
 
 #define SCREEN_Y_OFFSET (HUD_HEIGHT+2)
 #define SCREENS_H (12-HUD_HEIGHT)
-
+#define LIMITE_ABAJO (SCREENS_H-1)*16*64
 
 dim behs(128) as ubyte AT $5b00
 

@@ -322,7 +322,7 @@ sub PlayerMove()
         end if
     end if
     
-    if p_y > 10240 
+    if p_y > LIMITE_ABAJO
         if (first_row + SCREENS_H) < alto_mapa 'CAMBIANDO DE PLANO DE ALTURA HACIA ABAJO'
             changing_floor = 1
             level_floor = level_floor + 1
@@ -331,7 +331,7 @@ sub PlayerMove()
             player_y_ini = 0
 
         else    
-            p_y = 10240
+            p_y = LIMITE_ABAJO
         end if
     end if
 	gpy = p_y >> 6
