@@ -70,9 +70,9 @@ end sub
 
 function player_touch_tile_num() as ubyte
 
-    qtile(gpx+7>>4, gpy+3>>4)
+    qtile( (gpx+7+x_scroll)>>4, (gpy+3)>>4 )
     val_a = aux2
-    qtile(gpx+7>>4, gpy+15>>4)
+    qtile( (gpx+7+x_scroll)>>4, (gpy+15)>>4 )
     val_b = aux2
     if val_a = val_b then return aux2
     return 0
@@ -81,9 +81,9 @@ end function
 
 function player_touch_tile_type() as ubyte
 
-    qtile(gpx+7>>4, gpy+3>>4)
+    qtile( (gpx+7+x_scroll)>>4, (gpy+3)>>4 )
     val_a = aux1
-    qtile(gpx+7>>4, gpy+15>>4)
+    qtile( (gpx+7+x_scroll)>>4, (gpy+15)>>4 )
     val_b = aux1
     if val_a = val_b then return aux1
     return 0
