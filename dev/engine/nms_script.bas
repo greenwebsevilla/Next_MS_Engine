@@ -4,7 +4,8 @@
 'Generales'
 #define MODE256 NextReg($70,0)
 #define MODE320 NextReg($70,$10)
-#define CROP_ULA ClipULA(0,255,0,63)
+#define CROP_ULA ClipULA(0,255,0,HUD_HEIGHT*16)
+#define SHOW_DIALOG ClipULA(0,255,0,127)
 #define FULL_ULA ClipULA(0,255,0,191)
 #define HIDE_SPRITES ClipSprite(0,0,0,0)
 #define SHOW_SPRITES ClipSprite(16,143,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
@@ -63,12 +64,11 @@
 #define DELETE_HUD delete_hud(0)
 #define DELETE_TEXT_AREA delete_hud(HUD_HEIGHT*2)
 #define PRINT_HUD print_hud()
-' #define NEW_SPRITE new_sprite
-'  NEW_SPRITE (61, 50, PLAYER_X_IN_TILES, PLAYER_Y_IN_TILES-1, 1) 'Creamos un objeto a la izquierda del jugador: sprite 61, tipo 50
 #define TIMER_ON timer_on = 1
 #define TIMER_OFF timer_on = 0
 #define TIME timer_t
 #define RESTART_TIME timer_t=TIMER_INITIAL
+#define DIALOG load_text
 
 'Enemigos'
 #define ENEMY_TYPE _en_t

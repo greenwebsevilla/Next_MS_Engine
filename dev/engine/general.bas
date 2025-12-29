@@ -306,36 +306,53 @@ end sub
 
 #endif
 
+sub new_page()
+  WaitForNoKey()
+  WaitKey()
+  borra_cadena() 
+  xc = 1 : yc = 2*HUD_HEIGHT + 1
+end sub
+
 sub print_cadena(salto_linea as ubyte)
-    dim caracter as string
-    dim contador_cadena as integer
-    dim xc, yc as ubyte
-    ink 6
-    xc = 0 : yc = 0 : contador_cadena = 0
+    borra_cadena()
+    SHOW_DIALOG
+    ink 7
+    xc = 1 : yc = 2*HUD_HEIGHT + 1 : contador_cadena = 0
     do
-      caracter = cadena1$(contador_cadena)
-      if caracter = "*"
+      caracter = CHR(peek(TXT_BUFFER + contador_cadena))
+      if caracter = "*" OR contador_cadena = 512
         EXIT DO
       end if
-      if caracter = "%"
-        xc = 0
+      if caracter = "%" 
+
+        xc = 1
         yc = yc + salto_linea
-        if yc > 23 then EXIT DO
+        if yc > 8 then new_page()
+
       else
+
+        if xc = 31 then xc = 1 : yc = yc + salto_linea
+        if yc > 8 then new_page()
         PRINT AT yc,xc;caracter$
         xc = xc + 1
+
       end if
-      pausa(2)
+      pausa(1)
       contador_cadena = contador_cadena + 1
     loop
+    WaitKey()
+    CROP_ULA
 end sub
 
 sub borra_cadena() 
-    
-     _y = 0
-    while _y < 8
-        for _x = 0 to 31
-          ' L2Text(_x,_y," ",40,3)
+    INK 7: PAPER 0
+    print at 2*HUD_HEIGHT,0;"<^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>"
+    print at 9,0;"[______________________________]"
+     _y = 2*HUD_HEIGHT + 1
+    while _y < 9
+        PRINT AT _y,0;chr(92)
+        PRINT AT _y,31;chr(64)
+        for _x = 1 to 30
           PRINT AT _y,_x;" "
         next _x
         _y = _y + 1
@@ -517,7 +534,7 @@ function ScrollToLeft() as ubyte
             calculos_vx_scroll()
             process_left_scroll()
             'Scroll en X'
-            do_x_scroll()
+            haz_scroll = 1
             return 1
     else
       return 0
@@ -531,7 +548,7 @@ function ScrollToRight() as ubyte
             calculos_vx_scroll()
             process_right_scroll()
             'Scroll en X'
-            do_x_scroll()
+            haz_scroll = 1
             return 1
     else
       return 0
@@ -554,6 +571,7 @@ sub coloca_scroll()
   wend
   total_vx = 0
   colocando_scroll = 0
+  do_x_scroll()
 end sub
 
 
@@ -685,25 +703,9 @@ sub EnemyBulletsMove()
 
 end sub
 
-
-' sub new_sprite (sprite as ubyte, type as ubyte, x as ubyte, y as ubyte, vida as ubyte = 1, lim_ax as ubyte = 0, lim_ay as ubyte = 0, lim_bx as ubyte = 0,lim_by as ubyte = 0,mx as byte = 0,my as byte = 0)
-
-'         enemies_x(total_enemies) = cast(uinteger,x)<<4
-'         enemies_y(total_enemies) = cast(uinteger,y)<<4
-'         enemies_x1(total_enemies) = cast(uinteger,lim_ax)<<4
-'         enemies_y1(total_enemies) = cast(uinteger,lim_ay)<<4
-'         enemies_x2(total_enemies) = cast(uinteger,lim_ax)<<4
-'         enemies_y2(total_enemies) = cast(uinteger,lim_ay)<<4
-'         enemies_mx(total_enemies) = mx
-'         enemies_my(total_enemies) = my
-'         enem_vy(total_enemies) = 0
-'         enemies_t(total_enemies) = type
-'         en_an_facing(total_enemies) = 0
-'         enemies_spritenum(total_enemies) = sprite
-'         enemies_life(total_enemies) = vida
-'         en_an_state (total_enemies) = 0
-
-'         total_enemies = total_enemies + 1
-
-'         poke ENEMIES_BUFFER,total_enemies 'update the total enemies amount'
-' end sub
+'LOADING TEXTS'
+sub load_text(num_txt as uinteger)
+  fichero = "txt/"+ str(num_txt) +".txt"
+  LoadSD(fichero,TXT_BUFFER,512,0)
+  print_cadena(1)
+end sub

@@ -8,10 +8,7 @@ game_init ()
 
 
 do 'Game loop' 
-    WaitRetrace(1) 'Espera al siguiente frame o interrupcion'
     
-    'Saltar un frame de cada 6 en modo 60HZ para mantener la velocidad original del juego.'
-    if contador_frecuencia60 = 6 AND VarFrec = 60 : WaitRetrace(1): end if
 
 #ifdef DEBUGGING 'can change level pressing Z/X'
 
@@ -116,6 +113,12 @@ do 'Game loop'
 
     #include "../my/custom_code/game_cc/ingame_routines.bas"
     
+
+    WaitRetrace(1) 'Espera al siguiente frame o interrupcion'
+    if haz_scroll then do_x_scroll()
+    haz_scroll = 0
+    'Saltar un frame de cada 6 en modo 60HZ para mantener la velocidad original del juego.'
+    if contador_frecuencia60 = 6 AND VarFrec = 60 : WaitRetrace(1): end if
 
     fin_playing_loop:
 loop until playing = 0

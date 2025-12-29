@@ -165,7 +165,7 @@ dim resto_scrollx as integer
 'Variables scroll'
 dim x_scroll, x_scroll_temp, posicion_x_inicial as integer
 dim x_scroll_6, x_scroll_temp_6 as long
-dim columna_actual, columna_anterior, addx as ubyte
+dim columna_actual, columna_anterior, addx, haz_scroll as ubyte
 dim columna_inicial, colocando_scroll as byte
 dim x_fin_mapa as uinteger
 
@@ -192,9 +192,10 @@ dim timer_zero as ubyte
 
 'DEFINICION DE BUFFERS EN ZONA DE PANTALLA ULA'
 'PALETTE BUFFER
-#define PALETTE_BUFFER 18432 'SOLO SE USARíA PARA CARGAR UNA PALETA CUSTOM, luego se borra'
+#define PALETTE_BUFFER 20480 'SOLO SE USARíA PARA CARGAR UNA PALETA CUSTOM, luego se borra'
+#define TXT_BUFFER 20480 
 'ENEMIES BUFFER
-#define ENEMIES_BUFFER  18432
+#define ENEMIES_BUFFER  21248 'Dejamos 512 (21248-20480) bytes para cargar antes los txt para dialogos en TXT_BUFFER'
 #define ENEMIES_DATA  ENEMIES_BUFFER+1
 'MAP BUFFER
 #define DIMENSIONES_MAPA $C000 'En los bancos 90,91. Paginamos para acceder.
@@ -220,3 +221,7 @@ dim v, VarFrec, contador_frecuencia60 as ubyte
 
 dim behs(128) as ubyte AT $5b00
 
+'Dialogs'
+dim caracter as string
+dim contador_cadena as uinteger
+dim xc, yc as ubyte
