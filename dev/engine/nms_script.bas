@@ -69,6 +69,7 @@
 #define TIME timer_t
 #define RESTART_TIME timer_t=TIMER_INITIAL
 #define DIALOG load_text
+#define LANGUAGE idioma
 
 'Enemigos'
 #define ENEMY_TYPE _en_t
