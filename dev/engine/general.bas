@@ -315,7 +315,7 @@ end sub
 
 sub print_cadena(salto_linea as ubyte)
     borra_cadena()
-    SHOW_DIALOG
+    ' SHOW_DIALOG
     ink 7
     xc = 1 : yc = 2*HUD_HEIGHT + 1 : contador_cadena = 0
     do
@@ -341,7 +341,8 @@ sub print_cadena(salto_linea as ubyte)
       contador_cadena = contador_cadena + 1
     loop
     WaitKey()
-    CROP_ULA
+    ' CROP_ULA
+    DELETE_TEXT_AREA
 end sub
 
 sub borra_cadena() 
@@ -358,6 +359,8 @@ sub borra_cadena()
         _y = _y + 1
     wend
 end sub
+
+
 
 sub WaitForNoKey()
 do

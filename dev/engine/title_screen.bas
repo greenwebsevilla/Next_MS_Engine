@@ -47,4 +47,4 @@ CLS256(0)
 asm 
 
 end asm
-CROP_ULA ' recortamos la ULA a solo la parte superior para el marcador
+SHOW_DIALOG ' recortamos la ULA a solo la parte superior para el marcador y dialogos

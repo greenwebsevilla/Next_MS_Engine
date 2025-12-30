@@ -18,14 +18,17 @@ do 'Game loop'
 #endif
 
     if press_pause
-        print at 2,13;ink 6;"PAUSE"
+        PAPER 0: INK 6
+        print at 7,13;"       "
+        print at 8,13;" PAUSE "
+        print at 9,13;"       "
         WaitForNoKey()
         do
             control_vars()
             if press_pause then EXIT DO
         loop
         WaitForNoKey()
-        print at 2,13;ink 7;"     "
+        DELETE_TEXT_AREA
     end if
 
     if level_completed 

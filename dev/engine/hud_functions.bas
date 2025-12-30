@@ -98,10 +98,11 @@ sub delete_hud(start_y as ubyte)
 
     PAPER 3: BRIGHT 1
 
-    for i=start_y to 7
+    for i=start_y to 9
         for j=0 to 31
             PRINT AT i,j;" "
         next j
     next i'
 
 end sub
+

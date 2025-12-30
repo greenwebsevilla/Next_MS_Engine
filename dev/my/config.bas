@@ -50,7 +50,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 ' TIMER CONFIGURATION
 ' ============================================================================
 #define TIMER_ENABLE					' Enable timer
-#define TIMER_INITIAL 			300		' Initial value.
+#define TIMER_INITIAL 			200		' Initial value.
 #define TIMER_LAPSE				50		' # of frames between decrements
 #define TIMER_START						' If defined, start timer from the beginning
 #define TIMER_AUTO_RESET				' If defined, timer resets after "time up"

@@ -1,8 +1,11 @@
 'Code executed when the timer ends
 
 STOP_MUSIC
-PRINT AT 3,10;INK 7;" TIME'S UP! "
+PAPER 0: INK 6
+print at 7,11;"            "
+print at 8,11;" TIME'S UP! "
+print at 9,11;"            "
 PLAYER_DIE
 PAUSA(50)
-PRINT AT 3,10;PAPER 3;BRIGHT 1;"            "
+DELETE_TEXT_AREA
 
