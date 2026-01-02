@@ -6,6 +6,16 @@ sub reset_enems()
     next enit
 end sub
 
+sub reset_enems_extra_vars()
+    for enit = 0 to MAX_ENEMS-1
+        ENEMY_VAR1 = 0
+        ENEMY_VAR2 = 0
+        ENEMY_VAR3 = 0
+        ENEMY_VAR4 = 0
+        ENEMY_VAR5 = 0
+    next enit
+end sub
+
 sub enemy_start_code()
     #include "../my/custom_code/enemies_cc/enems_start.bas"
 end sub

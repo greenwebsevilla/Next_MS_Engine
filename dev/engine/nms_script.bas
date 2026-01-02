@@ -86,6 +86,7 @@
 #define ENEMY_VAR3 enem_var3(enit)
 #define ENEMY_VAR4 enem_var4(enit)
 #define ENEMY_VAR5 enem_var5(enit)
+#define RESET_ENEMY_VARS reset_enems_extra_vars
 #define ENEMY_SHOOT shoot_enemyBullet
 #define MOVE_ENEMY mover_enemigo()
 #define CHECK_ENEMY_LIMITS comprobar_limites()
