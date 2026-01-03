@@ -29,7 +29,7 @@ sub game_init()
     playing = 1
     p_vx = 0: p_vy = 0
     player_facing = 0
-    PLAYER_EXTRA_TOP_BB = 0 'por defecto por se amplía la caja de colisión por arriba'
+    PLAYER_EXTRA_TOP_BB = 0 'por defecto no se amplía la caja de colisión por arriba'
     player_status = 0 : p_ct_estado = 0
     num_objects = 0 : player_damaged = 0
     level_floor = 0 : changing_floor = 0
