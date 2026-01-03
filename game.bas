@@ -45,8 +45,15 @@ do ' main loop
 loop 'main loop
 
 end
-   
+
+#ifdef FULL_CHARSET
+font_buffer: 
+asm
+  defs 768
+end asm  
+#else
 font_buffer: 
 asm
   defs 512
 end asm  
+#endif

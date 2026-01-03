@@ -203,7 +203,11 @@ dim timer_zero as ubyte
 
 'Load the Charset (font)
 fichero = "bin/font.bin"
-LoadSD(fichero,@font_buffer+8,504,8)
+#ifdef FULL_CHARSET
+LoadSD(fichero,@font_buffer,768,0)
+#else
+LoadSD(fichero,@font_buffer,512,0)
+#endif
 direccion = @font_buffer
 poke uInteger 23606, direccion - 256
 

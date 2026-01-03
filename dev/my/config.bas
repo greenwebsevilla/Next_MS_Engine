@@ -60,7 +60,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 ' ============================================================================
 #define EXTRA_LIFE_SCORE    3000    'Win extra life each N points'
 #define SPIKES_KILL_VERTICAL_ONLY   ' If defined, tile type 1 only damages if touched on top or bottom, horizontally is a solid block
-
+' #define FULL_CHARSET                ' If defined, font will use also lowercase letters. If you don't need it, disable it and will save some bytes.
 ' ============================================================================
 ' PLAYER CONFIGURATION
 ' ============================================================================

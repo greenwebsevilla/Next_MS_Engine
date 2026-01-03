@@ -1,1 +1,0 @@
-..\utils\png2fontbin.exe font.png ..\data\bin\font.bin
