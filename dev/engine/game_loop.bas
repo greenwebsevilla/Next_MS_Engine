@@ -111,13 +111,13 @@ do 'Game loop'
     'Funciones player'
     PlayerMove() 
     PlayerAnimation()
-    UpdatePlayer()
+   
     check_death() 'Comprueba si ha terminado la animación de morir'
 
     #include "../my/custom_code/game_cc/ingame_routines.bas"
     
-
-    WaitRetrace(1) 'Espera al siguiente frame o interrupcion'
+WaitRetrace(1) 'Espera al siguiente frame o interrupcion'
+     UpdatePlayer()
     if haz_scroll then do_x_scroll()
     haz_scroll = 0
     'Saltar un frame de cada 6 en modo 60HZ para mantener la velocidad original del juego.'

@@ -229,3 +229,7 @@ dim behs(128) as ubyte AT $5b00
 dim caracter as string
 dim contador_cadena as uinteger
 dim xc, yc as ubyte
+
+'Autoscroll'
+dim autoscroll_vel as integer
+dim autoscroll_on as ubyte

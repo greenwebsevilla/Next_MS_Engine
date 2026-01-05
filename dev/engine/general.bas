@@ -523,12 +523,22 @@ sub do_x_scroll()
 end sub
 
 sub calculos_vx_scroll()
-
+#ifdef ENABLE_AUTOSCROLL
+  if NOT autoscroll_on
+    x_scroll_6 = x_scroll_6 + cast(long, total_vx)
+    x_scroll_temp_6 = x_scroll_temp_6 + cast(long, total_vx)
+  else
+    x_scroll_6 = x_scroll_6 + cast(long, autoscroll_vel)
+    x_scroll_temp_6 = x_scroll_temp_6 + cast(long, autoscroll_vel)
+  end if
+  x_scroll = cast(integer, (x_scroll_6 >> 6))
+  x_scroll_temp = cast(integer, (x_scroll_temp_6 >> 6))
+#else
   x_scroll_6 = x_scroll_6 + cast(long, total_vx)
   x_scroll = cast(integer, (x_scroll_6 >> 6))
   x_scroll_temp_6 = x_scroll_temp_6 + cast(long, total_vx)
   x_scroll_temp = cast(integer, (x_scroll_temp_6 >> 6))
-
+#endif
 end sub
 
 function ScrollToLeft() as ubyte
@@ -540,6 +550,9 @@ function ScrollToLeft() as ubyte
             haz_scroll = 1
             return 1
     else
+#ifdef ENABLE_AUTOSCROLL
+      autoscroll_vel = 0
+#endif
       return 0
     end if
 
@@ -554,6 +567,9 @@ function ScrollToRight() as ubyte
             haz_scroll = 1
             return 1
     else
+#ifdef ENABLE_AUTOSCROLL
+      autoscroll_vel = 0
+#endif
       return 0
     end if
 

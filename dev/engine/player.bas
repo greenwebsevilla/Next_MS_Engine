@@ -336,7 +336,7 @@ sub PlayerMove()
     end if
 	gpy = p_y >> 6
 
-  
+
     
 
     ' CONTROL HORIZONTAL
@@ -380,9 +380,14 @@ sub PlayerMove()
 
     total_vx = p_vx + plataforma_vx
 
+
+
 #ifdef ENABLE_LADDERS
     end if ' END IF 'NOT PLAYER_ON_LADDER' PARA MOV HORIZONTAL
 #endif
+
+
+
 
     ' Colisiones horizontales'
     if player_status < DYING_ST
@@ -424,13 +429,24 @@ sub PlayerMove()
                     end if
                 end if
 #endif
-                p_x = p_x + total_vx
 
+
+
+#ifdef ENABLE_AUTOSCROLL
+                if NOT autoscroll_on
+                    if p_x > CAM_RIGHT_LIMIT*64 
+                        if ScrollToRight()
+                        p_x = CAM_RIGHT_LIMIT*64 
+                        end if
+                    end if
+                end if
+#else
                 if p_x > CAM_RIGHT_LIMIT*64 
                     if ScrollToRight()
                     p_x = CAM_RIGHT_LIMIT*64 
                     end if
                 end if
+#endif
                 
         end if
 
@@ -469,15 +485,22 @@ sub PlayerMove()
                 end if
 #endif
 
-
-                p_x = p_x + total_vx
-        
+                
+#ifdef ENABLE_AUTOSCROLL   
+                if NOT autoscroll_on     
+                    if p_x < CAM_LEFT_LIMIT*64 
+                        if ScrollToLeft()
+                            p_x = CAM_LEFT_LIMIT*64
+                        end if
+                    end if
+                end if
+#else
                 if p_x < CAM_LEFT_LIMIT*64 
                     if ScrollToLeft()
                         p_x = CAM_LEFT_LIMIT*64
                     end if
                 end if
-
+#endif
         end if 
 
 
@@ -485,14 +508,35 @@ sub PlayerMove()
     end if ' END IF 'NOT PLAYER_ON_LADDER' PARA MOV HORIZONTAL
 #endif
 
+#ifdef ENABLE_AUTOSCROLL
+    if autoscroll_on
+        total_vx = total_vx - autoscroll_vel
+    end if
+#endif
+        p_x = p_x + total_vx
+
+ 
+'AUTOSCROLL (WIP)'
+#ifdef ENABLE_AUTOSCROLL
+    if autoscroll_on
+        if autoscroll_vel < 0 
+            ScrollToLeft()
+        else
+            ScrollToRight()                    
+        end if
+    end if
+#endif
+
+'PINCHOS Y TILES QUE MATAN'
         if spike_touched
             player_damaged = 1
             PlaySFX(SOUND_PLAYER_DAMAGED)
             spike_touched = 0
         end if
-
+        
+' // Flickering
         #ifdef PLAYER_FLICKERS
-            ' // Flickering
+
             if player_status = FLICKERING_ST
                     p_ct_estado = p_ct_estado - 1
                     if p_ct_estado = 0
