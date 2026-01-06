@@ -594,8 +594,8 @@ sub PlayerMove()
 
     if p_x < 2048 then p_x = 2048 'límite izquierdo pantalla'
 
-    if p_x > 17728 'límite derecho pantalla'
-        p_x = 17728 
+    if p_x > 17408 'límite derecho pantalla'
+        p_x = 17408 
     end if
 
     gpx = p_x >> 6  
