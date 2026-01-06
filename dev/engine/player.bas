@@ -581,7 +581,9 @@ sub PlayerMove()
                 player_status = DYING_ST
                 player_counter = 100
                 lives = lives - 1
+#ifdef SHOW_LIVES
                 print_number_of_lives()
+#endif 
             end if
         
         end if
