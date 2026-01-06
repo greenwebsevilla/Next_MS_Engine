@@ -309,7 +309,7 @@ sub PlayerMove()
 
 	p_y = p_y + p_vy
 
-    if p_y < -1024 
+    if p_y < LIMITE_ARRIBA 
         if first_row        'CAMBIANDO DE PLANO DE ALTURA HACIA ARRIBA'
             changing_floor = 1
             level_floor = level_floor - 1
@@ -318,7 +318,7 @@ sub PlayerMove()
             player_y_ini = SCREENS_H-1
 
         else
-            p_y = -1024
+            p_y = LIMITE_ARRIBA
         end if
     end if
     
