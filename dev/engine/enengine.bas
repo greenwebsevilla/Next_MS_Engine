@@ -122,6 +122,7 @@ end function
 'MOVER ENEMIGOS'
 
 sub EnemiesMove()
+    if total_enemies = 0 then return
     enviit = 0
     on_ground = 0
 
