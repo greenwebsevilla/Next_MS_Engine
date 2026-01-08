@@ -65,7 +65,9 @@ do 'Game loop'
         end if
         
         ' EnableSFX
+#ifdef TILANIMS
         reset_tilanims ()
+#endif
         draw_scr() 'Draws the screen'
         coloca_scroll()
         player_locate()
