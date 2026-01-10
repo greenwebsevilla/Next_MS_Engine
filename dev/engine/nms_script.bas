@@ -74,6 +74,8 @@
 'Enemigos'
 #define ENEMY_TYPE _en_t
 #define ENEMY_STATUS enem_status
+#define ENEMY_X _en_x
+#define ENEMY_Y _en_y
 #define ENEMY_VX _en_mx
 #define ENEMY_VY _en_my
 #define NO_KILL no_kill=1
