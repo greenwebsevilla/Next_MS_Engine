@@ -385,7 +385,7 @@ function mons_col_sc_x() as ubyte
     end if
 
     return 0
-end sub
+end function
 
 function mons_col_sc_y()
    
@@ -402,7 +402,7 @@ function mons_col_sc_y()
         return 1
     end if
     return 0
-end sub
+end function
 
 
 '////// FUNCIONES ENEMIGOS //////'
