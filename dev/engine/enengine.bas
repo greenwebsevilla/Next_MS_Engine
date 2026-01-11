@@ -114,7 +114,7 @@ function pisa_suelo_enem() as ubyte
     cx1 = _en_x : cx2 = cx1+15
     cy1 = _en_y + 16 : cy2 = cy1
     check_n_points(2)
-    if ct1 = 8 OR ct2 = 8 then return 1
+    if ct1 bAND 12 OR ct2 bAND 12 then return 1
     return 0
 end function
 
