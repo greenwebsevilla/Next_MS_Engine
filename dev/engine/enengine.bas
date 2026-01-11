@@ -387,7 +387,7 @@ function mons_col_sc_x() as ubyte
     return 0
 end function
 
-function mons_col_sc_y()
+function mons_col_sc_y() as ubyte
    
     if _en_my > 0 then
         cy1 = _en_y + 15 
