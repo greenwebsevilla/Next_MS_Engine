@@ -479,10 +479,13 @@ sub comprobar_limites()
 
     end if
 
-    ' limitex_ok:
+
     if _en_vy = 0
-        if _en_y = _en_y1 OR _en_y = _en_y2
-            _en_my = -_en_my
+        if _en_y <= _en_y1 then 
+            _en_my = enemies_my_ini(enit)
+    
+        else if _en_y >= _en_y2
+            _en_my = -enemies_my_ini(enit)
         end if
     end if
 
