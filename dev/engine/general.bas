@@ -181,11 +181,10 @@ function collide () as ubyte
 	#else
 		if (gpx + 13 >= cx2 AND gpx <= cx2 + 13 AND gpy + 13 >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB  <= cy2 + 13)
 	#endif
-      colision_ok = 1
+      return 1
     else 
-      colision_ok = 0
+      return 0
   end if
-      return colision_ok
 
 end function
 
@@ -198,11 +197,10 @@ function point_collide () as ubyte
 	#else
 		if (cx2 > gpx  AND cx2 < gpx+15 AND cy2 > gpy- PLAYER_EXTRA_TOP_BB AND cy2 < gpy+15)
 	#endif
-      colision_ok = 1
+      return 1
     else 
-      colision_ok = 0
+      return 0
   end if
-      return colision_ok
 
 end function
 

@@ -116,7 +116,7 @@ dim _en_t, _en_facing, _en_sprnum as ubyte
 dim _en_life as byte
 dim _en_vy as integer
 dim enem_status as ubyte
-dim colision_ok as ubyte
+
 
 'Disparos enemigos (enemyBullets)'
 dim x_enemyBullet (3)  as integer

@@ -363,8 +363,8 @@ end sub
 
 'COLISIONES ENEMIGOS CON PAREDES'
 
-sub mons_col_sc_x()
-    colision_ok = 0
+function mons_col_sc_x() as ubyte
+
     if _en_mx > 0 then
         cx1 = _en_x + 15 
     else
@@ -376,17 +376,19 @@ sub mons_col_sc_x()
     check_n_points(2)
     if _en_t <>  5
         if ct1 = 8 OR ct2 = 8
-            colision_ok = 1
+            return 1
         end if
     else
         if ct1 bAND 9 OR ct2 bAND 9
-            colision_ok = 1
+            return 1
         end if
     end if
+
+    return 0
 end sub
 
-sub mons_col_sc_y()
-    colision_ok = 0
+function mons_col_sc_y()
+   
     if _en_my > 0 then
         cy1 = _en_y + 15 
     else
@@ -397,8 +399,9 @@ sub mons_col_sc_y()
     cx2 = _en_x + 15
     check_n_points(2)
     if ct1 = 8 OR ct2 = 8
-        colision_ok = 1
+        return 1
     end if
+    return 0
 end sub
 
 
@@ -495,8 +498,8 @@ end sub
 sub colision_enem_tiles()
 
 #ifdef WALLS_STOP_ENEMIES
-        mons_col_sc_x()
-        if colision_ok  = 1
+        
+        if mons_col_sc_x()
             _en_mx = -_en_mx
             _en_x = _en_x + 7
             _en_x = _en_x bAND 0xfff0
@@ -504,8 +507,8 @@ sub colision_enem_tiles()
 #endif
 
 #ifdef WALLS_STOP_ENEMIES
-        mons_col_sc_y()
-        if colision_ok = 1
+        
+        if mons_col_sc_y()
             _en_my = -_en_my
         end if
 #endif
