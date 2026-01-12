@@ -335,7 +335,7 @@ sub print_cadena(salto_linea as ubyte)
         xc = xc + 1
 
       end if
-      pausa(1)
+      pause 1
       contador_cadena = contador_cadena + 1
     loop
     WaitKey()
