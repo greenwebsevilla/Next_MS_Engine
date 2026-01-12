@@ -16,7 +16,7 @@ if player_status < DYING_ST
         if enem_status < ENEM_DAMAGED 'afecta solo a estados diferentes a dañado o muriendo
 
         'DISPAROS'
-#ifdef OBJECT_TYPE
+#ifdef ENABLE_OBJECTS
         if _en_t <> OBJECT_TYPE
 #endif
 
@@ -48,14 +48,14 @@ if player_status < DYING_ST
             end if
 #endif
 
-#ifdef OBJECT_TYPE    
+#ifdef ENABLE_OBJECTS    
         end if
 #endif
             if enit bAND 1 = half_life 'Process only half enemies each cycle'
             if player_status < FLICKERING_ST
                 if enem_status < ENEM_DYING
                     if collide() = 1
-#ifdef OBJECT_TYPE
+#ifdef ENABLE_OBJECTS
                         'CODE FOR COLLECTIBLES OBJECTS'
                         IF ENEMY_TYPE = OBJECT_TYPE
                             SOUND(OBJECTS_GET_SOUND)
