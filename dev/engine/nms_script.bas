@@ -70,6 +70,10 @@
 #define RESTART_TIME timer_t=TIMER_INITIAL
 #define DIALOG load_text
 #define LANGUAGE idioma
+#define PUT_SPRITE put_sprite
+#define H_FLIP 8
+#define V_FLIP 4
+
 
 'Enemigos'
 #define ENEMY_TYPE _en_t

@@ -144,3 +144,22 @@ sub reset_tilanims ()
 end sub
 #endif
 
+
+
+'PINTAR SPRITES CUSTOM'
+
+sub put_sprite (bank_num as ubyte, spr_id as ubyte, image_num as ubyte, x_sprite as integer, y_sprite as ubyte, sp_facing as ubyte)
+
+	spnum = image_num
+
+	'LOAD IMAGE IN SPRITE RAM'
+    NextRegA($50,bank_num)
+    NextRegA($51,bank_num+1) 
+	direccion = $0000+(cast(uInteger,spnum)<<8)
+    Test_SetSprites(1, direccion, 63-spr_id)
+	asm : nextreg $50,$ff : nextreg $51,$ff : end asm
+
+	'SHOW SPRITE'
+	UpdateSprite(x_sprite, y_sprite, 127-spr_id, 63-spr_id, sp_facing, 0)
+
+end sub
