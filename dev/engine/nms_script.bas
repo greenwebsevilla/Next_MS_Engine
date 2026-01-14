@@ -109,6 +109,9 @@
 #define OBJECTS_NUMBER num_objects
 #define SCORE score
 #define FIRST_TILANIM tilanims_first
+#define SCROLL_X x_scroll
+
+
 
 
 
