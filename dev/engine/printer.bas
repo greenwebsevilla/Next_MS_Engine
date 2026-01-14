@@ -163,3 +163,7 @@ sub put_sprite (bank_num as ubyte, spr_id as ubyte, image_num as ubyte, x_sprite
 	UpdateSprite(x_sprite, y_sprite, 127-spr_id, 63-spr_id, sp_facing, 0)
 
 end sub
+
+sub delete_sprite (spr_id as ubyte)
+	RemoveSprite(127-spr_id,0)
+end sub

@@ -73,6 +73,7 @@
 #define PUT_SPRITE put_sprite
 #define H_FLIP 8
 #define V_FLIP 4
+#define DELETE_SPRITE delete_sprite
 
 
 'Enemigos'
