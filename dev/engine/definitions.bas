@@ -234,6 +234,20 @@ dim caracter as string
 dim contador_cadena as uinteger
 dim xc, yc as ubyte
 
+#ifndef TEXT_INK
+    #define TEXT_INK 7
+#endif
+#ifndef TEXT_BRIGHT
+    #define TEXT_BRIGHT 1
+#endif
+#ifndef FRAME_INK
+    #define FRAME_INK 7
+#endif
+#ifndef FRAME_BRIGHT
+    #define FRAME_BRIGHT 1
+#endif
+
+
 'Autoscroll'
 dim autoscroll_vel as integer
 dim autoscroll_on as ubyte

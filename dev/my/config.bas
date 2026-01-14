@@ -209,3 +209,12 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define KEY_TO_JUMP     PRESS_FIRE2
 #define KEY_TO_PAUSE    PRESS_PAUSE
 
+' ============================================================================
+' TEXTS & DIALOG CONFIGURATION
+' ============================================================================
+#define TEXT_INK 7
+#define TEXT_BRIGHT 1
+#define TEXT_PAPER 0
+#define FRAME_INK 7
+#define FRAME_BRIGHT 1
+#define FRAME_PAPER 0

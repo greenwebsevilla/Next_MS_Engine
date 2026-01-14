@@ -314,7 +314,7 @@ end sub
 sub print_cadena(salto_linea as ubyte)
     borra_cadena()
     ' SHOW_DIALOG
-    ink 7
+    
     xc = 1 : yc = 2*HUD_HEIGHT + 1 : contador_cadena = 0
     do
       caracter = CHR(peek(TXT_BUFFER + contador_cadena))
@@ -331,7 +331,7 @@ sub print_cadena(salto_linea as ubyte)
 
         if xc = 31 then xc = 1 : yc = yc + salto_linea
         if yc > 8 then new_page()
-        PRINT AT yc,xc;caracter$
+        PRINT AT yc,xc;PAPER TEXT_PAPER;INK TEXT_INK;BRIGHT TEXT_BRIGHT;caracter$
         xc = xc + 1
 
       end if
@@ -344,7 +344,7 @@ sub print_cadena(salto_linea as ubyte)
 end sub
 
 sub borra_cadena() 
-    INK 7: PAPER 0
+    INK FRAME_INK: PAPER FRAME_PAPER: bright FRAME_BRIGHT
     print at 2*HUD_HEIGHT,0;"<^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^>"
     print at 9,0;"[______________________________]"
      _y = 2*HUD_HEIGHT + 1
