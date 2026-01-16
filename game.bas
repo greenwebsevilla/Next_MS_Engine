@@ -9,6 +9,7 @@
 #include "dev/engine/control_keys_def.bas"
 #include "dev/my/config.bas"
 #include "dev/engine/definitions.bas"
+#include "dev/my/custom_code/extra_functions.bas"
 
 #define IM2
 #include <nextlib.bas>
@@ -22,7 +23,6 @@
 #include "dev/engine/general.bas"
 #include "dev/engine/player.bas"
 #include "dev/engine/enengine.bas"
-#include "dev/my/custom_code/extra_functions.bas"
 #include "dev/engine/hud_functions.bas"
 
 ShowLayer2(0) 
