@@ -434,6 +434,8 @@ sub PlayerMove()
 
 #ifdef ENABLE_AUTOSCROLL
                 if NOT autoscroll_on
+                    p_x = p_x + total_vx
+
                     if p_x > CAM_RIGHT_LIMIT*64 
                         if ScrollToRight()
                         p_x = CAM_RIGHT_LIMIT*64 
@@ -441,6 +443,8 @@ sub PlayerMove()
                     end if
                 end if
 #else
+                p_x = p_x + total_vx
+                
                 if p_x > CAM_RIGHT_LIMIT*64 
                     if ScrollToRight()
                     p_x = CAM_RIGHT_LIMIT*64 
@@ -487,7 +491,8 @@ sub PlayerMove()
 
                 
 #ifdef ENABLE_AUTOSCROLL   
-                if NOT autoscroll_on     
+                if NOT autoscroll_on   
+                    p_x = p_x + total_vx  
                     if p_x < CAM_LEFT_LIMIT*64 
                         if ScrollToLeft()
                             p_x = CAM_LEFT_LIMIT*64
@@ -495,6 +500,8 @@ sub PlayerMove()
                     end if
                 end if
 #else
+                p_x = p_x + total_vx
+
                 if p_x < CAM_LEFT_LIMIT*64 
                     if ScrollToLeft()
                         p_x = CAM_LEFT_LIMIT*64
@@ -511,10 +518,9 @@ sub PlayerMove()
 #ifdef ENABLE_AUTOSCROLL
     if autoscroll_on
         total_vx = total_vx - autoscroll_vel
+        p_x = p_x + total_vx
     end if
 #endif
-        p_x = p_x + total_vx
-
  
 'AUTOSCROLL (WIP)'
 #ifdef ENABLE_AUTOSCROLL
