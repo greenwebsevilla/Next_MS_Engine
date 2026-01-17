@@ -25,6 +25,7 @@ sub game_init()
     level_number = FIRST_LEVEL 
     current_level = 255
     player_energy = INIT_ENERGY
+    player_max_energy = INIT_ENERGY
     lives = INIT_LIVES
     playing = 1
     p_vx = 0: p_vy = 0
@@ -715,7 +716,7 @@ sub check_death()
             ' DisableMusic
             old_track = 255 'Reinicio la musica '
             current_level = 255 'Reinicio del nivel
-            player_energy = INIT_ENERGY
+            player_energy = player_max_energy
           
         else
             playing = 0

@@ -251,3 +251,7 @@ dim xc, yc as ubyte
 'Autoscroll'
 dim autoscroll_vel as integer
 dim autoscroll_on as ubyte
+
+
+'Max energy
+dim player_max_energy as ubyte

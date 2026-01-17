@@ -71,7 +71,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define FLICKERING_TIME     100             ' number of frames flickering
 
 ' Player data
-#define INIT_ENERGY 				4		' Max and starting energy gauge (put 1 for touched = death)
+#define INIT_ENERGY 				4		' Starting energy gauge (put 1 for touched = death)
 #define INIT_LIVES				    3		' Max and starting lives gauge. (put 1 for just one life and use energy instead)
 
 ' Fire

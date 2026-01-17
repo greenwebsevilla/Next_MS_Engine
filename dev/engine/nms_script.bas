@@ -29,12 +29,13 @@
 #define PLAYER_X_IN_TILES get_player_xtiles()
 #define PLAYER_Y_IN_TILES get_player_ytiles()
 #define PLAYER_ENERGY player_energy
+#define PLAYER_MAX_ENERGY player_max_energy
 #define PLAYER_LIVES lives
 #define PLAYER_IN_ZONE player_in_zone
 #define PLAYER_TOUCH_TILE_NUM player_touch_tile_num()
 #define PLAYER_TOUCH_TILE_TYPE player_touch_tile_type()
 #define SCORE_ADD add_points
-#define REFILL_ENERGY player_energy=INIT_ENERGY
+#define REFILL_ENERGY player_energy=player_max_energy
 #define PLAYER_DIE player_energy=1:player_damaged = 1
 #define SET_PLAYER_ANIMATION set_player_animation
 #define PLAYER_STATUS player_status
