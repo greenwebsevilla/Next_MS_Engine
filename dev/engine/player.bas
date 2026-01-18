@@ -375,9 +375,10 @@ sub PlayerMove()
 
         end if
 
-   
 
-    ' if disparando AND player_jumping = 0 then p_vx = 0
+#ifdef STOP_WHEN_FIRE
+    if disparando AND player_jumping = 0 then p_vx = 0
+#endif
 
     total_vx = p_vx + plataforma_vx
 
