@@ -274,12 +274,15 @@ sub animate_enemy()
 
                 _en_mx = 0
                 
-                #ifdef ENEMY_DEATH_BOUNCE   
-                        aplicar_gravedad_enem()
-                        mover_enemigo()
-                #endif
+#ifdef ENEMY_DEATH_BOUNCE   
+                aplicar_gravedad_enem()
+                mover_enemigo()
+#else
+                enem_counter (enit) =  enem_counter (enit) -1
+                if enem_counter (enit) = 0 then _en_y = 1+SCREENS_H*16
+#endif                  
 
-                if _en_y > 160  'SALE POR ABAJO DE LA PANTALLA'
+                if _en_y > SCREENS_H*16  'SALE POR ABAJO DE LA PANTALLA'
 
                     'Resetear enemigo en posicion y velocidad'
                     _en_x = enemies_x1(enit)
@@ -290,7 +293,7 @@ sub animate_enemy()
                     enem_status = ENEM_DEAD 'Estado Muerto del todo'
 
                 end if 
-                            
+         
             end if
 
         end if
@@ -308,6 +311,8 @@ sub animate_enemy()
                     enem_status = ENEM_DYING
 #ifdef ENEMY_DEATH_BOUNCE                    
                     _en_vy = -ENEMY_DEATH_BOUNCE
+#else
+                    enem_counter (enit) = ENEMY_DYING_TIME
 #endif
                     #include "../my/custom_code/enemies_cc/enems_die.bas"
                     en_an_subframe(enit) = 0

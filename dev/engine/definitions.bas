@@ -255,3 +255,8 @@ dim autoscroll_on as ubyte
 
 'Max energy
 dim player_max_energy as ubyte
+
+'Enemy dying time
+#ifndef ENEMY_DYING_TIME
+    #define ENEMY_DYING_TIME 32
+#endif

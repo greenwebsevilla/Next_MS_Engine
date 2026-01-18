@@ -124,6 +124,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 
 #define RESPAWN_ENEMIES         ' If defined, enemies will respawn in the the place they died, when it is out of the visible area.'
 #define ENEMY_DEATH_BOUNCE  24  ' If defined, when enemies die, they bounce, and the number is the vertical speed (VY) of the bounce (default is 24)'
+#define ENEMY_DYING_TIME    32  'Number of frames the dying status lasts.'
 #define WALLS_STOP_ENEMIES      ' If defined, enemies change direction when colliding with a solid tile.
 
 #define ENABLE_PLATFORMS        ' IF defined, enemy type 49 will be a mobile platform
