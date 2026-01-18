@@ -72,7 +72,7 @@ do 'Game loop'
         coloca_scroll()
         player_locate()
 
-        ClipLayer2(17,144,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16)
+        ClipLayer2(17,143,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16-1)
         ShowLayer2(1)
         
     end if
