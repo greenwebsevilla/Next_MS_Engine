@@ -177,7 +177,7 @@ end sub
 function collide () as ubyte
 
 	#ifdef SMALL_COLLISION_ENEM
-		if (gpx + 8 >= cx2 AND gpx <= cx2 + 8 AND gpy + 8 >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB <= cy2 + 8)
+    if (gpx + 10 >= cx2 AND gpx <= cx2 + 10 AND gpy + 10 >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB <= cy2 + 10)
 	#else
 		if (gpx + 13 >= cx2 AND gpx <= cx2 + 13 AND gpy + 13 >= cy2 - ENEMY_EXTRA_TOP_BB AND gpy - PLAYER_EXTRA_TOP_BB  <= cy2 + 13)
 	#endif
