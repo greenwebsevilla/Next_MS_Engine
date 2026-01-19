@@ -79,6 +79,7 @@ pantalla de inicio, vidas, que enemigos activar, posicionar elementos del hud, e
 #define BULLET_SPRITE				63		' # of sprite for the bullets in spriteset
 #define MAX_BULLETS				    3		' # of sprite for the bullets in spriteset
 ' #define STOP_WHEN_FIRE			10	    ' If defined, indicates # of frames the player is stopped when shoots
+#define RATE_OF_FIRE			    4	    ' minimum number of frames between two shots
 
 ' Vertical movement.
 #define PLAYER_GRAVITY				16		' If defined, apply gravity acceleration (value increases fall every frame until reach PLAYER_MAX_VY_FALLING) 

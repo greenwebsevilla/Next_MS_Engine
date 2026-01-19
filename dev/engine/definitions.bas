@@ -261,6 +261,6 @@ dim player_max_energy as ubyte
     #define ENEMY_DYING_TIME 32
 #endif
 
-#ifndef STOP_WHEN_FIRE
-    #define STOP_WHEN_FIRE 4
+#ifndef RATE_OF_FIRE
+    #define RATE_OF_FIRE 4
 #endif
