@@ -52,6 +52,7 @@ if player_status < DYING_ST
         end if
 #endif
             if enit bAND 1 = half_life 'Process only half enemies each cycle'
+#include "../my/custom_code/enemies_cc/enems_killable.bas"
             if player_status < FLICKERING_ST
                 if enem_status < ENEM_DYING
                     if collide() = 1
