@@ -612,7 +612,7 @@ sub PlayerMove()
     if KEY_TO_FIRE
         if disparando = 0 AND disparado = 0
 
-            disparando = 4 
+            disparando = STOP_WHEN_FIRE 
             disparado = 1
         
             shoot()
