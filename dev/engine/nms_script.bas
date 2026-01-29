@@ -5,13 +5,12 @@
 #define MODE256 NextReg($70,0)
 #define MODE320 NextReg($70,$10)
 #define CROP_ULA ClipULA(0,255,0,HUD_HEIGHT*16)
-#define SHOW_DIALOG ClipULA(0,255,0,127)
+#define SHOW_DIALOG ClipULA(0,255,0,79)
 #define FULL_ULA ClipULA(0,255,0,191)
 #define HIDE_SPRITES ClipSprite(0,0,0,0)
 #define SHOW_SPRITES ClipSprite(17,143,SCREEN_Y_OFFSET*16,SCREEN_Y_OFFSET*16+SCREENS_H*16-1)
 #define HALF_LIFE half_life
 #define QUARTER_LIFE half_life2
-
 
 
 'Niveles'

@@ -162,7 +162,8 @@ end sub
 sub stage_clear ()
 
 #include "../my/custom_code/game_cc/stage_clear.bas"
-	
+CROP_ULA 'Back to normal ULA status (show only hud)'
+
 end sub
  
 'Removes all sprites'
@@ -356,6 +357,7 @@ sub borra_cadena()
         next _x
         _y = _y + 1
     wend
+    SHOW_DIALOG
 end sub
 
 
