@@ -3,6 +3,7 @@
 sub reset_enems()
     for enit = 0 to MAX_ENEMS-1
         enemies_t (enit) = 0
+        en_an_facing (enit) = 0
     next enit
 end sub
 
@@ -259,6 +260,7 @@ sub animate_enemy()
         'Plataformas'
         if _en_t = PLATFORM_TYPE 
             spnum = _en_sprnum 'Ponemos el sprite fijo que hayamos elegido' 
+            return
         else
             en_an_subframe(enit) =  en_an_subframe(enit) +1
             
