@@ -404,12 +404,12 @@ sub PlayerMove()
        
                 cx1 = ptx2+1 : cy1 = pty1 
                 cx2 = ptx2+1 : cy2 = pty2-1 
-                if (cy1 >= 0)
+              
                     check_n_points(2)
 #ifdef SPIKES_KILL_VERTICAL_ONLY
-                    if ct1 bAND 9 OR ct2 bAND 9
+                     if (ct1 bAND 9 AND cy1 >= 0) OR ct2 bAND 9
 #else
-                    if ct1 = 8 OR ct2 = 8
+                    if (ct1 = 8 AND cy1 >= 0) OR ct2 = 8
 #endif
                         stop_hz_speed() 
                     end if
@@ -420,7 +420,7 @@ sub PlayerMove()
                         end if
                     end if
 #endif
-                end if
+               
 #ifdef PLAYER_SPRITE_16X32 
                 cx1 = ptx2+1
                 cy1 = pty1 - PLAYER_EXTRA_TOP_BB
@@ -461,12 +461,12 @@ sub PlayerMove()
         
                 cx1 = ptx1-1 : cy1 = pty1 
                 cx2 = ptx1-1 : cy2 = pty2-1 
-                if (cy1 > 0)
+                
                     check_n_points(2)
 #ifdef SPIKES_KILL_VERTICAL_ONLY
-                    if ct1 bAND 9 OR ct2 bAND 9
+                    if (ct1 bAND 9 AND cy1 >= 0) OR ct2 bAND 9
 #else
-                    if ct1 = 8 OR ct2 = 8
+                    if (ct1 = 8 AND cy1 >= 0) OR ct2 = 8
 #endif
                         stop_hz_speed()
                     end if
@@ -479,7 +479,7 @@ sub PlayerMove()
                     end if
                
 #endif
-                end if
+                
 #ifdef PLAYER_SPRITE_16X32 
                 cx1 = ptx1-1
                 cy1 = pty1 - PLAYER_EXTRA_TOP_BB
