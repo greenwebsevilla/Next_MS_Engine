@@ -117,7 +117,7 @@ dim _en_life as byte
 dim _en_vy as integer
 dim enem_status as ubyte
 
-
+#ifdef ENEMY_BULLETS
 'Disparos enemigos (enemyBullets)'
 dim x_enemyBullet (3)  as integer
 dim y_enemyBullet (3)  as integer
@@ -128,6 +128,7 @@ dim estado_enemyBullet (3)  as ubyte
 'enemyBullets animation secuences'
 dim sprite_enemyBullet(1) as ubyte => {ENEM_BULLET_ANIM} '2 frames'
 dim frame_enemyBullet as ubyte
+#endif
 
 'Arrays animaciones enemigos'
 dim enem_animation (MAX_ENEMS, MAX_FRAMES_ENEMIES) as ubyte 'array para guardar la animacion de cada enemigo

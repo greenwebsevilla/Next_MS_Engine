@@ -666,6 +666,7 @@ sub shoot_enemyBullet(vx as byte, vy as byte)
     next i
 end sub
 
+#ifdef ENEMY_BULLETS
 sub EnemyBulletsMove() 
 
     for i = 0 to MAX_ENEMY_BULLETS-1
@@ -721,6 +722,7 @@ sub EnemyBulletsMove()
     if frame_enemyBullet > 1 then frame_enemyBullet = 0
 
 end sub
+#endif
 
 'LOADING TEXTS'
 sub load_text(num_txt as uinteger)
