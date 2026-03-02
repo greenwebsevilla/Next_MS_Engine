@@ -30,9 +30,7 @@ reset_enems() 'Resets all enemies, put all to type 0'
 total_enemies = peek(ENEMIES_BUFFER) 'Leemos el numero de sprites del mapa actual'
 if total_enemies then enems_load () 'copy enemies data to variables if needed'
 
-#ifdef ENEMY_BULLETS
 reset_bullets() 'Resets all proyectils'
-#endif
 
 
 

@@ -641,14 +641,20 @@ end sub
 
 
 sub reset_bullets() 'reset all bullets, player`s and enemies'
+#ifdef PLAYER_CAN_FIRE
     for i = 0 to MAX_BULLETS-1
         estado_bala(i) = 0
     next i
+#endif
+#ifdef ENEMY_BULLETS
     for i = 0 to MAX_ENEMY_BULLETS-1
         estado_enemyBullet(i) = 0 
     next i
+#endif
 end sub
 
+
+#ifdef ENEMY_BULLETS
 'Disparos enemigos'
 sub shoot_enemyBullet(vx as byte, vy as byte)
     for i = 0 to MAX_ENEMY_BULLETS-1
@@ -666,7 +672,6 @@ sub shoot_enemyBullet(vx as byte, vy as byte)
     next i
 end sub
 
-#ifdef ENEMY_BULLETS
 sub EnemyBulletsMove() 
 
     for i = 0 to MAX_ENEMY_BULLETS-1
