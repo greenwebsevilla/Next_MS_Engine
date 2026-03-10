@@ -85,7 +85,7 @@
 #define ENEMY_VY _en_my
 #define NO_KILL no_kill=1
 #define KILL_SPRITE enem_status=ENEM_DEAD
-#define KILL_SPRITE_NO_RESPAWN enem_status=ENEM_NO_RESPAWN
+#define KILL_SPRITE_NO_RESPAWN enemies_t(enit)=0:_en_t=0
 #define ENEMY_ANIMATION set_enem_animation
 #define ENEMY_COUNTER enem_counter2(enit)
 #define ENEMY_VAR1 enem_var1(enit)
