@@ -108,10 +108,10 @@ if player_status < DYING_ST
         end if
         end if
 
-#endif
+
 
     end if
-
+#endif
 end if
 
 
