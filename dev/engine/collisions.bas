@@ -53,7 +53,7 @@ if player_status < DYING_ST
 #endif
             if enit bAND 1 = half_life 'Process only half enemies each cycle'
 #include "../my/custom_code/enemies_cc/enems_killable.bas"
-            if player_status < FLICKERING_ST
+            
                 if enem_status < ENEM_DYING
                     if collide() = 1
 #ifdef ENABLE_OBJECTS
@@ -70,14 +70,14 @@ if player_status < DYING_ST
 #endif
                         #include "../my/custom_code/enemies_cc/enems_collisions.bas"
 
-                        if no_kill = 0
+                        if no_kill = 0 AND player_status < FLICKERING_ST
                             player_damaged = 1
                             PlaySFX(SOUND_PLAYER_DAMAGED)
                         end if
 
                     end if
                 end if
-            end if
+            
             end if
 
         end if
@@ -90,12 +90,12 @@ if player_status < DYING_ST
         
         if gpx > cx2 - 15
         if gpx < cx2 + 15
-        if gpy >= cy2 - 17
+        if gpy >= cy2 - 17 - ABS(_en_my)
         if gpy < cy2 - 10
 
             on_ground = 1
             plataforma_vx = 0: plataforma_vy = 0
-            if half_life = 0
+            if half_life
                 plataforma_vx = _en_mx << 6 'Aplicamos la velocidad de la plataforma al player'
             end if
 
