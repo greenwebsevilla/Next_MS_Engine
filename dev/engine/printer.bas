@@ -5,12 +5,10 @@ sub draw_scr()
 #ifdef TILANIMS
     detect_tilanims() ' detectamos tiles animados de todo el level_floor'
 #endif
-    columna_inicial = cast(byte, x_scroll>>4)
 
     for y = 0 to (SCREENS_H-1)
         
         tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
-        tt = tt + columna_inicial + 2
 
         for x = 2  to 19 'Sumo 2 para empezar desde el tile 0, que se oculta con el clip de layer 2'
             asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
@@ -20,46 +18,26 @@ sub draw_scr()
             FDoTile16(p,x,y+SCREEN_Y_OFFSET,36)			' draw tiles from bank 36
             tt=tt+1 						' increase tile number
         next x
+
     next y 
 
 end sub
 
-'Dibujar nueva columna de tiles a la derecha'
-sub draw_column_right()
+'Before calling this sub, you need to set col_x and col_offset
+'Antes de llamar a esta sub, hay que pasarle col_x y col_offset
+sub draw_column()
 
-     			' point to the map 	
-    tt=0
-    addx = (x_scroll>>4) + 19 'es el offset para leer el mapa, a partir de la columna que toque'
-    ' if NOT colocando_scroll OR (cast(ubyte, posicion_x_inicial>>4) - cast(ubyte, x_scroll>>4)) < 30 'pintamos solo las ultimas 30 si estamos colocando scroll'
-        for y = 0 to (SCREENS_H-1)
-            tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
-            tt = tt + cast(uinteger,addx)
-            asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
-            p = peek(tt+MAP_BUFFER)
-            asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
-            FDoTile16(p,columna_anterior,y+SCREEN_Y_OFFSET,36)			' draw tiles from bank 36
-            tt=tt+1 						' increase tile number
-            
-        next y
-    ' end if
+    addx = (x_scroll>>4) + col_offset
+    tt = ancho_mapa * cast(uinteger, first_row) + addx
 
-end sub
-
-'Dibujar nueva columna de tiles a la izquierda'
-sub draw_column_left()
-
-     			' point to the map 	
-    tt=0
-    addx = (x_scroll>>4) 'es el offset para leer el mapa, a partir de la columna que toque'
     for y = 0 to (SCREENS_H-1)
-        tt = ancho_mapa * cast(uinteger,y+first_row) 'Sin el cast tt pasa a valores ubyte'
-        tt = tt + cast(uinteger,addx)
-        asm : di: nextreg $56,90 : nextreg $57,91 : end asm 
+        
+        asm : di : nextreg $56,90 : nextreg $57,91 : end asm ' Paginamos el banco del mapa UNA sola vez para toda la columna
         p = peek(tt + MAP_BUFFER)
-        asm : nextreg $56,0 : nextreg $57,1 : ei :end asm 
+        asm : nextreg $56,0 : nextreg $57,1 : ei : end asm ' Restauramos la paginación normal
+        tt = tt + ancho_mapa
+        FDoTile16(p, col_x, y+SCREEN_Y_OFFSET, 36)
 
-        FDoTile16(p,columna_actual,y+SCREEN_Y_OFFSET,36)			' draw tiles from bank 36
-        tt=tt+1 						' increase tile number
     next y
 
 end sub

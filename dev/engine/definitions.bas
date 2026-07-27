@@ -169,6 +169,8 @@ dim x_scroll_6, x_scroll_temp_6 as long
 dim columna_actual, columna_anterior, addx, haz_scroll as ubyte
 dim columna_inicial, colocando_scroll as byte
 dim x_fin_mapa as uinteger
+dim col_x as ubyte
+dim col_offset as uinteger
 
 '************************************************'
 'Variables Timer

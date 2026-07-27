@@ -487,7 +487,9 @@ sub process_right_scroll()
       end if
 
       if columna_actual <> columna_anterior
-          draw_column_right()
+          col_x = columna_anterior
+          col_offset = 19
+          draw_column()   ' antes: draw_column_right()
           columna_anterior = columna_actual 
       end if  
       
@@ -503,7 +505,9 @@ sub process_left_scroll()
     end if
 
     if columna_actual <> columna_anterior
-        draw_column_left()
+        col_x = columna_actual
+        col_offset = 0
+        draw_column()     ' antes: draw_column_left()
         columna_anterior = columna_actual 
     end if  
     
