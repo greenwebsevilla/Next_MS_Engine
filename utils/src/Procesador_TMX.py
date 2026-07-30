@@ -13,8 +13,18 @@ from tkinter import filedialog, messagebox
 import xml.etree.ElementTree as ET
 
 CONFIG_FILE = "config_protmx.txt"
-VERSION = "1.2.1"
+VERSION = "1.3"
 
+import sys
+
+def resource_path(relative_path):
+    """Obtiene la ruta correcta tanto en desarrollo como en el EXE."""
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+    
 # ---------------- TEXTOS MULTILINGÜES ----------------
 TEXTS = {
     "es": {
@@ -114,6 +124,20 @@ def process_tmx_folder(source_folder, bin_folder, map_folder=None, generate_map=
         tree = ET.parse(tmx_path)
         root = tree.getroot()
         base_name = os.path.splitext(tmx_file)[0]
+        
+        # --------------------------------------------------------
+        # Obtener el firstgid del tileset llamado "tiles"
+        # --------------------------------------------------------
+        firstgid_tiles = 1
+
+        for tileset in root.findall("tileset"):
+            source = tileset.get("source", "")
+            name = tileset.get("name", "")
+
+            # Puede ser tiles.tsx o un tileset embebido con name="tiles"
+            if source.endswith("tiles.tsx") or name == "tiles":
+                firstgid_tiles = int(tileset.get("firstgid", "1"))
+                break
 
         # --------------------------------------------------------
         # 1) Construir diccionario de marcadores de _temp_markers
@@ -148,7 +172,19 @@ def process_tmx_folder(source_folder, bin_folder, map_folder=None, generate_map=
             if data_elem is None or data_elem.text is None:
                 continue
             data = data_elem.text.strip().replace("\n", "").replace("\r", "")
-            tile_ids = [int(x) - 1 for x in data.split(",") if x != ""]
+            # tile_ids = [int(x) - 1 for x in data.split(",") if x != ""]
+            tile_ids = []
+
+            for value in data.split(","):
+                if value == "":
+                    continue
+
+                gid = int(value)
+
+                if gid == 0:
+                    tile_ids.append(0)      # tile vacío
+                else:
+                    tile_ids.append(gid - firstgid_tiles)
 
             # --- BIN ---
             os.makedirs(bin_folder, exist_ok=True)
@@ -288,6 +324,7 @@ def process_tmx_folder(source_folder, bin_folder, map_folder=None, generate_map=
 class TMXProcessorGUI:
     def __init__(self, root):
         self.root = root
+        self.root.iconbitmap(resource_path("map.ico"))
         self.config = load_config()
         self.lang = self.config.get("lang", "es")
         self.root.title(self.t("title"))
