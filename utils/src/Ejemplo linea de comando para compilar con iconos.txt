@@ -1,0 +1,3 @@
+python -m PyInstaller --onefile --windowed --icon=beh.ico --add-data "beh.ico;." Tiles_Behaviour.py
+
+hay que cambiar el nombre del icono (2 veces) y el nombre del programa .py

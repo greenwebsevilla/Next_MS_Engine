@@ -14,12 +14,22 @@ from tkinter import filedialog, simpledialog, messagebox
 from PIL import Image, ImageTk
 
 CONFIG_FILE = "config_tb.txt"
-VERSION = "1.1.5"
+VERSION = "1.1.6"
+
+import sys
+
+def resource_path(relative_path):
+    """Obtiene la ruta correcta tanto en desarrollo como en el EXE."""
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 # ---------------- TEXTOS MULTILINGÜES ----------------
 TEXTS = {
     "es": {
-        "title": f"🧱 Asignación de Comportamientos - Ver.{VERSION} (Pat Morita Team)",
+        "title": f"Asignación de Comportamientos - Ver.{VERSION} (Pat Morita Team)",
         "zoom_in": "🔍 +",
         "zoom_out": "🔍 –",
         "reset": "🔄 Poner todo a 0",
@@ -90,6 +100,7 @@ TEXTS = {
 class TileNumberingApp:
     def __init__(self, root):
         self.root = root
+        self.root.iconbitmap(resource_path("beh.ico"))
         self.lang = "es"
 
         # Datos de imagen

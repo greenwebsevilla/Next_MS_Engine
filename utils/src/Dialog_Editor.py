@@ -6,7 +6,17 @@ from tkinter import ttk
 import tkinter.font as tkfont
 
 CONFIG_FILE = "config_ascii_editor.txt"
-APP_TITLE = "Dialog Editor Ver 1.0 MS_Engine"
+APP_TITLE = "Dialog Editor Ver 1.1 MS_Engine"
+
+import sys
+
+def resource_path(relative_path):
+    """Obtiene la ruta correcta tanto en desarrollo como en el EXE."""
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 DEFAULTS = {
     "line_width": 30,
@@ -132,6 +142,7 @@ class ConfigDialog(tk.Toplevel):
 class AsciiDialogEditor:
     def __init__(self, root):
         self.root = root
+        self.root.iconbitmap(resource_path("text.ico"))
         self.cfg = load_config()
 
         self.current_file = None
